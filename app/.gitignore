@@ -1,0 +1,10 @@
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+pages/
+nbactions.xml
+nb-configuration.xml
+.nb-gradle/
+src/java/connection.properties
