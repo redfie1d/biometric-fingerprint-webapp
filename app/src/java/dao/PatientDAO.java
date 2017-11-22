@@ -29,6 +29,7 @@ public class PatientDAO {
             stmt = conn.prepareStatement("select * from patients where id = ? and village_prefix = ?");
             stmt.setInt(1, pNo);
             stmt.setString(2, pVillage);
+            System.out.println("testtes");
             rs = stmt.executeQuery();
 
             ArrayList<Integer> allergies = new ArrayList<>();

@@ -36,7 +36,6 @@ public class SearchPatientServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
         String inputPatientID = request.getParameter("patientID");
 
         String pVillage;
@@ -55,6 +54,8 @@ public class SearchPatientServlet extends HttpServlet {
 
         }
 
+        System.out.println(pVillage);
+        System.out.println(pNo);
         if (pNo == -1) {
             session.setAttribute("searchError", "Patient not found!");
             response.sendRedirect("existing_patient.jsp");

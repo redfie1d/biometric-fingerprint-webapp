@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class ConnectionManager {
 
-    public static final String PROPS_FILENAME = "/connection.properties";
+    public static final String PROPS_FILENAME = "./connection.properties";
     private static String dbUser;
     private static String dbPassword;
     private static String dbURL;
@@ -41,6 +41,9 @@ public class ConnectionManager {
             String host = props.getProperty("db.host");
             String port = props.getProperty("db.port");
             String dbName = props.getProperty("db.name");
+            System.out.println("DBNAME"+dbName);
+            System.out.println("DBHOST"+host);
+            System.out.println("DBPORT"+port);
             dbUser = props.getProperty("db.user");
 
             // grab environment variable to check if we are on production environment
