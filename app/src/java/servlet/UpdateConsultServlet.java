@@ -35,7 +35,6 @@ public class UpdateConsultServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
             /* TODO output your page here. You may use following sample code. */
             String visitID = request.getParameter("visitId");
             String doctor = request.getParameter("doctor");

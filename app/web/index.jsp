@@ -32,7 +32,6 @@
 
         <!-- Your Page Content Here -->
         <div class="row text-center">
-
             <a class="btn btn-app homepage-button bg-green" href="new_consult.jsp">
                 <i class="fa fa-user fa-5x"></i> <h3>Doctor</h3>
             </a>
@@ -43,6 +42,14 @@
             
             <a class="btn btn-app homepage-button bg-orange" href="new_triage.jsp">
                 <i class="fa fa-user-plus fa-5x"></i> <h3>Triage</h3>
+            </a>
+            
+            <a class="btn btn-app homepage-button bg-yellow" href="pharmacy.jsp">
+                <i class="fa fa-user-plus fa-5x"></i> <h3>Pharmacy</h3>
+            </a>
+            
+            <a class="btn btn-app homepage-button bg-fuchsia" href="new_triage.jsp">
+                <i class="fa fa-user-plus fa-5x"></i> <h3>Summary</h3>
             </a>
 
 

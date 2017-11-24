@@ -568,11 +568,59 @@
                                     }
                                 %>
                             </div> 
+                        </form>
                     </div>
 
                 </div>
+                            
+                <div class="box box-info box-solid" style="display:<%=visitRecord != null ? "block" : "none"%>">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Issue Medicine</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <form action="OrderServlet" method="POST">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>Doctor</th>
+                                        <th>Medicine</th>
+                                        <th>Quantity</th>
+                                        <th>Status</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <input name="doctor" placeholder="Reviewing Doctor" class="form-control" type="text">
+                                        </td>
+                                        <td>
+                                            <input name="medicineName" placeholder="Medicine Name" class="form-control" type="text">
+                                        </td>
+                                        <td>
+                                            <input name="quantity" placeholder="Quantity" class="form-control" type="text">
+                                        </td>
+                                        <td>
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-info btn-flat">Place Order</button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    
+
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
                 <!-- /.box-body -->
             </div>
+                                         
             <!-- /.box -->
         </div>
         <!-- /.col (right) -->

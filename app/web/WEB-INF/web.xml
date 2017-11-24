@@ -67,6 +67,10 @@
         <servlet-name>ImageReceiver</servlet-name>
         <servlet-class>servlet.ImageReceiver</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>servlet.OrderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InitializeBioMiniServlet</servlet-name>
         <url-pattern>/InitializeBioMiniServlet</url-pattern>
@@ -130,6 +134,10 @@
     <servlet-mapping>
         <servlet-name>ImageReceiver</servlet-name>
         <url-pattern>/ImageReceiver</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/OrderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

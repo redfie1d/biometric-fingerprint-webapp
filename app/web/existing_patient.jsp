@@ -111,7 +111,7 @@
 
                 <div id="fg_box" class="box box-info box-solid">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Search By Fingerprints</h3>
+                        <h3 class="box-title">Search By Fingerprint</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -160,7 +160,7 @@
                 
                 Visit visitRecord = visitObject == null ? null : (Visit) visitObject;
                 Patient patientRecord = patientObject == null ? null : (Patient) patientObject;
-
+                
                 session.removeAttribute("visitRecord");
                 session.removeAttribute("patientRecord");
                 
