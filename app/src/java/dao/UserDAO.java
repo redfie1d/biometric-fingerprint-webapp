@@ -25,7 +25,7 @@ public class UserDAO {
         ResultSet rs = null;
 
         User user = null;
-        String sql = "SELECT name, password, account_type FROM user WHERE username = ?";
+        String sql = "SELECT name, password, account_type FROM users WHERE username = ?";
 
         try {
             conn = ConnectionManager.getConnection();
