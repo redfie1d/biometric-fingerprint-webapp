@@ -5,16 +5,19 @@
  */
 package servlet;
 
+import dao.InventoryDAO;
 import dao.OrderDAO;
 import dao.PatientDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Order;
 
 /**
  *
@@ -36,18 +39,54 @@ public class OrderServlet extends HttpServlet {
             throws ServletException, IOException {
         
 //        HttpSession session = request.getSession();
+        OrderDAO orderDAO = new OrderDAO();
+        InventoryDAO inventoryDAO = new InventoryDAO();
+        ArrayList<String> errors = new ArrayList<>();
+
+        String orderID = request.getParameter("orderID");
         String doctor = request.getParameter("doctor");
-        String medicineName = request.getParameter("medicineName");
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        String medicine = request.getParameter("medicine");
+        String qty = request.getParameter("quantity");
+        
+        int quantity = 0;
+        
+        if(qty != null){
+            quantity = Integer.parseInt(qty);
+        }
+        
+        System.out.println("orderid"+orderID);
+
+        if(orderID == null){
+            orderDAO.placeOrder(doctor, medicine, quantity);
+
+            response.sendRedirect("new_consult.jsp");
+        } else {
+            int orderNo = Integer.parseInt(orderID);
+            int currentQty = inventoryDAO.getDrugQuantity(medicine);
+            System.out.println("Current"+currentQty);
+            System.out.println("Requested"+quantity);
+            if(currentQty < quantity){
+                errors.add("Insufficient Quantity");
+                request.getSession().setAttribute("errormsg", "Insufficient Quantity");
+            } else {
+                orderDAO.removeOrder(orderNo);
+                boolean status = inventoryDAO.updateInventory(medicine, currentQty - quantity);
+                System.out.println(status);
+                request.getSession().setAttribute("successmsg", "Order has been approved");
+            }
+            
+            
+            response.sendRedirect("pharmacy.jsp");
+        }
+        
+        
+
         
 //        request.getSession().setAttribute("visitRecord", visit);
 //                    request.getSession().setAttribute("patientRecord", PatientDAO.getPatientByPatientID(visit.getPatientId()));
 //                    request.getSession().setAttribute("successmsg", "Consult record has been updated");
         
-        OrderDAO orderDAO = new OrderDAO();
-        orderDAO.placeOrder(doctor,medicineName, quantity);
         
-        response.sendRedirect("new_consult.jsp");
         
 //        response.setContentType("text/html;charset=UTF-8");
 //        try (PrintWriter out = response.getWriter()) {

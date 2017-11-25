@@ -10,14 +10,24 @@ package model;
  * @author Kwtam
  */
 public class Order {
+    private int orderID;
     private String doctor;
     private String medicine;
-    private double quantity;
+    private int quantity;
 
-    public Order(String doctor, String medicine, double quantity) {
+    public Order(int orderID, String doctor, String medicine, int quantity) {
+        this.orderID = orderID;
         this.doctor = doctor;
         this.medicine = medicine;
         this.quantity = quantity;
+    }
+
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
     }
 
     public String getDoctor() {
@@ -36,13 +46,15 @@ public class Order {
         this.medicine = medicine;
     }
 
-    public double getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+
     
     
 }

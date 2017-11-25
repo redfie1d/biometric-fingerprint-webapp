@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Order;
 
 /**
  *
@@ -62,7 +63,7 @@ public class OrderDAO {
         
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("INSERT INTO orders values(?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO orders values(NULL,?,?,?)");
             
             stmt.setString(1, doctor);
             stmt.setString(2, medicineName);
@@ -75,5 +76,78 @@ public class OrderDAO {
             ConnectionManager.close(conn, stmt, rs);
         }
         return false;
+    }
+    
+    public static Order getOrder(int order){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("Select * from orders");
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int orderID = rs.getInt("order_id");
+                String doctor = rs.getString("doctor");
+                String medicine = rs.getString("medicine_name");
+                int quantity = rs.getInt("quantity");
+                
+                return new Order(orderID, doctor, medicine, quantity);
+            }
+            //Returns the converted array to the caller of method
+            return null;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return null;
+    }
+    
+    public static ArrayList<Order> getOrders(){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<Order> orderList = new ArrayList();
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("Select * from orders");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int orderID = rs.getInt("order_id");
+                String doctor = rs.getString("doctor");
+                String medicine = rs.getString("medicine_name");
+                int quantity = rs.getInt("quantity");
+                
+                orderList.add(new Order(orderID, doctor, medicine, quantity));
+            }
+            //Returns the converted array to the caller of method
+            return orderList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return null;
+    }
+    
+    public static void removeOrder(int orderID){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("delete from orders where order_id = ?");
+            stmt.setInt(1, orderID);
+            stmt.executeUpdate();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 }

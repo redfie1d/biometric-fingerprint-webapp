@@ -4,6 +4,9 @@
     Author     : tcw
 --%>
 
+<%@page import="model.Drug"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.InventoryDAO"%>
 <%@page import="dao.ConsultDAO"%>
 <%@page import="model.Consult"%>
 <%@page import="dao.VisitDAO"%>
@@ -600,10 +603,20 @@
                                             <input name="doctor" placeholder="Reviewing Doctor" class="form-control" type="text">
                                         </td>
                                         <td>
-                                            <input name="medicineName" placeholder="Medicine Name" class="form-control" type="text">
+                                            <select name="medicine" class="form-control">
+                                            <%
+                                                InventoryDAO inventoryDAO = new InventoryDAO();
+                                                ArrayList<Drug> drugList = inventoryDAO.getInventory();                              
+                                                for(Drug drug:drugList){
+                                            %>
+                                                <option value="<%=drug.getMedicine_name()%>" type="text"><%=drug.getMedicine_name()%></option>
+                                            <%
+                                                }
+                                            %>
+                                            </select>
                                         </td>
                                         <td>
-                                            <input name="quantity" placeholder="Quantity" class="form-control" type="text">
+                                            <input name="quantity" placeholder="Quantity" class="form-control" type="number">
                                         </td>
                                         <td>
                                             <span class="input-group-btn">
