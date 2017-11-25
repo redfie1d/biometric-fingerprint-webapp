@@ -609,7 +609,7 @@
                                                 ArrayList<Drug> drugList = inventoryDAO.getInventory();                              
                                                 for(Drug drug:drugList){
                                             %>
-                                                <option value="<%=drug.getMedicine_name()%>" type="text"><%=drug.getMedicine_name()%></option>
+                                                <option value="<%=drug.getMedicine_name()%>" type="text"><%=drug.getMedicine_name()+ " (" + drug.getQuantity()+")"%></option>
                                             <%
                                                 }
                                             %>
