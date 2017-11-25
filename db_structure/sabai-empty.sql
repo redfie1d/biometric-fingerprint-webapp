@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2016 at 03:17 AM
+-- Generation Time: Nov 24, 2017 at 02:05 PM
 -- Server version: 5.7.11
 -- PHP Version: 5.6.19
 
@@ -55,7 +55,11 @@ CREATE TABLE `consults` (
   `doctor` varchar(255) NOT NULL,
   `notes` longtext NOT NULL,
   `diagnosis` longtext NOT NULL,
-  `problems` varchar(255) NOT NULL
+  `problems` varchar(255) NOT NULL,
+  `urine_test` varchar(255) DEFAULT NULL,
+  `hemocue_count` varchar(255) DEFAULT NULL,
+  `blood_glucose` varchar(255) DEFAULT NULL,
+  `referrals` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -93,6 +97,30 @@ CREATE TABLE `fingerprint` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `inventory`
+--
+
+CREATE TABLE `inventory` (
+  `medicine_name` varchar(255) NOT NULL,
+  `quantity` int(10) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `order_id` int(10) NOT NULL,
+  `doctor` varchar(255) NOT NULL,
+  `medicine_name` varchar(255) NOT NULL,
+  `quantity` int(10) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `patients`
 --
 
@@ -101,7 +129,9 @@ CREATE TABLE `patients` (
   `village_prefix` varchar(5) NOT NULL,
   `name` varchar(255) DEFAULT '',
   `image` varchar(255) DEFAULT '',
+  `contactNo` varchar(255) DEFAULT NULL,
   `gender` varchar(6) DEFAULT '',
+  `travelling_time_to_village` int(11) DEFAULT NULL,
   `year_of_birth` int(11) UNSIGNED DEFAULT NULL,
   `drug_allergy` text,
   `parent` int(11) UNSIGNED DEFAULT NULL
@@ -165,7 +195,21 @@ CREATE TABLE `triages` (
   `diastolic` double UNSIGNED DEFAULT NULL,
   `temperature` double DEFAULT NULL,
   `hiv_positive` int(11) DEFAULT NULL,
-  `ptb_positive` int(11) DEFAULT NULL
+  `ptb_positive` int(11) DEFAULT NULL,
+  `hepC_positive` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `account_type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -252,6 +296,12 @@ ALTER TABLE `triages`
   ADD KEY `visit_id` (`visit_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`username`);
+
+--
 -- Indexes for table `visits`
 --
 ALTER TABLE `visits`
@@ -276,7 +326,7 @@ ALTER TABLE `conditions`
 -- AUTO_INCREMENT for table `consults`
 --
 ALTER TABLE `consults`
-  MODIFY `consult_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `consult_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `drugs`
 --
@@ -286,12 +336,12 @@ ALTER TABLE `drugs`
 -- AUTO_INCREMENT for table `fingerprint`
 --
 ALTER TABLE `fingerprint`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `prescriptions`
 --
@@ -311,12 +361,12 @@ ALTER TABLE `referrals`
 -- AUTO_INCREMENT for table `triages`
 --
 ALTER TABLE `triages`
-  MODIFY `triage_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `triage_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `visits`
 --
 ALTER TABLE `visits`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

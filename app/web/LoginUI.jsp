@@ -12,8 +12,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sabai Biometric </title>
         <!-- Bootstrap core CSS -->
-        <link href="style/css/bootstrap.min.css" rel="stylesheet">
-        <link href="style/css/menu.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="template-resources/css/skins/skin-blue.min.css">
+        <link rel="stylesheet" href="css/sabai.css">
     </head>
     <body>
         <div class="container-login">
@@ -23,7 +23,7 @@
             </div>
             <center> 
              <%
-                    String errorMsg = (String) request.getAttribute("errorMsg");
+                    String errorMsg = (String) request.getAttribute("errorMessage");
 
                     if (errorMsg != null) {
                         out.println("<font color='red'>" + "* " + errorMsg + "</font>");
@@ -34,7 +34,7 @@
                     <table>
                         <tr>
                             <td>
-                                Doctor's username:
+                                Username:
                             </td>
                             <td>
                                 <div class="form-group">
@@ -48,7 +48,7 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                <input type='password' class="form-control" name='pwd' />
+                                <input type='password' class="form-control" name='password' />
                                 </div>
                             </td>
                         </tr>
