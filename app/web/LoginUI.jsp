@@ -19,7 +19,7 @@
         <div class="container-login">
 
             <div class="starter-template">
-                <h1 class="text-center font-vonique">SaBai Biometric</h1>
+                <h1 class="font-vonique" style="text-align:center">SaBai Biometric</h1>
             </div>
             <center> 
              <%

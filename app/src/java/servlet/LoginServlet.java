@@ -38,7 +38,9 @@ public class LoginServlet extends HttpServlet {
         
         //Retrieve values from LoginUI
         String enteredUsername = request.getParameter("username");
+        //String enteredUsername = "admin";
         String enteredPassword = request.getParameter("password");
+        //String enteredPassword = "sabaisuper";
         HttpSession session = request.getSession();
         
         // Checking if username field is null or empty

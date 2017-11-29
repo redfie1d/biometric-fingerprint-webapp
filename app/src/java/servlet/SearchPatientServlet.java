@@ -63,6 +63,7 @@ public class SearchPatientServlet extends HttpServlet {
         }
 
         Patient p = PatientDAO.getPatientByPatientID(pVillage, pNo);
+        System.out.println(p);
 
         if (p == null) {
             session.setAttribute("searchError", "Patient not found!");

@@ -44,7 +44,7 @@ public class ImageReceiver extends HttpServlet {
 
             byte[] photoImageByte = Base64.getDecoder().decode(imgBase64Str);
 
-            try (OutputStream stream = new FileOutputStream(new File("d:/sabai/app/web/patient-images/" + p.getVillage() + p.getPatientId() + ".png"))) {
+            try (OutputStream stream = new FileOutputStream(new File(getServletContext().getRealPath("/") + "../../web/patient-images/" + p.getVillage() + p.getPatientId() + ".png"))) {
                 stream.write(photoImageByte);
             }
         } catch (Exception e){

@@ -108,9 +108,11 @@ public class CreatePatientServlet extends HttpServlet {
                 byte[] photoImageByte = Base64.getDecoder().decode(photoImage.replace("data:image/jpeg;base64,", ""));
 
                 ServletContext servletContext = this.getServletConfig().getServletContext();
-                System.out.println(servletContext.getContextPath());
+                System.out.println("contextPath = " + servletContext.getContextPath());
+                System.out.println("RealPath = " + servletContext.getRealPath("/"));
+                System.out.println("user.dir = " + System.getProperty("user.dir"));
 
-                try (OutputStream stream = new FileOutputStream(new File("d:/sabai/app/web/patient-images/" + p.getVillage() + p.getPatientId() + ".png"))) {
+                try (OutputStream stream = new FileOutputStream(new File(servletContext.getRealPath("/") + "../../web/patient-images/" + p.getVillage() + p.getPatientId() + ".png"))) {
                     stream.write(photoImageByte);
                 }
 
