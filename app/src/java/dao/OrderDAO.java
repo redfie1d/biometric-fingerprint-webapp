@@ -56,19 +56,17 @@ public class OrderDAO {
 //        return null;
     }
     
-    public static boolean placeOrder(String doctor, String medicineName, int quantity) {
+    public static boolean placeOrder(int patientID) {
         Connection conn = null;
         ResultSet rs = null;
         PreparedStatement stmt = null;
         
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("INSERT INTO orders values(NULL,?,?,?)");
-            
-            stmt.setString(1, doctor);
-            stmt.setString(2, medicineName);
-            stmt.setInt(3, quantity);
+            stmt = conn.prepareStatement("INSERT INTO orders values(NULL,'Pris',?,'PENDING')");
+            stmt.setInt(1, patientID);
             stmt.executeUpdate();
+            
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,64 +76,30 @@ public class OrderDAO {
         return false;
     }
     
-    public static Order getOrder(int order){
+    public static boolean addOrders(int orderID, Order order) {
         Connection conn = null;
-        PreparedStatement stmt = null;
         ResultSet rs = null;
-
+        PreparedStatement stmt = null;
+        
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("Select * from orders");
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                int orderID = rs.getInt("order_id");
-                String doctor = rs.getString("doctor");
-                String medicine = rs.getString("medicine_name");
-                int quantity = rs.getInt("quantity");
-                
-                return new Order(orderID, doctor, medicine, quantity);
-            }
-            //Returns the converted array to the caller of method
-            return null;
-
+            
+            stmt = conn.prepareStatement("INSERT INTO orderlist values(?,?,?,?,?)");
+            stmt.setInt(1, orderID);
+            stmt.setString(2, order.getMedicine());
+            stmt.setInt(3, order.getQuantity());
+            stmt.setString(4, order.getNotes());
+            stmt.setString(5, order.getRemarks());
+            stmt.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConnectionManager.close(conn, stmt, rs);
         }
-        return null;
+        return false;
     }
-    
-    public static ArrayList<Order> getOrders(){
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        ArrayList<Order> orderList = new ArrayList();
 
-        try {
-            conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("Select * from orders");
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                int orderID = rs.getInt("order_id");
-                String doctor = rs.getString("doctor");
-                String medicine = rs.getString("medicine_name");
-                int quantity = rs.getInt("quantity");
-                
-                orderList.add(new Order(orderID, doctor, medicine, quantity));
-            }
-            //Returns the converted array to the caller of method
-            return orderList;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionManager.close(conn, stmt, rs);
-        }
-        return null;
-    }
     
     public static void removeOrder(int orderID){
         Connection conn = null;
@@ -149,5 +113,91 @@ public class OrderDAO {
         } catch(SQLException e){
             e.printStackTrace();
         }
+    }
+    
+    public static int getOrderID(){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("SELECT AUTO_INCREMENT FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'sabai' AND   TABLE_NAME= 'orders';");
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("Returning rs.next");
+                return rs.getInt("AUTO_INCREMENT");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        System.out.println("Returning 0");
+        return 0;
+    }
+    
+    public static ArrayList<Order> getOrders(){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<Order> orderList = new ArrayList<Order>();
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("SELECT o.order_id, doctor, patient_id, medicine_name, quantity, notes, remarks FROM orders o INNER JOIN orderlist ol ON o.order_id = ol.order_id WHERE status = 'PENDING';");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int orderID = rs.getInt("order_id");
+                String doctor = rs.getString("doctor");
+                int patient_id = rs.getInt("patient_id");
+                String medicine_name = rs.getString("medicine_name");
+                int quantity = rs.getInt("quantity");
+                String notes = rs.getString("notes");
+                String remarks = rs.getString("remarks");
+                orderList.add(new Order(orderID, doctor, patient_id, medicine_name, quantity, notes, remarks));
+            }
+            
+            return orderList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return orderList;
+    }
+    
+    public static ArrayList<Order> getOrdersByOrderID(int orderID){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<Order> orderList = new ArrayList<Order>();
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("SELECT o.order_id, doctor, patient_id, medicine_name, quantity, notes, remarks FROM orders o INNER JOIN orderlist ol ON o.order_id = ol.order_id WHERE o.order_id = ?");
+            stmt.setInt(1, orderID);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                rs.getInt("order_id");
+                String doctor = rs.getString("doctor");
+                int patient_id = Integer.parseInt(rs.getString("patient_id"));
+                String medicine_name = rs.getString("medicine_name");
+                int quantity = rs.getInt("quantity");
+                String notes = rs.getString("notes");
+                String remarks = rs.getString("remarks");
+                orderList.add(new Order(orderID, doctor, patient_id, medicine_name, quantity, notes, remarks));
+            }
+            
+            return orderList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return orderList;
     }
 }

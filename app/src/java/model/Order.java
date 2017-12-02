@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Kwtam
@@ -12,14 +14,20 @@ package model;
 public class Order {
     private int orderID;
     private String doctor;
+    private int patientID;
     private String medicine;
     private int quantity;
+    private String notes;
+    private String remarks;
 
-    public Order(int orderID, String doctor, String medicine, int quantity) {
+    public Order(int orderID, String doctor, int patientID, String medicine, int quantity, String notes, String remarks) {
         this.orderID = orderID;
         this.doctor = doctor;
+        this.patientID = patientID;
         this.medicine = medicine;
         this.quantity = quantity;
+        this.notes = notes;
+        this.remarks = remarks;
     }
 
     public int getOrderID() {
@@ -38,6 +46,14 @@ public class Order {
         this.doctor = doctor;
     }
 
+    public int getPatientID() {
+        return patientID;
+    }
+
+    public void setPatientID(int patientID) {
+        this.patientID = patientID;
+    }
+
     public String getMedicine() {
         return medicine;
     }
@@ -54,6 +70,23 @@ public class Order {
         this.quantity = quantity;
     }
 
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    
 
     
     

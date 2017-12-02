@@ -5,33 +5,24 @@
  */
 package servlet;
 
-import dao.InventoryDAO;
-import dao.OrderDAO;
-import dao.PatientDAO;
-import dao.VisitDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Drug;
-import model.Order;
-import model.Visit;
 
 /**
  *
  * @author Kwtam
  */
-//@WebServlet("/OrderServlet")
-public class OrderServlet extends HttpServlet {
+@WebServlet(name = "IssueMedicineServlet", urlPatterns = {"/IssueMedicineServlet"})
+public class IssueMedicineServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods. 
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -40,42 +31,19 @@ public class OrderServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        OrderDAO orderDAO = new OrderDAO();
-
-        String visitID = request.getParameter("visitId");
-        
-        String[] medicines = request.getParameterValues("medicine");
-        String[] quantities = request.getParameterValues("quantity");
-        String[] notes = request.getParameterValues("notes");
-        String[] remarks = request.getParameterValues("remarks");
-        int patientID = Integer.parseInt(request.getParameter("patientID").substring(3));
-
-        int orderID = orderDAO.getOrderID();
-        orderDAO.placeOrder(patientID);
-        for(int i=0; i<medicines.length; i++){
-            
-            Order order = new Order(0,"Dr Pris", 100, medicines[i], Integer.parseInt(quantities[i]), notes[i], remarks[i]);
-            orderDAO.addOrders(orderID, order);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet IssueMedicineServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet IssueMedicineServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        
-        int visitId = -1;
-        String errorMsg = "";
-        if (visitID != null) {
-            try {
-                visitId = Integer.parseInt(visitID);
-            } catch (Exception e) {
-                errorMsg = "Failed to get visitID"; //shouldnt happen
-            }
-        }
-        
-        if(errorMsg.isEmpty()){
-            Visit visit = VisitDAO.getVisitByVisitID(visitId);
-            request.getSession().setAttribute("visitRecord", visit);
-            request.getSession().setAttribute("patientRecord", PatientDAO.getPatientByPatientID(visit.getPatientId()));
-            request.getSession().setAttribute("successmsg", "Successfully ordered medicine(s)");
-            response.sendRedirect("new_consult.jsp");
-        }     
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

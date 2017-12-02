@@ -589,25 +589,24 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <form action="OrderServlet" method="POST">
-                            <table class="table">
+                            <table class="table" id="issueMedicine">
                                 <tbody>
                                     <tr>
-                                        <th>Doctor</th>
                                         <th>Medicine</th>
                                         <th>Quantity</th>
-                                        <th>Status</th>
+                                        <th>Notes</th>
+                                        <th>Remarks</th>
                                     </tr>
 
                                     <tr>
                                         <td>
-                                            <input name="doctor" placeholder="Reviewing Doctor" class="form-control" type="text">
-                                        </td>
-                                        <td>
-                                            <select name="medicine" class="form-control">
+                                            <select name="medicine" class="form-control medicine" id="medicines">
                                             <%
                                                 InventoryDAO inventoryDAO = new InventoryDAO();
-                                                ArrayList<Drug> drugList = inventoryDAO.getInventory();                              
+                                                ArrayList<Drug> drugList = inventoryDAO.getInventory();
+                                                ArrayList<String> drugNames = new ArrayList<String>();
                                                 for(Drug drug:drugList){
+                                                    drugNames.add(drug.getMedicine_name() + " (" + drug.getQuantity() + ")");
                                             %>
                                                 <option value="<%=drug.getMedicine_name()%>" type="text"><%=drug.getMedicine_name()+ " (" + drug.getQuantity()+")"%></option>
                                             <%
@@ -615,19 +614,33 @@
                                             %>
                                             </select>
                                         </td>
+                                        
                                         <td>
-                                            <input name="quantity" placeholder="Quantity" class="form-control" type="number">
+                                            <input name="quantity" placeholder="Quantity" class="form-control quantity" type="number">
                                         </td>
                                         <td>
-                                            <span class="input-group-btn">
-                                                <button type="submit" class="btn btn-info btn-flat">Place Order</button>
-                                            </span>
+                                            <input name="notes" placeholder="Notes" class="form-control notes" type="text">
                                         </td>
+                                        <td>
+                                            <input name="remarks" placeholder="Remarks" class="form-control remarks" type="text">
+                                            <input type="hidden" name="patientID" value=<%=patientRecord.getVillage()%><%=patientRecord.getPatientId()%>>
+                                            <input type="hidden" name="visitId" value=<%=visitRecord.getId()%>>
+                                        </td>
+                                        
                                     </tr>
-                                    
-
                                 </tbody>
+                                
                             </table>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Add_Medicine()">Add Medicine</button>
+                            </span>
+
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Remove_Medicine()">Remove Medicine</button>
+                            </span>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-info btn-flat">Place Order</button>
+                            </span>
                         </form>
                     </div>
                 </div>

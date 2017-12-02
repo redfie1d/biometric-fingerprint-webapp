@@ -70,16 +70,16 @@ public class InventoryDAO {
         return 0;
     }
     
-    public static boolean updateInventory(String medicine, int quantity){
+    public static boolean updateInventoryStatus(int orderID){
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("update inventory set quantity = ? where medicine_name = ?");
-            stmt.setDouble(1, quantity);
-            stmt.setString(2, medicine);
+            
+            stmt = conn.prepareStatement("update orders set status='APPROVED' where order_id = ?");
+            stmt.setInt(1, orderID);
             stmt.executeUpdate();
             
             return true;
@@ -92,4 +92,28 @@ public class InventoryDAO {
         }
         return false;
     }
+    
+    public static boolean updateInventory(Order order){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("update inventory set quantity = quantity-? where medicine_name = ?");
+            stmt.setDouble(1, order.getQuantity());
+            stmt.setString(2, order.getMedicine());
+            stmt.executeUpdate();
+            
+            return true;
+            //Returns the converted array to the caller of method
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return false;
+    }
+    
 }

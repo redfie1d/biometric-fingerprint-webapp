@@ -482,3 +482,37 @@ function Enroll() {
         }
     });
 }
+
+
+function Add_Medicine(){
+    var table = document.getElementById("issueMedicine");
+    var numRows = table.getElementsByTagName("tr").length;
+    var row = table.insertRow(-1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    
+    
+    var options = document.getElementById("medicines").innerHTML;
+ 
+    cell1.innerHTML = `<select name="medicine" class="form-control">` + options + `</select>`
+    cell2.innerHTML = 
+    `<td>
+        <input name="quantity" placeholder="Quantity" class="form-control" type="number">
+    </td>`
+    cell3.innerHTML = 
+    `<td>
+        <input name="notes" placeholder="Notes" class="form-control" type="text">
+    </td>`
+    cell4.innerHTML = 
+    `<td>
+        <input name="remarks" placeholder="Remarks" class="form-control" type="text">
+    </td>`
+}
+
+function Remove_Medicine(){
+    console.log("Removing Medicine");
+    var table = document.getElementById("issueMedicine");
+    table.deleteRow(-1);
+}
