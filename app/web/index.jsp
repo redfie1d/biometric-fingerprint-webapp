@@ -60,29 +60,29 @@
                 <i class="fa fa-bar-chart fa-5x"></i> <h3>Summary</h3>
             </a>
 
-            <a class="btn btn-app homepage-button bg-purple" href="referral.jsp">
-                <i class="fa fa-user-plus fa-5x"></i> <h3>Referral</h3>
+            <a class="btn btn-app homepage-button bg-purple" href="new_referral.jsp">
+                <i class="fa fa-user-plus fa-5x"></i> <h3>Post-Referral</h3>
             </a>
 
             <%
                 }
 
-                ArrayList<String> consultation_pharmacy = new ArrayList<>();
-                consultation_pharmacy.add("acts");
-                consultation_pharmacy.add("alumni");
-                consultation_pharmacy.add("m4");
+                ArrayList<String> consultationAccounts = new ArrayList<>();
+                consultationAccounts.add("acts");
+                consultationAccounts.add("alumni");
+                consultationAccounts.add("m4");
 
-                // CONSULTATION & PHARAMCY ONLY
-                if (consultation_pharmacy.contains(user.getAccountType())) {
+                // CONSULTATION & POST-REFERRAL ONLY
+                if (consultationAccounts.contains(user.getAccountType())) {
 
             %>
 
             <a class="btn btn-app homepage-button bg-green" href="new_consult.jsp">
                 <i class="fa fa-user fa-5x"></i> <h3>Consultation</h3>
             </a>
-
-            <a class="btn btn-app homepage-button bg-yellow" href="pharmacy.jsp">
-                <i class="fa fa-user-plus fa-5x"></i> <h3>Pharmacy</h3>
+            
+            <a class="btn btn-app homepage-button bg-purple" href="new_referral.jsp">
+                <i class="fa fa-user-plus fa-5x"></i> <h3>Post-Referral</h3>
             </a>
 
             <%                
@@ -105,24 +105,6 @@
 
             <a class="btn btn-app homepage-button bg-yellow" href="pharmacy.jsp">
                 <i class="fa fa-user-plus fa-5x"></i> <h3>Pharmacy</h3>
-            </a>
-
-            <%
-                // SUMMARY ONLY
-                } else if (user.getAccountType().equals("pharmacy")) {
-            %>
-
-            <a class="btn btn-app homepage-button bg-fuchsia" href="summary.jsp">
-                <i class="fa fa-bar-chart fa-5x"></i> <h3>Summary</h3>
-            </a>
-
-            <%
-                // REFERRAL ONLY
-                } else if (user.getAccountType().equals("referral")) {
-            %>
-
-            <a class="btn btn-app homepage-button bg-purple" href="referral.jsp">
-                <i class="fa fa-user-plus fa-5x"></i> <h3>Referral</h3>
             </a>
             
             <%
