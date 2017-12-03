@@ -613,7 +613,14 @@
                                         <th>Notes</th>
                                         <th>Remarks</th>
                                     </tr>
-
+                                    
+                                    <%
+                                        if(viewPastConsultRecord){
+                                            
+                                        } else {
+                                            
+                                        }
+                                    %>
                                     <tr>
                                         <td>
                                             <select name="medicine" class="form-control medicine" id="medicines">

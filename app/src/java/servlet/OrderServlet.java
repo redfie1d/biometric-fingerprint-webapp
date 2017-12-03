@@ -50,14 +50,6 @@ public class OrderServlet extends HttpServlet {
         String[] notes = request.getParameterValues("notes");
         String[] remarks = request.getParameterValues("remarks");
         int patientID = Integer.parseInt(request.getParameter("patientID").substring(3));
-
-        int orderID = orderDAO.getOrderID();
-        orderDAO.placeOrder(patientID);
-        for(int i=0; i<medicines.length; i++){
-            
-            Order order = new Order(0,"Dr Pris", 100, medicines[i], Integer.parseInt(quantities[i]), notes[i], remarks[i]);
-            orderDAO.addOrders(orderID, order);
-        }
         
         int visitId = -1;
         String errorMsg = "";
@@ -67,6 +59,13 @@ public class OrderServlet extends HttpServlet {
             } catch (Exception e) {
                 errorMsg = "Failed to get visitID"; //shouldnt happen
             }
+        }
+        
+        int orderID = orderDAO.getOrderID();
+        orderDAO.placeOrder(visitId);
+        for(int i=0; i<medicines.length; i++){
+            Order order = new Order(0,"Dr Pris", 100, medicines[i], Integer.parseInt(quantities[i]), notes[i], remarks[i]);
+            orderDAO.addOrders(orderID, order);
         }
         
         if(errorMsg.isEmpty()){
