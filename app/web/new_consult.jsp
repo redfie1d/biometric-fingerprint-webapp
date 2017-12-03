@@ -4,6 +4,7 @@
     Author     : tcw
 --%>
 
+<%@page import="model.Order"%>
 <%@page import="model.Drug"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.InventoryDAO"%>
@@ -343,7 +344,7 @@
                         <%
                             if (pastVisits != null) {
                         %>
-                        <table class="table" id="issueMedicine">
+                        <table class="table" >
                             <tbody>
                                 <tr>
                                     <th>#</th>
@@ -573,9 +574,6 @@
                             </div> 
                         </form>
                             
-                        <%
-                            viewPastConsultRecord = false;
-                        %>
                     </div>
 
                 </div>
@@ -603,57 +601,93 @@
                                     </tr>
                                     
                                     <%
+                                        InventoryDAO inventoryDAO = new InventoryDAO();
+
                                         if(viewPastConsultRecord){
-                                            
+                                            ArrayList<Order> orderList = inventoryDAO.getOrdersByVisitID(visitRecord.getId());
+                                            for(Order order:orderList){
+                                                String selectTag = "<input name='medicine' class='form-control medicine' id='medicines' value='" + order.getMedicine() + "' disabled";
+                                                String quantityInputTag = "<input name='quantity' placeholder='Quantity' class='form-control quantity' type='number' value='" + order.getQuantity() + "' disabled";
+                                                String notesInputTag = "<input name='notes' placeholder='Notes' class='form-control notes' type='text' value='" + order.getNotes() + "' disabled";
+                                                String remarksInputTag = "<input name='remarks' placeholder='Remarks' class='form-control remarks' type='text' value='" + order.getRemarks() + "' disabled";
+
+                                                out.println("<tr><td>");
+                                    %>
+                                                <%=selectTag%>
+                                                </td>
+                                                <td>
+                                                    <%=quantityInputTag%>
+                                                </td>
+                                                <td>
+                                                    <%=notesInputTag%>
+                                                </td>
+                                                <td>
+                                                    <%=remarksInputTag%>
+                                                </td>
+                                                </tr>
+                                    <%            
+                                            }
                                         } else {
-                                            
+                                            String selectTag = "<select name='medicine' class='form-control medicine' id='medicines'>";
+                                            String quantityInputTag = "<input name='quantity' placeholder='Quantity' class='form-control quantity' type='number'>";
+                                            String notesInputTag = "<input name='notes' placeholder='Notes' class='form-control notes' type='text'>";
+                                            String remarksInputTag = "<input name='remarks' placeholder='Remarks' class='form-control remarks' type='text'>";
+
+                                            out.println("<tr><td>");
+                                            out.println(selectTag);
+
+                                            ArrayList<Drug> drugList = inventoryDAO.getInventory();
+                                            ArrayList<String> drugNames = new ArrayList<String>();
+
+                                            for(Drug drug:drugList){
+                                                drugNames.add(drug.getMedicine_name() + " (" + drug.getQuantity() + ")");
+
+                                    %>
+                                                <option value="<%=drug.getMedicine_name()%>" type="text"><%=drug.getMedicine_name()+ " (" + drug.getQuantity()+")"%></option>
+                                    <%
+                                            }
+                                    %>
+                                            </select>
+                                            </td>
+                                            <td>
+                                                <%=quantityInputTag%>
+                                            </td>
+                                            <td>
+                                                <%=notesInputTag%>
+                                            </td>
+                                            <td>
+                                                <%=remarksInputTag%>
+                                                <input type="hidden" name="patientID" value=<%=patientRecord.getVillage()%><%=patientRecord.getPatientId()%>>
+                                                <input type="hidden" name="visitId" value=<%=visitRecord.getId()%>>
+                                            </td>
+                                            </tr>
+                                    <%
                                         }
                                     %>
-                                    <tr>
-                                        <td>
-                                            <select name="medicine" class="form-control medicine" id="medicines">
-                                            <%
-                                                InventoryDAO inventoryDAO = new InventoryDAO();
-                                                ArrayList<Drug> drugList = inventoryDAO.getInventory();
-                                                ArrayList<String> drugNames = new ArrayList<String>();
-                                                for(Drug drug:drugList){
-                                                    drugNames.add(drug.getMedicine_name() + " (" + drug.getQuantity() + ")");
-                                            %>
-                                                <option value="<%=drug.getMedicine_name()%>" type="text"><%=drug.getMedicine_name()+ " (" + drug.getQuantity()+")"%></option>
-                                            <%
-                                                }
-                                            %>
-                                            </select>
-                                        </td>
-                                        
-                                        <td>
-                                            <input name="quantity" placeholder="Quantity" class="form-control quantity" type="number">
-                                        </td>
-                                        <td>
-                                            <input name="notes" placeholder="Notes" class="form-control notes" type="text">
-                                        </td>
-                                        <td>
-                                            <input name="remarks" placeholder="Remarks" class="form-control remarks" type="text">
-                                            <input type="hidden" name="patientID" value=<%=patientRecord.getVillage()%><%=patientRecord.getPatientId()%>>
-                                            <input type="hidden" name="visitId" value=<%=visitRecord.getId()%>>
-                                        </td>
-                                        
-                                    </tr>
                                 </tbody>
                                 
                             </table>
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Add_Medicine()">Add Medicine</button>
-                            </span>
+                            <%
+                                if(!viewPastConsultRecord){
+                            %>   
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Add_Medicine()">Add Medicine</button>
+                                    </span>
 
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Remove_Medicine()">Remove Medicine</button>
-                            </span>
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-info btn-flat">Place Order</button>
-                            </span>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Remove_Medicine()">Remove Medicine</button>
+                                    </span>
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-info btn-flat">Place Order</button>
+                                    </span>
+                            <%
+                                }
+                            %>
                         </form>
                     </div>
+                    <%
+                        viewPastConsultRecord = false;
+                    %>
                 </div>
                 <!-- /.box-body -->
             </div>

@@ -116,4 +116,39 @@ public class InventoryDAO {
         return false;
     }
     
+    public static ArrayList<Order> getOrdersByVisitID(int visit_id){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<Order> orderList = new ArrayList<Order>();
+        ConsultDAO consultDAO = new ConsultDAO();
+        VisitDAO visitDAO = new VisitDAO();
+        
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("SELECT o.order_id, visit_id, medicine_name, quantity, notes, remarks FROM orders o INNER JOIN orderlist ol ON o.order_id = ol.order_id WHERE visit_id = ?");
+            stmt.setInt(1, visit_id);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int orderID = rs.getInt("order_id");
+                rs.getInt("visit_id");
+                String medicine_name = rs.getString("medicine_name");
+                int quantity = rs.getInt("quantity");
+                String notes = rs.getString("notes");
+                String remarks = rs.getString("remarks");
+                
+                orderList.add(new Order(orderID,consultDAO.getConsultByVisitID(visit_id).getDoctor(), visitDAO.getVisitByVisitID(visit_id).getPatientId(), medicine_name, quantity, notes, remarks));
+            }
+
+            return orderList;
+            //Returns the converted array to the caller of method
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return orderList;
+    }
 }
