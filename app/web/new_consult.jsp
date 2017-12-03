@@ -108,6 +108,11 @@
 
             Object visitObject = session.getAttribute("visitRecord");
             Object patientObject = session.getAttribute("patientRecord");
+            boolean viewPastConsultRecord = false;
+            Object viewPastConsultRecordObject = session.getAttribute("viewPastConsultRecord");
+            if(viewPastConsultRecordObject!=null){
+                viewPastConsultRecord = (boolean)viewPastConsultRecordObject;
+            }
 
             Visit visitRecord = visitObject == null ? null : (Visit) visitObject;
 //            DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
@@ -117,7 +122,7 @@
             Triage triageObject = visitRecord == null ? null : visitRecord.getTriage();
 
             String patientDetailsDisplayState = visitRecord != null && patientRecord != null ? "block" : "none";
-            String consultActionPage = visitRecord != null && patientRecord != null && visitRecord.getConsult() != null ? "UpdateConsultServlet" : "CreateConsultServlet";
+            String consultActionPage = "CreateConsultServlet";
 
             Visit[] pastVisits = null;
 
@@ -127,6 +132,7 @@
                 pastVisits = VisitDAO.getVisitByPatientID(visitRecord.getPatientId());
             }
 
+            session.removeAttribute("viewPastConsultRecord");
             session.removeAttribute("visitRecord");
             session.removeAttribute("patientRecord");
             session.removeAttribute("pastVisits");
@@ -349,11 +355,14 @@
                         <%
                             if (pastVisits != null) {
                         %>
-                        <div class="col-md-4">#</div>
-                        <div class="col-md-4" >Date & Time</div>
-                        <div class="col-md-4">Doctor</div>
-                        <div class="col-md-4">Action</div>
-
+                        <table class="table" id="issueMedicine">
+                            <tbody>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Doctor</th>
+                                    <th>Action</th>
+                                </tr>
                         <%
                             int count = 1;
                             for (Visit v : pastVisits) {
@@ -365,26 +374,31 @@
                                 if (consult != null) {
                                     String doctor = consult.getDoctor();
                         %>
-                        <div class="col-md-4"><%=count++%></a></div>
-                        <div class="col-md-4"><%=date%></div>
-                        <div class="col-md-4"><%=doctor%></div>
-                        <div class="col-md-4">
-                            <form action="SearchPatientByVisitIDServlet" method="POST">
-                                <input type="hidden" name="source" value="consult">
-                                <input type="hidden" name="patientID" value=<%=patientRecord.getVillage()%><%=patientRecord.getPatientId()%>>
-                                <input type="hidden" name="visitID" value=<%=v.getId()%>>
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <button type="submit" class="btn btn-info btn-flat">View</button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
+                                <tr>
+                                    <td><%=count++%></td>
+                                    <td><%=date%></td>
+                                    <td><%=doctor%></td>
+                                    <td>
+                                        <form action="SearchPatientByVisitIDServlet" method="POST">
+                                            <input type="hidden" name="source" value="consult">
+                                            <input type="hidden" name="patientID" value=<%=patientRecord.getVillage()%><%=patientRecord.getPatientId()%>>
+                                            <input type="hidden" name="visitID" value=<%=v.getId()%>>
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="btn btn-info btn-flat">View</button>
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                                          
                         <%
                                     }
                                 }
                             }
                         %>
+                            </tbody>
+                        </table>  
                     </div>
                 </div>
 
@@ -403,6 +417,7 @@
                         <!-- /.box-tools -->
                     </div>
                     <!-- /.box-header -->
+                    
                     <div class="box-body">
 
                         <form action="<%=consultActionPage%>" method="POST" class="row">
@@ -414,9 +429,9 @@
                                 <div class="form-group">
                                     <label>Consult Details</label>
                                     <%
-                                        if (visitRecord != null && visitRecord.getConsult() != null) {
+                                        if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null) {
                                     %>
-                                    <textarea class="form-control" name="notes" rows="3" style="height:200px"><%=visitRecord.getConsult().getNotes()%></textarea>
+                                    <textarea class="form-control" name="notes" rows="3" style="height:200px" disabled><%=visitRecord.getConsult().getNotes()%></textarea>
 
                                     <%
                                     } else {
@@ -431,9 +446,9 @@
                                 <div class="form-group">
                                     <label>Diagnosis</label>
                                     <%
-                                        if (visitRecord != null && visitRecord.getConsult() != null) {
+                                        if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null) {
                                     %>
-                                    <textarea class="form-control" name="diagnosis" rows="3" style="height:80px"><%=visitRecord.getConsult().getDiagnosis()%></textarea>
+                                    <textarea class="form-control" name="diagnosis" rows="3" style="height:80px" disabled><%=visitRecord.getConsult().getDiagnosis()%></textarea>
 
                                     <%
                                     } else {
@@ -445,19 +460,17 @@
                                     %>                                
                                 </div>
 
-                                <div class ="col-md-9">
-                                    <div class="form-group">
-                                        <label>STAT Investigations</label>
-                                    </div>
+                                <div class="form-group">
+                                    <label>STAT Investigations</label>
                                 </div>
 
-                                <div class ="col-md-6">
+                                <div class ="col-md-6" style="padding:0">
                                     <div class="form-group">
                                         <label>Urine Dip Test</label>
                                         <%
-                                            if (visitRecord != null && visitRecord.getConsult() != null) {
+                                            if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null) {
                                         %>
-                                        <textarea class="form-control" name="urine" rows="3" style="height:100px"><%=visitRecord.getConsult().getUrine_test()%></textarea>
+                                        <textarea class="form-control" name="urine" rows="3" style="height:100px" disabled><%=visitRecord.getConsult().getUrine_test()%></textarea>
 
                                         <%
                                         } else {
@@ -472,9 +485,9 @@
                                     <div class="form-group">
                                         <label>Hemocue Hb Test</label>
                                         <%
-                                            if (visitRecord != null && visitRecord.getConsult() != null) {
+                                            if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null) {
                                         %>
-                                        <textarea class="form-control" name="hemocue" rows="3" style="height:100px"><%=visitRecord.getConsult().getHemocue_count()%></textarea>
+                                        <textarea class="form-control" name="hemocue" rows="3" style="height:100px" disabled><%=visitRecord.getConsult().getHemocue_count()%></textarea>
 
                                         <%
                                         } else {
@@ -491,9 +504,9 @@
                                     <div class="form-group">
                                         <label>Capillary Blood Glucose Test</label>
                                         <%
-                                            if (visitRecord != null && visitRecord.getConsult() != null) {
+                                            if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null) {
                                         %>
-                                        <textarea class="form-control" name="blood" rows="3" style="height:100px"><%=visitRecord.getConsult().getBlood_glucose()%></textarea>
+                                        <textarea class="form-control" name="blood" rows="3" style="height:100px" disabled><%=visitRecord.getConsult().getBlood_glucose()%></textarea>
 
                                         <%
                                         } else {
@@ -504,13 +517,14 @@
                                             }
                                         %>      
                                     </div>
-
+                                </div>
+                                <div class="col-md-12" style="padding:0">
                                     <div class="form-group">
                                         <label>Referral: Investigations/External Care</label>
                                         <%
-                                            if (visitRecord != null && visitRecord.getConsult() != null) {
+                                            if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null) {
                                         %>
-                                        <textarea class="form-control" name="referrals" rows="3" style="height:100px"><%=visitRecord.getConsult().getReferrals()%></textarea>
+                                        <textarea class="form-control" name="referrals" rows="3" style="height:100px" disabled><%=visitRecord.getConsult().getReferrals()%></textarea>
 
                                         <%
                                         } else {
@@ -521,7 +535,7 @@
                                             }
                                         %>      
                                     </div>
-                                </div>  
+                                </div>
                             </div>
 
                             <div class="col-md-3">
@@ -535,9 +549,9 @@
                                         for (String s : problems) {
 
                                             String checked = "";
-
-                                            if (visitRecord != null && visitRecord.getConsult() != null && visitRecord.getConsult().getProblems() != null) {
-
+                                            String disable = "";
+                                            if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null && visitRecord.getConsult().getProblems() != null) {
+                                                disable +="disabled";
                                                 for (String p : visitRecord.getConsult().getProblems().split(",")) {
                                                     //out.println(p);
                                                     if (p.equals(s)) {
@@ -549,7 +563,7 @@
 
                                             out.println("<div class=\"checkbox\">");
                                             out.println("<label>");
-                                            out.println("<input type=\"checkbox\" name=\"problems\" class='problemsCB' value='" + s + "' " + checked + ">");
+                                            out.println("<input type=\"checkbox\" name=\"problems\" class='problemsCB' value='" + s + "' " + checked + " " + disable + ">");
                                             out.println(s);
                                             out.println("</label>");
                                             out.println("</div>");
@@ -560,18 +574,20 @@
                             </div>
 
                             <div class="col-md-12">
-                                <%                                    if (visitRecord != null && visitRecord.getConsult() != null) {
+                                <%                                    
+                                    if (!viewPastConsultRecord && visitRecord != null) {
                                 %>
-                                <button class="btn btn-primary btn-lg" id="btn-create-record" type="submit">Update Consult Record</button>
+                                        <button class="btn btn-primary btn-lg" id="btn-create-record" type="submit">Create Consult Record</button>
                                 <%
-                                } else {
+                                    } 
                                 %>
-                                <button class="btn btn-primary btn-lg" id="btn-create-record" type="submit">Create Consult Record</button>
-                                <%
-                                    }
-                                %>
+
                             </div> 
                         </form>
+                            
+                        <%
+                            viewPastConsultRecord = false;
+                        %>
                     </div>
 
                 </div>

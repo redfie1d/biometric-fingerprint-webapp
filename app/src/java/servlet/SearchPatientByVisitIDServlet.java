@@ -111,6 +111,7 @@ public class SearchPatientByVisitIDServlet extends HttpServlet {
 
             session.setAttribute("visitRecord", v);
             session.setAttribute("patientRecord", p);
+            session.setAttribute("viewPastConsultRecord", true);
 
             if (source.equals("consult")) {
                 Visit[] pastVisits = VisitDAO.getVisitByPatientID(p.getPatientId());

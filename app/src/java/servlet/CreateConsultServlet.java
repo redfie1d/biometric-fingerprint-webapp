@@ -74,6 +74,8 @@ public class CreateConsultServlet extends HttpServlet {
                 Consult consult = new Consult(visitId, doctor, notes, diagnosis, finalStringProblems, urine, hemocue, blood, referrals);
                 VisitDAO visitDAO = new VisitDAO();
                 Visit visit = visitDAO.getVisitByVisitID(visitId);
+                System.out.println("Printing Visit");
+                System.out.println(visit);
                 visit.setConsult(consult);
                 ConsultDAO consultDAO = new ConsultDAO();
                 boolean successful = consultDAO.insertData(visitId, doctor, notes, diagnosis, finalStringProblems, urine, hemocue, blood, referrals);
