@@ -17,28 +17,16 @@
 <%@page import="model.Patient"%>
 <%@page import="model.Visit"%>
 <%@include file="header.jsp" %>
+<%@ include file="protect.jsp" %>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="margin-left: 0 !important;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Doctor's Consultation
-            <form action="SetDoctorNameServlet" method="POST">         
-                <div class="input-group col-md-12 row">
-                    <%
-                        String doctorName = session.getAttribute("docName") == null ? "" : session.getAttribute("docName").toString();
-                    %>
-
-                    <div class="col-md-8">
-                        <input type="text" id="docName" placeholder="Enter your name here" name="docName" class="form-control" style="width:80%" value="<%=doctorName%>">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-info btn-flat">Set</button>
-                        </span>
-                    </div>
-
-                </div>
-            </form>
-        </h1>
+        <%            
+            String doctorName = user_doctor.getName();
+        %>
+        <h1>Doctor's Consultation (<%=doctorName%>)</h1>
     </section>
 
     <!-- Main content -->
