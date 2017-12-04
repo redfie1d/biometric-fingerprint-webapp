@@ -8,16 +8,16 @@ public class Visit {
     
     private Triage t;
     private Consult c;
-    private Referral r;
+    private PostReferral r;
 
-    public Visit(int id, int patientId, String date, Triage t, Consult c, Referral r) {
+    public Visit(int id, int patientId, String date, Triage t, Consult c, PostReferral r) {
         this(id, patientId, date);
         this.t = t;
         this.c = c;
         this.r = r;
     }
 
-    public Visit(int id, int patientId, String date, Triage t, Consult c, Referral r, String status) {
+    public Visit(int id, int patientId, String date, Triage t, Consult c, PostReferral r, String status) {
         this(id, patientId, date);
         this.t = t;
         this.c = c;
@@ -73,7 +73,7 @@ public class Visit {
         return c;
     }
 
-    public Referral getReferral() {
+    public PostReferral getPostReferral() {
         return r;
     }
     
@@ -97,7 +97,7 @@ public class Visit {
         this.c = c;
     }   
 
-    public void setReferral(Referral r) {
+    public void setPostReferral(PostReferral r) {
         this.r = r;
     }
 

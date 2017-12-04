@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>LoginUI.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
         <servlet-name>InitializeBioMiniServlet</servlet-name>
@@ -71,6 +71,10 @@
         <servlet-name>OrderServlet</servlet-name>
         <servlet-class>servlet.OrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreatePostReferralServlet</servlet-name>
+        <servlet-class>servlet.CreatePostReferralServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InitializeBioMiniServlet</servlet-name>
         <url-pattern>/InitializeBioMiniServlet</url-pattern>
@@ -138,6 +142,10 @@
     <servlet-mapping>
         <servlet-name>OrderServlet</servlet-name>
         <url-pattern>/OrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePostReferralServlet</servlet-name>
+        <url-pattern>/CreatePostReferralServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -23,7 +23,7 @@ public class ReferralDAO {
     public boolean insertData(int visitId, String condition, String test, String parameters, String remarks) {
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("INSERT INTO visits values(?,?,?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO Referrals values(?,?,?,?,?)");
 
             stmt.setInt(1, visitId);
             stmt.setString(2, condition);

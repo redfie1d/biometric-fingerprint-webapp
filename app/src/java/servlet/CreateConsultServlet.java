@@ -83,9 +83,6 @@ public class CreateConsultServlet extends HttpServlet {
                     request.getSession().setAttribute("visitRecord", visit);
                     request.getSession().setAttribute("patientRecord", PatientDAO.getPatientByPatientID(visit.getPatientId()));
                     request.getSession().setAttribute("successmsg", "A new consult record is created");
-//                    RequestDispatcher dispatcher = request.getRequestDispatcher("createTriage.jsp");
-//                    dispatcher.forward(request, response);
-                    
                     response.sendRedirect("new_consult.jsp");
                 }
             }

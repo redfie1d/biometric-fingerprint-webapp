@@ -15,6 +15,7 @@
 <%@page import="model.Visit"%>
 <%@page import="dao.VisitDAO"%>
 <%@include file="header.jsp" %>
+<%@ include file="protect.jsp" %>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="margin-left: 0 !important;">

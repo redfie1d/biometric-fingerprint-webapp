@@ -59,6 +59,8 @@ public class SearchPatientLatestVisitServlet extends HttpServlet {
             session.setAttribute("visitError", "Patient/Visit not found!");
             if (source.equals("consult")) {
                 response.sendRedirect("new_consult.jsp");
+            } else if (source.equals("postreferral")) {
+                response.sendRedirect("new_postreferral.jsp");
             } else {
                 response.sendRedirect("new_triage.jsp");
             }
@@ -82,6 +84,8 @@ public class SearchPatientLatestVisitServlet extends HttpServlet {
             session.setAttribute("visitError", "Patient/Visit not found!");
             if (source.equals("consult")) {
                 response.sendRedirect("new_consult.jsp");
+            } else if (source.equals("postreferral")) {
+                response.sendRedirect("new_postreferral.jsp");
             } else {
                 response.sendRedirect("new_triage.jsp");
             }
@@ -94,6 +98,8 @@ public class SearchPatientLatestVisitServlet extends HttpServlet {
             session.setAttribute("visitError", "Patient/Visit not found!");
             if (source.equals("consult")) {
                 response.sendRedirect("new_consult.jsp");
+            } else if (source.equals("postreferral")) {
+                response.sendRedirect("new_postreferral.jsp");
             } else {
                 response.sendRedirect("new_triage.jsp");
             }
@@ -113,6 +119,10 @@ public class SearchPatientLatestVisitServlet extends HttpServlet {
                 Visit[] pastVisits = VisitDAO.getVisitByPatientID(p.getPatientId());
                 session.setAttribute("pastVisits", pastVisits);
                 response.sendRedirect("new_consult.jsp");
+            } else if (source.equals("postreferral")) {
+                Visit[] pastVisits = VisitDAO.getVisitByPatientID(p.getPatientId());
+                session.setAttribute("pastVisits", pastVisits);
+                response.sendRedirect("new_postreferral.jsp");
             } else {
                 response.sendRedirect("new_triage.jsp");
             }
@@ -121,29 +131,12 @@ public class SearchPatientLatestVisitServlet extends HttpServlet {
             session.setAttribute("visitError", "Patient/Visit not found!");
             if (source.equals("consult")) {
                 response.sendRedirect("new_consult.jsp");
+            } else if (source.equals("postreferral")) {
+                response.sendRedirect("new_postreferral.jsp");
             } else {
                 response.sendRedirect("new_triage.jsp");
             }
         }
-
-//            if (visitId != -1) {
-//                Visit visit = VisitDAO.getVisitByVisitID(visitId);
-//
-//                if (visit != null) {
-//                    Patient patient = PatientDAO.getPatientByPatientID(visit.getPatientId());
-//
-//                    HttpSession session = request.getSession();
-//                    session.setAttribute("visitRecord", visit);
-//                    session.setAttribute("patientRecord", patient);
-//
-//                    if (source.equals("consult")) {
-//                        response.sendRedirect("new_consult.jsp");
-//                    } else {
-//                        response.sendRedirect("new_triage.jsp");
-//                    }
-//
-//                }
-//            }
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

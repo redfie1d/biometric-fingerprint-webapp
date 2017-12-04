@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import model.Consult;
-import model.Referral;
+import model.PostReferral;
 import model.Triage;
 import model.Visit;
 
@@ -42,7 +42,7 @@ public class VisitDAO {
                 String date = rs.getString("date");
                 Triage t = TriageDAO.getDataByVisitID(visitID);
                 Consult c = ConsultDAO.getConsultByVisitID(visitID);
-                Referral r = null;
+                PostReferral r = null;
                 return new Visit(visitID, patientID, date, t, c, r);
             }
 
@@ -117,7 +117,7 @@ public class VisitDAO {
                 int patientID = rs.getInt("patient_id");
                 Triage t = TriageDAO.getDataByVisitID(visitID);
                 Consult c = ConsultDAO.getConsultByVisitID(visitID);
-                Referral r = null;
+                PostReferral r = null;
                 return new Visit(visitID, patientID, date, t, c, r);
             }
 
@@ -163,15 +163,6 @@ public class VisitDAO {
         try {
             conn = ConnectionManager.getConnection();
             stmt = conn.prepareStatement("INSERT INTO visits values(?,?,?,?)");
-
-//            System.out.println("v");
-//            System.out.println(visitId);
-//            
-//            System.out.println("p");
-//            System.out.println(patientId);
-//            
-//            System.out.println("d");
-//            System.out.println(date);
             stmt.setInt(1, visitId);
             stmt.setInt(2, patientId);
             stmt.setString(3, date);

@@ -13,7 +13,7 @@
     } */
     
     UserDAO userDao = new UserDAO();
-    //User user = (User) session.getAttribute("user");
-    User user = userDao.retrieve("admin");
-    User user_doctor = userDao.retrieve("strange1");
+    User user = (User) session.getAttribute("user");
+    //User user = userDao.retrieve("admin");
+    //User user_recorder = userDao.retrieve("strange1");
 %>

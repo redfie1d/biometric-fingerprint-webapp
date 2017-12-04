@@ -60,7 +60,7 @@
                 <i class="fa fa-bar-chart fa-5x"></i> <h3>Summary</h3>
             </a>
 
-            <a class="btn btn-app homepage-button bg-purple" href="new_referral.jsp">
+            <a class="btn btn-app homepage-button bg-purple" href="new_postreferral.jsp">
                 <i class="fa fa-user-plus fa-5x"></i> <h3>Post-Referral</h3>
             </a>
 
@@ -81,7 +81,7 @@
                 <i class="fa fa-user fa-5x"></i> <h3>Consultation</h3>
             </a>
             
-            <a class="btn btn-app homepage-button bg-purple" href="new_referral.jsp">
+            <a class="btn btn-app homepage-button bg-purple" href="new_postreferral.jsp">
                 <i class="fa fa-user-plus fa-5x"></i> <h3>Post-Referral</h3>
             </a>
 
