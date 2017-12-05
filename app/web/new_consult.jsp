@@ -535,20 +535,26 @@
                                             "Gastrointestinal", "Gynaecology", "Hematology", "Infectious Diseases", "Musculo-skeletal", "Neurology",
                                             "Oncology", "Psychology", "Renal", "Respiratory", "Urology", "Surgery"};
 
+                                        String disable = "";
+                                        
+                                        if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null && visitRecord.getConsult().getProblems() != null) {
+                                            disable +="disabled";
+                                        }
+                                        
                                         for (String s : problems) {
 
                                             String checked = "";
-                                            String disable = "";
-                                            if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null && visitRecord.getConsult().getProblems() != null) {
-                                                disable +="disabled";
-                                                for (String p : visitRecord.getConsult().getProblems().split(",")) {
-                                                    //out.println(p);
-                                                    if (p.equals(s)) {
-                                                        checked = "checked";
-                                                        break;
-                                                    }
+                                            
+                                                
+                                            for (String p : visitRecord.getConsult().getProblems().split(",")) {
+                                                //out.println(p);
+
+                                                if (viewPastConsultRecord && p.equals(s)) {
+                                                    checked = "checked";
+                                                    break;
                                                 }
                                             }
+                                            
 
                                             out.println("<div class=\"checkbox\">");
                                             out.println("<label>");
@@ -558,6 +564,17 @@
                                             out.println("</div>");
                                         }
 
+                                    %>
+                                </div>
+                                <h4>Chronic Referrals</h4>
+                                <div class="form-group">
+                                    <%  
+                                        out.println("<div class=\"checkbox\">");
+                                        out.println("<label>");
+                                        out.println("<input type=\"checkbox\" name=\"problems\" class='problemsCB' value='Chronic Referral' " + disable + ">");
+                                        out.println("Yes");
+                                        out.println("</label>");
+                                        out.println("</div>");
                                     %>
                                 </div>
                             </div>

@@ -3,6 +3,8 @@
     Created on : 22 Nov, 2017, 3:21:52 PM
     Author     : Kwtam
 --%>
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
 <%@page import="model.Drug"%>
 <%@page import="dao.InventoryDAO"%>
 <%@page import="java.util.HashMap"%>
@@ -180,6 +182,14 @@
                                 <%
                                     InventoryDAO inventoryDAO = new InventoryDAO();
                                     ArrayList<Drug> drugList = inventoryDAO.getInventory();
+                                    
+                                    Collections.sort(drugList, new Comparator<Drug>() {
+                                        @Override
+                                        public int compare(Drug drug1,Drug drug2) {
+                                            return drug1.getMedicine_name().compareTo(drug2.getMedicine_name());
+                                        }
+                                    });
+                                     
                                     for(Drug drug:drugList){
                                 %>
                                         <tr>
