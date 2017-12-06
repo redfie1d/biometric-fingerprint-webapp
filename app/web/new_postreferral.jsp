@@ -4,6 +4,9 @@
     Author     : JunMing
 --%>
 
+<%@page import="model.Order"%>
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
 <%@page import="dao.PostReferralDAO"%>
 <%@page import="model.PostReferral"%>
 <%@page import="model.Drug"%>
@@ -15,7 +18,7 @@
 <%@page import="dao.PatientDAO"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.*"%>
-<%@page import="model.Triage"%>
+<%@page import="model.Vitals"%>
 <%@page import="model.Patient"%>
 <%@page import="model.Visit"%>
 <%@include file="header.jsp" %>
@@ -110,14 +113,14 @@
 
             Visit visitRecord = visitObject == null ? null : (Visit) visitObject;
             Patient patientRecord = patientObject == null ? null : (Patient) patientObject;
-            Triage triageObject = visitRecord == null ? null : visitRecord.getTriage();
+            Vitals vitalsObject = visitRecord == null ? null : visitRecord.getVitals();
 
             String patientDetailsDisplayState = visitRecord != null && patientRecord != null ? "block" : "none";
 
             Visit[] pastVisits = null;
 
             if (visitRecord != null) {
-                triageObject = visitRecord.getTriage();
+                vitalsObject = visitRecord.getVitals();
                 pastVisits = (Visit[]) session.getAttribute("pastVisits");
             }
 
@@ -195,10 +198,10 @@
 
                                     <div class="row" style="padding:15px;">
                                         <div class="col-md-3">
-                                            <b>Age:</b>
+                                            <b>Date Of Birth:</b>
                                         </div>
                                         <div class="col-md-9">
-                                            <%=patientRecord.getBirthYear()%>
+                                            <%=patientRecord.getDateOfBirth()%>
                                         </div>
                                     </div>
 
@@ -224,13 +227,13 @@
                                     </div>
 
                                     <%
-                                        if (triageObject != null) {
+                                        if (vitalsObject != null) {
                                     %>
 
                                     <div class="box-footer no-padding">
                                         <div class="row" style="padding-left:15px;">
                                             <div class="col-md-12">
-                                                <h3><b>Current Triage Record</b></h3>
+                                                <h3><b>Current Vitals Record</b></h3>
                                             </div>
                                         </div>
 
@@ -239,14 +242,14 @@
                                                 <b>Height:</b>
                                             </div>
                                             <div class="col-md-3">
-                                                <%=triageObject.getHeight()%>
+                                                <%=vitalsObject.getHeight()%>
                                             </div>
 
                                             <div class="col-md-3">
                                                 <b>Weight:</b>
                                             </div>
                                             <div class="col-md-3">
-                                                <%=triageObject.getWeight()%>
+                                                <%=vitalsObject.getWeight()%>
                                             </div>
                                         </div>
                                         <div class="row" style="padding:15px;">
@@ -254,14 +257,14 @@
                                                 <b>BP:</b>
                                             </div>
                                             <div class="col-md-3">
-                                                <%=triageObject.getSystolic()%>/<%=triageObject.getDiastolic()%>
+                                                <%=vitalsObject.getSystolic()%>/<%=vitalsObject.getDiastolic()%>
                                             </div>
 
                                             <div class="col-md-3">
                                                 <b>Temp:</b>
                                             </div>
                                             <div class="col-md-3">
-                                                <%=triageObject.getTemperature()%>
+                                                <%=vitalsObject.getTemperature()%>
                                             </div>
                                         </div>
 
@@ -271,7 +274,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <%
-                                                    if (triageObject.getHivPositive() == 1) {
+                                                    if (vitalsObject.getHivPositive() == 1) {
                                                 %>
                                                 Yes
                                                 <%
@@ -288,24 +291,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <%
-                                                    if (triageObject.getPtbPositive() == 1) {
-                                                %>
-                                                Yes
-                                                <%
-                                                } else {
-                                                %>
-                                                No
-                                                <%
-                                                    }
-                                                %>
-                                            </div>
-
-                                            <div class="col-md-2">
-                                                <b>Hepatitis C Positive:</b>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <%
-                                                    if (triageObject.getHepCPositive() == 1) {
+                                                    if (vitalsObject.getPtbPositive() == 1) {
                                                 %>
                                                 Yes
                                                 <%
@@ -549,7 +535,7 @@
                                 </div>
                                 <div class="col-md-12" style="padding:0">
                                     <div class="form-group">
-                                        <label>Referral: Investigations/External Care</label>
+                                        <label>Referral Letter (if needed)</label>
                                         <%
                                             if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null) {
                                         %>
@@ -601,9 +587,135 @@
                                     %>
                                 </div>
                             </div>
+                            <%    String chronicReferral = "";
+                                String disable = "";
 
+                                if (visitRecord != null && visitRecord.getConsult() != null && visitRecord.getConsult().isChronic_referral()) {
+                                    chronicReferral = "checked";
+                                }
+
+                                if (viewPastConsultRecord) {
+                                    disable = "disabled";
+                                }
+                            %>
                             <div class="col-md-12">
-                                <%                                    if (!viewPastConsultRecord && visitRecord != null) {
+                                <div class="checkbox">
+                                    <label>
+                                        <%
+                                            out.println("<input type='checkbox' name='chronicReferral' class='problemsCB' value='true' " + chronicReferral + " " + disable + ">");
+                                        %>
+                                        Chronic Referral
+                                    </label>
+                                </div>
+                                <br>
+
+                                <div class="box box-info box-solid" style="display:<%=viewPastConsultRecord ? "block" : "none"%>">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Issue Medicine</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <!-- /.box-tools -->
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table class="table" id="issueMedicine">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Medicine</th>
+                                                    <th>Quantity</th>
+                                                    <th>Regimen</th>
+                                                    <th>Remarks</th>
+                                                </tr>
+
+                                                <%
+                                                    InventoryDAO inventoryDAO = new InventoryDAO();
+
+                                                    if (viewPastConsultRecord) {
+                                                        ArrayList<Order> orderList = inventoryDAO.getOrdersByVisitID(visitRecord.getId());
+
+                                                        for (Order order : orderList) {
+                                                            String selectTag = "<input name='medicine' class='form-control medicine' id='medicines' value='" + order.getMedicine() + "' disabled";
+                                                            String quantityInputTag = "<input name='quantity' placeholder='Quantity' class='form-control quantity' type='number' value='" + order.getQuantity() + "' disabled";
+                                                            String notesInputTag = "<input name='notes' placeholder='Regimen' class='form-control notes' type='text' value='" + order.getNotes() + "' disabled";
+                                                            String remarksInputTag = "<input name='remarks' placeholder='Remarks' class='form-control remarks' type='text' value='" + order.getRemarks() + "' disabled";
+
+                                                            out.println("<tr><td>");
+                                                %>
+                                                <%=selectTag%>
+                                                </td>
+                                            <td>
+                                                <%=quantityInputTag%>
+                                            </td>
+                                            <td>
+                                                <%=notesInputTag%>
+                                            </td>
+                                            <td>
+                                                <%=remarksInputTag%>
+                                            </td>
+                                            </tr>
+                                            <%
+                                                }
+                                            } else if (visitRecord != null) {
+                                                String selectTag = "<select name='medicine' class='form-control medicine' id='medicines'>";
+                                                String quantityInputTag = "<input name='quantity' placeholder='Quantity' class='form-control quantity' type='number'>";
+                                                String notesInputTag = "<input name='notes' placeholder='Regimen' class='form-control notes' type='text'>";
+                                                String remarksInputTag = "<input name='remarks' placeholder='Remarks' class='form-control remarks' type='text'>";
+
+                                                out.println("<tr><td>");
+                                                out.println(selectTag);
+
+                                                ArrayList<Drug> drugList = inventoryDAO.getInventory();
+                                                ArrayList<String> drugNames = new ArrayList<String>();
+
+                                                for (Drug drug : drugList) {
+                                                    drugNames.add(drug.getMedicine_name() + " (" + drug.getQuantity() + ")");
+
+                                            %>
+                                            <option value="<%=drug.getMedicine_name()%>" type="text"><%=drug.getMedicine_name() + " (" + drug.getQuantity() + ")"%></option>
+                                            <%
+                                                }
+                                            %>
+                                            </select>
+                                            </td>
+                                            <td>
+                                                <%=quantityInputTag%>
+                                            </td>
+                                            <td>
+                                                <%=notesInputTag%>
+                                            </td>
+                                            <td>
+                                                <%=remarksInputTag%>
+                                                <input type="hidden" name="visitId" value=<%=visitRecord.getId()%>>
+                                            </td>
+                                            </tr>
+                                            <%
+                                                }
+                                            %>
+                                            </tbody>
+
+                                        </table>
+                                        <%
+                                            if (!viewPastConsultRecord) {
+                                        %>   
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Add_Medicine()">Add Medicine</button>
+                                        </span>
+
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-info btn-flat" id="removeMedicine" onClick="Remove_Medicine()">Remove Medicine</button>
+                                        </span>
+                                        <%
+                                            }
+                                        %>
+
+                                    </div>
+
+                                </div>
+                                <%
+                                    if (!viewPastConsultRecord && visitRecord != null) {
                                 %>
                                 <button class="btn btn-primary btn-lg" id="btn-create-record" type="submit">Create Consult Record</button>
                                 <%
@@ -613,89 +725,7 @@
                             </div> 
                         </form>
                     </div>
-
                 </div>
-
-                <div class="box box-info box-solid" style="display:<%=viewPastConsultRecord ? "block" : "none"%>">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Issue Medicine</h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <!-- /.box-tools -->
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <form action="OrderServlet" method="POST">
-                            <table class="table" id="issueMedicine">
-                                <tbody>
-                                    <tr>
-                                        <th>Medicine</th>
-                                        <th>Quantity</th>
-                                        <th>Notes</th>
-                                        <th>Remarks</th>
-                                    </tr>
-
-                                    <%
-                                        if (viewPastConsultRecord) {
-
-                                        } else {
-
-                                        }
-                                    %>
-                                    <tr>
-                                        <td>
-                                            <select name="medicine" class="form-control medicine" id="medicines">
-                                                <%
-                                                    InventoryDAO inventoryDAO = new InventoryDAO();
-                                                    ArrayList<Drug> drugList = inventoryDAO.getInventory();
-                                                    ArrayList<String> drugNames = new ArrayList<String>();
-                                                    for (Drug drug : drugList) {
-                                                        drugNames.add(drug.getMedicine_name() + " (" + drug.getQuantity() + ")");
-                                                %>
-                                                <option value="<%=drug.getMedicine_name()%>" type="text"><%=drug.getMedicine_name() + " (" + drug.getQuantity() + ")"%></option>
-                                                <%
-                                                    }
-                                                %>
-                                            </select>
-                                        </td>
-
-                                        <td>
-                                            <input name="quantity" placeholder="Quantity" class="form-control quantity" type="number">
-                                        </td>
-                                        <td>
-                                            <input name="notes" placeholder="Notes" class="form-control notes" type="text">
-                                        </td>
-                                        <td>
-                                            <input name="remarks" placeholder="Remarks" class="form-control remarks" type="text">
-                                            <input type="hidden" name="patientID" value=<%=patientRecord.getVillage()%><%=patientRecord.getPatientId()%>>
-                                            <input type="hidden" name="visitId" value=<%=visitRecord.getId()%>>
-                                        </td>
-
-                                    </tr>
-                                </tbody>
-
-                            </table>
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Add_Medicine()">Add Medicine</button>
-                            </span>
-
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Remove_Medicine()">Remove Medicine</button>
-                            </span>
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-info btn-flat">Place Order</button>
-                            </span>
-                        </form>
-                    </div>
-                </div>
-
-                <%
-                    // viewPastConsultRecord = false (means havent click view)
-%>
-
                 <div id="patientRecordsBox" class="box box-info box-solid" style="display:<%=viewPastConsultRecord ? "block" : "none"%>">
                     <div class="box-header with-border">
                         <h3 class="box-title">Consultation's Post Referral</h3>
@@ -752,10 +782,10 @@
                 </div>
                 <!-- /.box-body -->
             </div>
-
             <!-- /.box -->
         </div>
-        <!-- /.col (right) -->
+</div>
+<!-- /.col (right) -->
 
 </div>
 <!-- /.row -->
@@ -782,13 +812,13 @@
 
 <script>
 //            .summaryProblemGroup
-                                    $(document).ready(function () {
-                                        var problems = ["Cardiovascular", "Dental", "Dermatology", "Endocrine", "ENT", "Eye",
-                                            "Gastrointestinal", "Gynaecology", "Hematology", "Infectious Diseases", "Musculo-skeletal", "Neurology",
-                                            "Oncology", "Psychology", "Renal", "Respiratory", "Urology", "Surgery"];
+                                                $(document).ready(function () {
+                                                    var problems = ["Cardiovascular", "Dental", "Dermatology", "Endocrine", "ENT", "Eye",
+                                                        "Gastrointestinal", "Gynaecology", "Hematology", "Infectious Diseases", "Musculo-skeletal", "Neurology",
+                                                        "Oncology", "Psychology", "Renal", "Respiratory", "Urology", "Surgery"];
 
 
-                                    });
+                                                });
 </script>
 
 <%@include file="footer.jsp" %>

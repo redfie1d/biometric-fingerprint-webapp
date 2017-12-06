@@ -61,7 +61,7 @@ public class SearchPatientByVisitIDServlet extends HttpServlet {
             } else if (source.equals("postreferral")) {
                 response.sendRedirect("new_postreferral.jsp");
             } else {
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             }
             return;
         }
@@ -80,7 +80,7 @@ public class SearchPatientByVisitIDServlet extends HttpServlet {
             } else if (source.equals("postreferral")) {
                 response.sendRedirect("new_postreferral.jsp");
             } else {
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             }
             return;
         }
@@ -94,7 +94,7 @@ public class SearchPatientByVisitIDServlet extends HttpServlet {
             } else if (source.equals("postreferral")) {
                 response.sendRedirect("new_postreferral.jsp");
             } else {
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             }
             return;
         }
@@ -126,7 +126,7 @@ public class SearchPatientByVisitIDServlet extends HttpServlet {
                 session.setAttribute("pastVisits", pastVisits);
                 response.sendRedirect("new_postreferral.jsp");
             } else {
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             }
             
             session.setAttribute("visitRecord", v);
@@ -139,7 +139,7 @@ public class SearchPatientByVisitIDServlet extends HttpServlet {
             } else if (source.equals("postreferral")) {
                 response.sendRedirect("new_postreferral.jsp");
             } else {
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             }
         }
     }

@@ -7,7 +7,7 @@ public class Patient {
     private int patientId;
     private String name;
     private String gender;
-    private int birthYear;
+    private String dateOfBirth;
     private int parentId;
     private String allergies;
     private String photoImage;
@@ -27,28 +27,28 @@ public class Patient {
 
     public Patient(){}
     
-    public Patient(String village, int patientId, String name, String gender, int birthYear, int parentId, String allergies, ArrayList<Visit> visits) {
-        this(village,patientId,name,gender,birthYear,parentId,allergies);
+    public Patient(String village, int patientId, String name, String gender, String dateOfBirth, int parentId, String allergies, ArrayList<Visit> visits) {
+        this(village,patientId,name,gender,dateOfBirth,parentId,allergies);
         this.visits = visits;
     }
 
-    public Patient(String village, int patientId, String name, String gender, int birthYear, int parentId, String allergies) {
+    public Patient(String village, int patientId, String name, String gender, String dateOfBirth, int parentId, String allergies) {
         this.village = village;
         this.patientId = patientId;
         this.name = name;
         this.gender = gender;
-        this.birthYear = birthYear;
+        this.dateOfBirth = dateOfBirth;
         this.parentId = parentId;
         this.allergies = allergies; 
     }
     
-    public Patient(String village, int patientId, String name, String contactNo, String gender, int birthYear, int travellingTimeToClinic, int parentId, String allergies) {
+    public Patient(String village, int patientId, String name, String contactNo, String gender, String dateOfBirth, int travellingTimeToClinic, int parentId, String allergies) {
         this.village = village;
         this.patientId = patientId;
         this.name = name;
         this.contactNo = contactNo;
         this.gender = gender;
-        this.birthYear = birthYear;
+        this.dateOfBirth = dateOfBirth;
         this.parentId = parentId;
         this.travellingTimeToClinic = travellingTimeToClinic;
         this.allergies = allergies; 
@@ -94,8 +94,8 @@ public class Patient {
         return gender;
     }
 
-    public int getBirthYear() {
-        return birthYear;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
     public int getParentId() {
@@ -122,8 +122,8 @@ public class Patient {
         this.gender = gender;
     }
 
-    public void setBirthYear(int birthYear) {
-        this.birthYear = birthYear;
+    public void setBirthYear(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public void setParentId(int parentId) {

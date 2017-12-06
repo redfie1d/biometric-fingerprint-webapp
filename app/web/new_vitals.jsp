@@ -15,7 +15,7 @@
 <div class="content-wrapper" style="margin-left: 0 !important;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>New Triage</h1>
+        <h1>New Vitals</h1>
     </section>
 
     <!-- Main content -->
@@ -181,7 +181,7 @@
                                             <b>Age:</b>
                                         </div>
                                         <div class="col-md-9">
-                                            <%=patientRecord.getBirthYear()%>
+                                            <%=patientRecord.getDateOfBirth()%>
                                         </div>
                                     </div>
 
@@ -219,7 +219,7 @@
 
                 <div id="patientRecordsBox" class="box box-info box-solid" style="display: <%=displayState%>">
                     <div class="box-header with-border">
-                        <h3 class="box-title">New Triage Information</h3>
+                        <h3 class="box-title">New Vitals Information</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -230,38 +230,38 @@
                     <!-- /.box-header -->
                     <div class="box-body">
 
-                        <form action="CreateTriageServlet" method="POST">
+                        <form action="CreateVitalsServlet" method="POST">
                             
-                            <input type="hidden" name="update" value="<%=visitRecord != null && visitRecord.getTriage() != null ? 1 : 0 %>">
+                            <input type="hidden" name="update" value="<%=visitRecord != null && visitRecord.getVitals() != null ? 1 : 0 %>">
                             <input type="hidden" name="visitId" value="<%=visitRecord != null ? visitRecord.getId() : ""%>">
 
                             <div class="col-md-10 border-right">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="name">Height (cm)</label>
-                                        <input type="number" step=0.1 class="form-control" id="name" name="height" value="<%=visitRecord != null && visitRecord.getTriage() != null ? visitRecord.getTriage().getHeight(): ""%>">
+                                        <input type="number" step=0.1 class="form-control" id="name" name="height" value="<%=visitRecord != null && visitRecord.getVitals() != null ? visitRecord.getVitals().getHeight(): ""%>">
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="name">Weight (kg)</label>
-                                        <input type="number" step=0.1 class="form-control" id="name" name="weight" value="<%=visitRecord != null && visitRecord.getTriage() != null ? visitRecord.getTriage().getWeight(): ""%>">
+                                        <input type="number" step=0.1 class="form-control" id="name" name="weight" value="<%=visitRecord != null && visitRecord.getVitals() != null ? visitRecord.getVitals().getWeight(): ""%>">
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="name">Blood Pressure</label><br/>
-                                        <input type="number" class="form-control" id="name" name="systolic" value="<%=visitRecord != null && visitRecord.getTriage() != null ? (int)visitRecord.getTriage().getSystolic() : "0"%>" style="width: 44%; display:inline">&nbsp;/&nbsp;
-                                        <input type="number" class="form-control" id="name" name="diastolic" value="<%=visitRecord != null && visitRecord.getTriage() != null ? (int)visitRecord.getTriage().getDiastolic() : "0"%>" style="width: 44%; display:inline">
+                                        <input type="number" class="form-control" id="name" name="systolic" value="<%=visitRecord != null && visitRecord.getVitals() != null ? (int)visitRecord.getVitals().getSystolic() : "0"%>" style="width: 44%; display:inline">&nbsp;/&nbsp;
+                                        <input type="number" class="form-control" id="name" name="diastolic" value="<%=visitRecord != null && visitRecord.getVitals() != null ? (int)visitRecord.getVitals().getDiastolic() : "0"%>" style="width: 44%; display:inline">
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="name">Temperature (Celsius)</label>
-                                        <input type="number" step=0.1 class="form-control" id="name" name="temperature" value="<%=visitRecord != null && visitRecord.getTriage() != null ? visitRecord.getTriage().getTemperature() : ""%>">
+                                        <input type="number" step=0.1 class="form-control" id="name" name="temperature" value="<%=visitRecord != null && visitRecord.getVitals() != null ? visitRecord.getVitals().getTemperature() : ""%>">
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +270,7 @@
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="hivPositive" <%=visitRecord != null && visitRecord.getTriage() != null && visitRecord.getTriage().getHivPositive() != 0 ? "checked" : ""%>/>HIV
+                                            <input type="checkbox" name="hivPositive" <%=visitRecord != null && visitRecord.getVitals() != null && visitRecord.getVitals().getHivPositive() != 0 ? "checked" : ""%>/>HIV
                                         </label>
                                     </div>
                                 </div>
@@ -278,14 +278,14 @@
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="ptbPositive" <%=visitRecord != null && visitRecord.getTriage() != null && visitRecord.getTriage().getPtbPositive() != 0 ? "checked" : ""%>/>PTB
+                                            <input type="checkbox" name="ptbPositive" <%=visitRecord != null && visitRecord.getVitals() != null && visitRecord.getVitals().getPtbPositive() != 0 ? "checked" : ""%>/>PTB
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-12">
-                                <button class="btn btn-info" id="btn-create-record"><%=visitRecord != null && visitRecord.getTriage() != null ? "Update Triage Record" : "Create Triage Record"%></button>
+                                <button class="btn btn-info" id="btn-create-record"><%=visitRecord != null && visitRecord.getVitals() != null ? "Update Vitals Record" : "Create Vitals Record"%></button>
                             </div> 
                         </form>
 

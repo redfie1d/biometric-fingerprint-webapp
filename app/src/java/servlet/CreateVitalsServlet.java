@@ -5,27 +5,23 @@
  */
 package servlet;
 
-import dao.PatientDAO;
-import dao.TriageDAO;
+import dao.VitalsDAO;
 import dao.VisitDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Patient;
-import model.Triage;
+import model.Vitals;
 import model.Visit;
 
 /**
  *
  * @author tcw
  */
-public class CreateTriageServlet extends HttpServlet {
+public class CreateVitalsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,7 +46,7 @@ public class CreateTriageServlet extends HttpServlet {
         int ptbPositive = 0;
         int hepCPositive = 0;
 
-        TriageDAO triageDAO = new TriageDAO();
+        VitalsDAO vitalsDao = new VitalsDAO();
         ArrayList<String> errors = new ArrayList<>();
         VisitDAO visitDAO = new VisitDAO();
 
@@ -154,10 +150,10 @@ public class CreateTriageServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (errors.isEmpty()) {
-            Triage triage = new Triage(visitId, height, weight, systolic, diastolic, temperature, hivPositive, ptbPositive, hepCPositive);
+            Vitals vitals = new Vitals(visitId, height, weight, systolic, diastolic, temperature, hivPositive, ptbPositive, hepCPositive);
             Visit visit = VisitDAO.getVisitByVisitID(visitId);
-            visit.setTriage(triage);
-            boolean successful = triageDAO.insertData(visitId, height, weight, systolic, diastolic, temperature, hivPositive, ptbPositive, hepCPositive);
+            visit.setVitals(vitals);
+            boolean successful = vitalsDao.insertData(visitId, height, weight, systolic, diastolic, temperature, hivPositive, ptbPositive, hepCPositive);
             int update = -1;
             try {
                 update = Integer.parseInt(request.getParameter("update"));
@@ -166,9 +162,9 @@ public class CreateTriageServlet extends HttpServlet {
 
             if (successful) {
                 if (update == 0) {
-                    session.setAttribute("msg", "A new triage is created");
+                    session.setAttribute("msg", "A new vitals is created");
                 } else if (update == 1) {
-                    session.setAttribute("msg", "Triage record has been updated");
+                    session.setAttribute("msg", "Vitals record has been updated");
 
                 }
 //                if (session.getAttribute("visitRecord") != null){
@@ -178,14 +174,14 @@ public class CreateTriageServlet extends HttpServlet {
 //                if (session.getAttribute("patientRecord") != null){
 //                  session.setAttribute("patientRecord", patient);
 //                }
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             } else {
                 session.setAttribute("errorMsg", errors);
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             }
         } else {
             session.setAttribute("errorMsg", errors);
-            response.sendRedirect("new_triage.jsp");
+            response.sendRedirect("new_vitals.jsp");
         }
 
     }

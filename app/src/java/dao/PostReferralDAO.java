@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.PostReferral;
-import model.Triage;
+import model.Vitals;
 import model.Visit;
 
 /**

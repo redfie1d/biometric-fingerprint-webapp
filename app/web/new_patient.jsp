@@ -188,8 +188,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="yearOfBirth">Age</label>
-                            <input type="number" class="form-control" id="yearOfBirth" name="yearOfBirth" placeholder="Enter age">
+                            <label for="dateOfBirth">Date of Birth</label>
+                            <input class="form-control" type="date" name="dateOfBirth" id="dateOfBirth">
+                            <!--<label for="yearOfBirth">Year of Birth</label>-->
+                            <!--<input type="number" class="form-control" id="yearOfBirth" name="yearOfBirth" placeholder="Enter year of birth">-->
                         </div>
 
                         <div class = "row">

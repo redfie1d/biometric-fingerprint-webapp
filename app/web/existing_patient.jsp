@@ -8,7 +8,7 @@
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.Arrays"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="model.Triage"%>
+<%@page import="model.Vitals"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="dao.PatientDAO"%>
 <%@page import="model.Patient"%>
@@ -23,12 +23,7 @@
     <section class="content-header">
         <h1>
             View Patient's Information
-            <!--<small>Optional description</small>-->
         </h1>
-        <!--        <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                    <li class="active">Here</li>
-                </ol>-->
     </section>
 
     <!-- Main content -->
@@ -182,7 +177,7 @@
                         <span class="widget-user-username col-md-4">Village: <%=patientRecord.getVillage()%></span>
                         <span class="widget-user-username col-md-4">Gender: <%=patientRecord.getGender()%></span>
                         <span class="widget-user-username col-md-4">0</span>
-                        <span class="widget-user-username col-md-4">Age: <%=patientRecord.getBirthYear()%></span>
+                        <span class="widget-user-username col-md-4">Age: <%=patientRecord.getDateOfBirth()%></span>
                     </div>
 
                     <div class="widget-user-image">
@@ -228,7 +223,7 @@
                                         
                                         for (int i=0; i<visitsAL.size();i++) {
                                             Visit visit = visitsAL.get(i);
-                                            Triage t = visit.getTriage();
+                                            Vitals v = visit.getVitals();
                                     %>
 
 
@@ -236,16 +231,16 @@
                                         <td><%=visit.getId()%></td>
                                         <td><%=visit.getDate()%></td>
                                         <td>
-                                            <%=t == null ? "NA" : t.getHeight()%>
+                                            <%=v == null ? "NA" : v.getHeight()%>
                                         </td>
                                         <td>
-                                            <%=t == null ? "NA" : t.getWeight()%>
+                                            <%=v == null ? "NA" : v.getWeight()%>
                                         </td>
                                         <td>
-                                            <%=t == null ? "NA" : t.getSystolic()%>/<%=t == null ? "NA" : t.getDiastolic()%>
+                                            <%=v == null ? "NA" : v.getSystolic()%>/<%=v == null ? "NA" : v.getDiastolic()%>
                                         </td>
                                         <td>
-                                            <%=t == null ? "NA" : t.getTemperature()%>
+                                            <%=v == null ? "NA" : v.getTemperature()%>
                                         </td>
                                     </tr>
                                     <%    

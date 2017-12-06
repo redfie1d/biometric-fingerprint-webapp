@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.*;
 import model.Consult;
 import model.PostReferral;
-import model.Triage;
+import model.Vitals;
 import model.Visit;
 
 public class VisitDAO {
@@ -40,7 +40,7 @@ public class VisitDAO {
                 
                 int visitID = rs.getInt("id");
                 String date = rs.getString("date");
-                Triage t = TriageDAO.getDataByVisitID(visitID);
+                Vitals t = VitalsDAO.getDataByVisitID(visitID);
                 Consult c = ConsultDAO.getConsultByVisitID(visitID);
                 PostReferral r = null;
                 return new Visit(visitID, patientID, date, t, c, r);
@@ -115,7 +115,7 @@ public class VisitDAO {
                 int visitID = rs.getInt("id");
                 String date = rs.getString("date");
                 int patientID = rs.getInt("patient_id");
-                Triage t = TriageDAO.getDataByVisitID(visitID);
+                Vitals t = VitalsDAO.getDataByVisitID(visitID);
                 Consult c = ConsultDAO.getConsultByVisitID(visitID);
                 PostReferral r = null;
                 return new Visit(visitID, patientID, date, t, c, r);
@@ -145,7 +145,7 @@ public class VisitDAO {
                 int visitId = rs.getInt("id");
                 String date = rs.getString("date");
                 String status = rs.getString("status");
-                Triage triage = TriageDAO.getDataByVisitID(visitId);
+                Vitals triage = VitalsDAO.getDataByVisitID(visitId);
                 visitList.add(new Visit(visitId, patientId, date, triage, status));
             }
             //Returns the converted array to the caller of method

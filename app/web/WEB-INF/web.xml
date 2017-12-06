@@ -40,8 +40,8 @@
         <servlet-class>servlet.CreateVisitServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CreateTriageServlet</servlet-name>
-        <servlet-class>servlet.CreateTriageServlet</servlet-class>
+        <servlet-name>CreateVitalsServlet</servlet-name>
+        <servlet-class>servlet.CreateVitalsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SetDoctorNameServlet</servlet-name>
@@ -112,8 +112,8 @@
         <url-pattern>/CreateVisitServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CreateTriageServlet</servlet-name>
-        <url-pattern>/CreateTriageServlet</url-pattern>
+        <servlet-name>CreateVitalsServlet</servlet-name>
+        <url-pattern>/CreateVitalsServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SetDoctorNameServlet</servlet-name>

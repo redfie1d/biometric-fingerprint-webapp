@@ -67,7 +67,7 @@ function createPatientRecord() {
     var name = $("#name").val();
     var contactNo = $("#phoneNumber").val();
     var gender = $("input[name='gender']:checked").val();
-    var yearOfBirth = $("#yearOfBirth").val();
+    var dateOfBirth = $("#dateOfBirth").val();
     var travellingTimeToClinic = $("#travellingTimeToClinic").val();
 
 //    console.log(patientID);
@@ -75,16 +75,16 @@ function createPatientRecord() {
     console.log(name);
     console.log(contactNo);
     console.log(gender);
-    console.log(yearOfBirth);
+    console.log(dateOfBirth);
     console.log(travellingTimeToClinic);
 
     var villageFilled = village !== null && village.length > 0;
     var nameFilled = name !== null && name.length > 0;
     var contactNoFilled = contactNo !== null && contactNo.length > 0;
     var genderFilled = gender !== null && gender.length > 0;
-    var yearOfBirthFilled = yearOfBirth !== null && yearOfBirth.length > 0;
+    var dateOfBirthFilled = dateOfBirth !== null && dateOfBirth.length > 0;
 
-    patientRecordsFilled = villageFilled && nameFilled && genderFilled && yearOfBirthFilled;
+    patientRecordsFilled = villageFilled && nameFilled && genderFilled && dateOfBirthFilled;
 
     if (fingerprint1Taken && fingerprint2Taken && photoTaken && patientRecordsFilled) {
         jQuery.ajax({
@@ -95,7 +95,7 @@ function createPatientRecord() {
                 name: name,
                 contactNo: contactNo,
                 gender: gender,
-                yearOfBirth: yearOfBirth.trim(),
+                dateOfBirth: dateOfBirth.trim(),
                 travellingTimeToClinic: travellingTimeToClinic,
                 photoImage: img1
             },
@@ -135,12 +135,12 @@ function createPatientRecord() {
         }
 
         if (!genderFilled) {
-            missingFields.push("Please sepcify gender");
+            missingFields.push("Please specify gender");
             $("#patientRecordsBox").addClass("box-danger").removeClass("box-info");
         }
 
-        if (!yearOfBirthFilled) {
-            missingFields.push("Please enter the patient's age");
+        if (!dateOfBirthFilled) {
+            missingFields.push("Please enter the patient's date of birth");
             $("#patientRecordsBox").addClass("box-danger").removeClass("box-info");
         }
 
@@ -153,8 +153,7 @@ function createPatientRecord() {
             missingFields.push("Please take photo of the patient");
             $("#photo_box").addClass("box-danger").removeClass("box-info");
         }
-
-//        if (!villageFilled || !nameFilled || !genderFilled || !yearOfBirthFilled){
+        
         if (missingFields.length > 0) {
             $("#alertPanel>div").css("display", "block").addClass("alert-danger").removeClass("alert-success");
         }
@@ -175,7 +174,7 @@ function createPatientRecord2() {
     var name = $("#name").val();
     var contactNo = $("#phoneNumber").val();
     var gender = $("input[name='gender']:checked").val();
-    var yearOfBirth = $("#yearOfBirth").val();
+    var dateOfBirth = $("#dateOfBirth").val();
     var travellingTimeToClinic = $("#travellingTimeToClinic").val();
 
 //    console.log(patientID);
@@ -183,16 +182,16 @@ function createPatientRecord2() {
     console.log(name);
     console.log(contactNo);
     console.log(gender);
-    console.log(yearOfBirth);
+    console.log(dateOfBirth);
     console.log(travellingTimeToClinic);
 
     var villageFilled = village !== null && village.length > 0;
     var nameFilled = name !== null && name.length > 0;
     var contactNoFilled = contactNo !== null && contactNo.length > 0;
     var genderFilled = gender !== null && gender.length > 0;
-    var yearOfBirthFilled = yearOfBirth !== null && yearOfBirth.length > 0;
+    var dateOfBirthFilled = dateOfBirth !== null && dateOfBirth.length > 0;
 
-    patientRecordsFilled = villageFilled && nameFilled && genderFilled && yearOfBirthFilled;
+    patientRecordsFilled = villageFilled && nameFilled && genderFilled && dateOfBirthFilled;
 
     if (fingerprint1Taken && fingerprint2Taken && photoTaken && patientRecordsFilled) {
         jQuery.ajax({
@@ -203,7 +202,7 @@ function createPatientRecord2() {
                 name: name,
                 contactNo: contactNo,
                 gender: gender,
-                yearOfBirth: yearOfBirth.trim(),
+                dateOfBirth: dateOfBirth.trim(),
                 travellingTimeToClinic: travellingTimeToClinic,
                 photoImage: img1
             },
@@ -247,8 +246,8 @@ function createPatientRecord2() {
             $("#patientRecordsBox").addClass("box-danger").removeClass("box-info");
         }
 
-        if (!yearOfBirthFilled) {
-            missingFields.push("Please enter the patient's age");
+        if (!dateOfBirthFilled) {
+            missingFields.push("Please enter the patient's date of birth");
             $("#patientRecordsBox").addClass("box-danger").removeClass("box-info");
         }
 
@@ -261,8 +260,7 @@ function createPatientRecord2() {
             missingFields.push("Please take photo of the patient");
             $("#photo_box").addClass("box-danger").removeClass("box-info");
         }
-
-//        if (!villageFilled || !nameFilled || !genderFilled || !yearOfBirthFilled){
+        
         if (missingFields.length > 0) {
             $("#alertPanel>div").css("display", "block").addClass("alert-danger").removeClass("alert-success");
         }

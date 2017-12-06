@@ -37,7 +37,7 @@ public class PatientDAO {
                 int patientId = rs.getInt("id");
                 String name = rs.getString("name");
                 String gender = rs.getString("gender");
-                int birthYear = rs.getInt("year_of_birth");
+                String dateOfBirth = rs.getString("date_of_birth");
                 int parentId = rs.getInt("parent");
                 String allergy = rs.getString("drug_allergy");
 
@@ -46,7 +46,7 @@ public class PatientDAO {
 //                    allergy = rs.getInt(7);
 //                    allergies.add(allergy);
 //                }
-                Patient p = new Patient(village, patientId, name, gender, birthYear, parentId, allergy);
+                Patient p = new Patient(village, patientId, name, gender, dateOfBirth, parentId, allergy);
                 p.setPhotoImage(rs.getString("image"));
                 return p;
             }
@@ -79,7 +79,7 @@ public class PatientDAO {
                 int patientId = rs.getInt("id");
                 String name = rs.getString("name");
                 String gender = rs.getString("gender");
-                int birthYear = rs.getInt("year_of_birth");
+                String dateOfBirth = rs.getString("date_of_birth");
                 int parentId = rs.getInt("parent");
                 String allergy = rs.getString("drug_allergy");
 
@@ -88,7 +88,7 @@ public class PatientDAO {
 //                    allergy = rs.getInt(7);
 //                    allergies.add(allergy);
 //                }
-                Patient p = new Patient(village, patientId, name, gender, birthYear, parentId, allergy);
+                Patient p = new Patient(village, patientId, name, gender, dateOfBirth, parentId, allergy);
                 p.setPhotoImage(rs.getString("image"));
                 return p;
             }
@@ -117,7 +117,7 @@ public class PatientDAO {
                 int patientId = rs.getInt("id");
                 String name = rs.getString("name");
                 String gender = rs.getString("gender");
-                int birthYear = rs.getInt("year_of_birth");
+                String dateOfBirth = rs.getString("date_of_birth");
                 int parentId = rs.getInt("parent");
                 String allergy = rs.getString("drug_allergy");
 
@@ -126,7 +126,7 @@ public class PatientDAO {
 //                    allergy = rs.getInt(7);
 //                    allergies.add(allergy);
 //                }
-                Patient p = new Patient(village, patientId, name, gender, birthYear, parentId, allergy);
+                Patient p = new Patient(village, patientId, name, gender, dateOfBirth, parentId, allergy);
                 p.setPhotoImage(rs.getString("image"));
                 return p;
             }
@@ -179,7 +179,7 @@ public class PatientDAO {
 
             //Statement to insert information into the database: user_id, password, name, school, edollar
             pstmt = conn.prepareStatement("INSERT INTO patients "
-                    + "(village_prefix, name, image, contactNo, gender, travelling_time_to_village, year_of_birth) VALUES (?, ?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
+                    + "(village_prefix, name, image, contactNo, gender, travelling_time_to_village, date_of_birth) VALUES (?, ?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
 
 //            System.out.println("imageLength" + fgImage.length);
             //Sets the objects retrieved from the getter methods into the variables
@@ -189,7 +189,7 @@ public class PatientDAO {
             pstmt.setString(4, p.getContactNo());
             pstmt.setString(5, p.getGender());
             pstmt.setInt(6, p.getTravellingTimeToClinic());
-            pstmt.setInt(7, p.getBirthYear());
+            pstmt.setString(7, p.getDateOfBirth());
 
             //Executes the update and stores data into database
             int affectedRows = pstmt.executeUpdate();

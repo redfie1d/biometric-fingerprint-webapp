@@ -16,7 +16,7 @@
 <%@page import="dao.PatientDAO"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.*"%>
-<%@page import="model.Triage"%>
+<%@page import="model.Vitals"%>
 <%@page import="model.Patient"%>
 <%@page import="model.Visit"%>
 <%@include file="header.jsp" %>
@@ -109,7 +109,7 @@
 //            visitRecord = df.format(new Date()).equals(visitRecord.getDate()) ? visitRecord : null;
 
             Patient patientRecord = patientObject == null ? null : (Patient) patientObject;
-            Triage triageObject = visitRecord == null ? null : visitRecord.getTriage();
+            Vitals vitalsObject = visitRecord == null ? null : visitRecord.getVitals();
 
             String patientDetailsDisplayState = visitRecord != null && patientRecord != null ? "block" : "none";
 
@@ -120,7 +120,7 @@
                 consultDisplayState = consultDAO.getConsultByVisitID(visitRecord.getId()) == null || viewPastConsultRecord ? "block" : "none";
                 
                 //visitRecord = VisitDAO.getPatientLatestVisit(visitRecord.getPatientId());
-                triageObject = visitRecord.getTriage();
+                vitalsObject = visitRecord.getVitals();
                 pastVisits = VisitDAO.getVisitByPatientID(visitRecord.getPatientId());
             }
 
@@ -197,10 +197,10 @@
 
                                     <div class="row" style="padding:15px;">
                                         <div class="col-md-3">
-                                            <b>Age:</b>
+                                            <b>Date of Birth:</b>
                                         </div>
                                         <div class="col-md-9">
-                                            <%=patientRecord.getBirthYear()%>
+                                            <%=patientRecord.getDateOfBirth()%>
                                         </div>
                                     </div>
 
@@ -226,13 +226,13 @@
                                     </div>
 
                                     <%
-                                        if (triageObject != null) {
+                                        if (vitalsObject != null) {
                                     %>
 
                                     <div class="box-footer no-padding">
                                         <div class="row" style="padding-left:15px;">
                                             <div class="col-md-12">
-                                                <h3><b>Current Triage Record</b></h3>
+                                                <h3><b>Current Vitals Record</b></h3>
                                             </div>
                                         </div>
 
@@ -241,14 +241,14 @@
                                                 <b>Height:</b>
                                             </div>
                                             <div class="col-md-3">
-                                                <%=triageObject.getHeight()%>
+                                                <%=vitalsObject.getHeight()%>
                                             </div>
 
                                             <div class="col-md-3">
                                                 <b>Weight:</b>
                                             </div>
                                             <div class="col-md-3">
-                                                <%=triageObject.getWeight()%>
+                                                <%=vitalsObject.getWeight()%>
                                             </div>
                                         </div>
                                         <div class="row" style="padding:15px;">
@@ -256,14 +256,14 @@
                                                 <b>BP:</b>
                                             </div>
                                             <div class="col-md-3">
-                                                <%=triageObject.getSystolic()%>/<%=triageObject.getDiastolic()%>
+                                                <%=vitalsObject.getSystolic()%>/<%=vitalsObject.getDiastolic()%>
                                             </div>
 
                                             <div class="col-md-3">
                                                 <b>Temp:</b>
                                             </div>
                                             <div class="col-md-3">
-                                                <%=triageObject.getTemperature()%>
+                                                <%=vitalsObject.getTemperature()%>
                                             </div>
                                         </div>
 
@@ -273,7 +273,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <%
-                                                    if (triageObject.getHivPositive() == 1) {
+                                                    if (vitalsObject.getHivPositive() == 1) {
                                                 %>
                                                 Yes
                                                 <%
@@ -290,7 +290,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <%
-                                                    if (triageObject.getPtbPositive() == 1) {
+                                                    if (vitalsObject.getPtbPositive() == 1) {
                                                 %>
                                                 Yes
                                                 <%
@@ -496,7 +496,7 @@
                                 </div>
                                 <div class="col-md-12" style="padding:0">
                                     <div class="form-group">
-                                        <label>Referral: Investigations/External Care</label>
+                                        <label>Referral Letter (if needed)</label>
                                         <%
                                             if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null) {
                                         %>
@@ -570,7 +570,7 @@
                                         Chronic Referral
                                     </label>
                                 </div>
-                                <hr>
+                                <br>
                                 
                                 <div class="box box-info box-solid" style="display:<%=visitRecord != null ? "block" : "none"%>">
                                     <div class="box-header with-border">

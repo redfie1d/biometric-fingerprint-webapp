@@ -6,35 +6,35 @@ public class Visit {
     private String date;
     private String status;
     
-    private Triage t;
+    private Vitals v;
     private Consult c;
     private PostReferral r;
 
-    public Visit(int id, int patientId, String date, Triage t, Consult c, PostReferral r) {
+    public Visit(int id, int patientId, String date, Vitals v, Consult c, PostReferral r) {
         this(id, patientId, date);
-        this.t = t;
+        this.v = v;
         this.c = c;
         this.r = r;
     }
 
-    public Visit(int id, int patientId, String date, Triage t, Consult c, PostReferral r, String status) {
+    public Visit(int id, int patientId, String date, Vitals v, Consult c, PostReferral r, String status) {
         this(id, patientId, date);
-        this.t = t;
+        this.v = v;
         this.c = c;
         this.r = r;
         this.status = status;
     }
     
-    public Visit(int id, int patientId, String date, Triage t, String status) {
-        this.t = t;
+    public Visit(int id, int patientId, String date, Vitals v, String status) {
+        this.v = v;
         this.id = id;
         this.patientId = patientId;
         this.date = date;
         this.status = status;
     }
     
-    public Visit(int id, int patientId, String date, Triage t) {
-        this.t = t;
+    public Visit(int id, int patientId, String date, Vitals v) {
+        this.v = v;
         this.id = id;
         this.patientId = patientId;
         this.date = date;
@@ -65,8 +65,8 @@ public class Visit {
         return date;
     }
 
-    public Triage getTriage() {
-        return t;
+    public Vitals getVitals() {
+        return v;
     }
 
     public Consult getConsult() {
@@ -89,8 +89,8 @@ public class Visit {
         this.date = date;
     }
 
-    public void setTriage(Triage t) {
-        this.t = t;
+    public void setVitals(Vitals v) {
+        this.v = v;
     }
 
     public void setConsult(Consult c) {

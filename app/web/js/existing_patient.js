@@ -64,21 +64,21 @@ function createPatientRecord() {
     var village = $("#village").val();
     var name = $("#name").val();
     var gender = $("#gender").val();
-    var yearOfBirth = $("#yearOfBirth").val();
+    var dateOfBirth = $("#dateOfBirth").val();
 
     console.log(patientID);
     console.log(village);
     console.log(name);
     console.log(gender);
-    console.log(yearOfBirth);
+    console.log(dateOfBirth);
 
     var patientIDFilled = patientID !== null && patientID.length > 0;
     var villageFilled = village !== null && village.length > 0;
     var nameFilled = name !== null && name.length > 0;
     var genderFilled = gender !== null && gender.length > 0;
-    var yearOfBirthFilled = yearOfBirth !== null && yearOfBirth.length > 0;
+    var dateOfBirthFilled = dateOfBirth !== null && dateOfBirth.length > 0;
 
-    patientRecordsFilled = patientIDFilled && villageFilled && nameFilled && genderFilled && yearOfBirthFilled;
+    patientRecordsFilled = patientIDFilled && villageFilled && nameFilled && genderFilled && dateOfBirthFilled;
 
     if (fingerprint1Taken && fingerprint2Taken && photoTaken && patientRecordsFilled) {
         jQuery.ajax({
@@ -89,7 +89,7 @@ function createPatientRecord() {
                 village: village,
                 name: name,
                 gender: gender,
-                yearOfBirth: yearOfBirth,
+                dateOfBirth: dateOfBirth,
                 photoImage: img1
             },
             success: function (msg) {

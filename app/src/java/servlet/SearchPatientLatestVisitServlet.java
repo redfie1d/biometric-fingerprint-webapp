@@ -62,7 +62,7 @@ public class SearchPatientLatestVisitServlet extends HttpServlet {
             } else if (source.equals("postreferral")) {
                 response.sendRedirect("new_postreferral.jsp");
             } else {
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             }
             return;
         }
@@ -75,19 +75,13 @@ public class SearchPatientLatestVisitServlet extends HttpServlet {
         }
 
         if (pNo == -1) {
-//                    if (source.equals("consult")) {
-//                        response.sendRedirect("new_consult.jsp");
-//                    } else {
-//                        response.sendRedirect("new_triage.jsp");
-//                    }
-//                out.println("2");
             session.setAttribute("visitError", "Patient/Visit not found!");
             if (source.equals("consult")) {
                 response.sendRedirect("new_consult.jsp");
             } else if (source.equals("postreferral")) {
                 response.sendRedirect("new_postreferral.jsp");
             } else {
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             }
             return;
         }
@@ -101,7 +95,7 @@ public class SearchPatientLatestVisitServlet extends HttpServlet {
             } else if (source.equals("postreferral")) {
                 response.sendRedirect("new_postreferral.jsp");
             } else {
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             }
 //                out.println("87654");
             return;
@@ -124,7 +118,7 @@ public class SearchPatientLatestVisitServlet extends HttpServlet {
                 session.setAttribute("pastVisits", pastVisits);
                 response.sendRedirect("new_postreferral.jsp");
             } else {
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             }
 
         } else {
@@ -134,7 +128,7 @@ public class SearchPatientLatestVisitServlet extends HttpServlet {
             } else if (source.equals("postreferral")) {
                 response.sendRedirect("new_postreferral.jsp");
             } else {
-                response.sendRedirect("new_triage.jsp");
+                response.sendRedirect("new_vitals.jsp");
             }
         }
     }

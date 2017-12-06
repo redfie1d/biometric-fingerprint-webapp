@@ -4,8 +4,8 @@
     Author     : yu.fu.2015
 --%>
 
-<%@page import="model.Triage"%>
-<%@page import="dao.TriageDAO"%>
+<%@page import="model.Vitals"%>
+<%@page import="dao.VitalsDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.VisitDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,7 +18,7 @@
     <body>
         
         Create Triage
-        <form action="CreateTriageServlet" method="POST">
+        <form action="CreateVitalsServlet" method="POST">
             <input type="text" name="visitId" value=""/>
             <input type="text" name="height" value="" />
             <input type="text" name="weight" value="" />

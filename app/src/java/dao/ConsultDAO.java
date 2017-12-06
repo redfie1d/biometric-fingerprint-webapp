@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import model.Consult;
-import model.Triage;
+import model.Vitals;
 import model.Visit;
 
 /**

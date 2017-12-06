@@ -1,6 +1,6 @@
 package model;
 
-public class Triage {
+public class Vitals {
     private int visitId;
     private double height;
     private double weight;
@@ -9,28 +9,9 @@ public class Triage {
     private double temperature;
     private int hivPositive;
     private int ptbPositive;
-
     private int hepCPositive;
 
-    /**
-     * Get the value of hepCPositive
-     *
-     * @return the value of hepCPositive
-     */
-    public int getHepCPositive() {
-        return hepCPositive;
-    }
-
-    /**
-     * Set the value of hepCPositive
-     *
-     * @param hepCPositive new value of hepCPositive
-     */
-    public void setHepCPositive(int hepCPositive) {
-        this.hepCPositive = hepCPositive;
-    }
-
-    public Triage(int visitId, double height, double weight, double systolic, double diastolic, double temperature, int hivPositive, int ptbPositive, int hepCPositive) {
+    public Vitals(int visitId, double height, double weight, double systolic, double diastolic, double temperature, int hivPositive, int ptbPositive, int hepCPositive) {
         this.visitId = visitId;
         this.height = height;
         this.weight = weight;
@@ -42,31 +23,7 @@ public class Triage {
         this.hepCPositive = hepCPositive;
     }
     
-    public double getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
-    }
-
-    public int getHivPositive() {
-        return hivPositive;
-    }
-
-    public void setHivPositive(int hivPositive) {
-        this.hivPositive = hivPositive;
-    }
-
-    public int getPtbPositive() {
-        return ptbPositive;
-    }
-
-    public void setPtbPositive(int ptbPositive) {
-        this.ptbPositive = ptbPositive;
-    }
-    
-    public Triage(int visitId, double height, double weight, double systolic, double diastolic, double temperature) {
+    public Vitals(int visitId, double height, double weight, double systolic, double diastolic, double temperature) {
         this.visitId = visitId;
         this.height = height;
         this.weight = weight;
@@ -74,7 +31,7 @@ public class Triage {
         this.diastolic = diastolic;
         this.temperature = temperature;
     }
-
+    
     public int getVisitId() {
         return visitId;
     }
@@ -93,6 +50,22 @@ public class Triage {
 
     public double getDiastolic() {
         return diastolic;
+    }
+    
+    public double getTemperature() {
+        return temperature;
+    }
+    
+    public int getHivPositive() {
+        return hivPositive;
+    }
+    
+    public int getPtbPositive() {
+        return ptbPositive;
+    }
+    
+    public int getHepCPositive() {
+        return hepCPositive;
     }
 
     public void setVisitId(int visitId) {
@@ -113,5 +86,21 @@ public class Triage {
 
     public void setDiastolic(double diastolic) {
         this.diastolic = diastolic;
+    }
+
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
+    public void setHivPositive(int hivPositive) {
+        this.hivPositive = hivPositive;
+    }
+
+    public void setPtbPositive(int ptbPositive) {
+        this.ptbPositive = ptbPositive;
+    }
+    
+    public void setHepCPositive(int hepCPositive) {
+        this.hepCPositive = hepCPositive;
     }
 }

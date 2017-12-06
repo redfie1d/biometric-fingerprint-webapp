@@ -61,7 +61,7 @@ public class CreatePatientServlet extends HttpServlet {
             String name = request.getParameter("name");
             String contactNo = request.getParameter("contactNo");
             String gender = request.getParameter("gender");
-            String yearOfBirth = request.getParameter("yearOfBirth");
+            String dateOfBirth = request.getParameter("dateOfBirth");
             String travellingTimeToClinic = request.getParameter("travellingTimeToClinic");
             String photoImage = request.getParameter("photoImage");
 
@@ -86,7 +86,7 @@ public class CreatePatientServlet extends HttpServlet {
                 return;
             }
 
-            Patient p = new Patient(village, 0, name, contactNo, gender, Integer.parseInt(yearOfBirth), Integer.parseInt(travellingTimeToClinic), 0, null);
+            Patient p = new Patient(village, 0, name, contactNo, gender, dateOfBirth, Integer.parseInt(travellingTimeToClinic), 0, null);
 
             PatientDAO.addPatient(p);
 
@@ -128,7 +128,7 @@ public class CreatePatientServlet extends HttpServlet {
             System.out.println(village);
             System.out.println(name);
             System.out.println(gender);
-            System.out.println(yearOfBirth);
+            System.out.println(dateOfBirth);
 //            System.out.println(photoImage.replace("data:image/jpeg;base64,", ""));
 
             VisitDAO visitDAO = new VisitDAO();
