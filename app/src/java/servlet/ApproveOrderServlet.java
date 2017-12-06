@@ -36,22 +36,37 @@ public class ApproveOrderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         InventoryDAO inventoryDAO = new InventoryDAO();
         OrderDAO orderDAO = new OrderDAO();
         int orderID = Integer.parseInt(request.getParameter("orderID"));
         ArrayList<Order> orderList = orderDAO.getOrdersByOrderID(orderID);
         
-        boolean success = false;
-        
-        for(Order order:orderList){
-            success = inventoryDAO.updateInventory(order);
+        if (request.getParameter("approve") != null) {
+            boolean status = true;
+            System.out.println("Pharmacy Approved OrderID: " + orderID);
+            
+            for(Order order:orderList){
+                if(!inventoryDAO.updateInventory(order)){
+                    status = false;
+                }
+            }
+            
+            if(status){
+                System.out.println("Sufficient Quantity For All Orders");
+                inventoryDAO.updateInventoryStatus(orderList.get(0).getOrderID());
+                request.getSession().setAttribute("successmsg", "Request Approved");
+            } else {
+                System.out.println("Insufficient Quantity For Some/All Orders");
+                request.getSession().setAttribute("errormsg", "Insufficient Quantity");
+            }
         }
         
-        if(success){
-            inventoryDAO.updateInventoryStatus(orderList.get(0).getOrderID());
-            request.getSession().setAttribute("successmsg", "Request Approved");
-        } else {
-            request.getSession().setAttribute("errormsg", "Insufficient Quantity");
+        if (request.getParameter("reject") != null) {
+            System.out.println("Pharmacy Rejected OrderID: " + orderID);
+            inventoryDAO.rejectOrders(orderID);
+            System.out.println("Pharmacy Successfully Removed OrderID: " + orderID);
+            request.getSession().setAttribute("successmsg", "Request Rejected");
         }
         
         response.sendRedirect("pharmacy.jsp");

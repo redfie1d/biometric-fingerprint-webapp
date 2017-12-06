@@ -39,9 +39,12 @@
         %>
         
 <!DOCTYPE html>
+
 <div class="content-wrapper" style="margin-left: 0 !important;">
         <div class="row">
+            
             <div id="alertPanel" class="col-md-12">
+                
                 <div class="callout alert alert-<%=msgState%> alert-dismissible" style="display:<%=msgDisplayState%>">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <h4 style="margin-bottom:0;">
@@ -54,6 +57,7 @@
                             if (errmsg.length() > 0) {
                                 out.println(errmsg);
                             }
+                            
                         %>
 
                         <!--<i class="icon fa fa-check"></i> Alert!-->
@@ -62,9 +66,11 @@
                     <!--Success alert preview. This alert is dismissable.-->
                 </div>
             </div>
-
+                        
         </div>
-        <div class="col-md-8" style="left">
+
+            
+        <div class="col-xs-12 col-md-8 content"> 
             <div id="fg_box" class="box box-info box-solid" style="margin-bottom:0px">
                 <div class="box-header with-border">
                     <h3 class="box-title">Requested Medicine</h3>
@@ -91,7 +97,6 @@
                                 <%
                                     OrderDAO orderDAO = new OrderDAO();
                                     ArrayList<Order> orderList = orderDAO.getOrders();
-                                    
                                     HashMap<Integer, ArrayList<Order>> map = new HashMap<>();
                                     for(Order order:orderList){
                                         int orderID = order.getOrderID();
@@ -106,7 +111,8 @@
                                         }
                                     }
                                     
-                                    for (Integer key : map.keySet())
+                                    boolean even = true;
+                                    for (Integer key:map.keySet())
                                     {
                                         ArrayList<Order> orderIDList = map.get(key);
                                         Order firstOrder = orderIDList.get(0);
@@ -137,10 +143,16 @@
                                         }
                                 %>
 
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                         <td>
                                             <form action="ApproveOrderServlet" method="POST">
                                                 <input type="hidden" name="orderID" value=<%=firstOrder.getOrderID()%>>
-                                                <button class="btn btn-info" type="submit">Approve</button>
+                                                <button class="btn btn-info" type="submit" name="approve">Approve</button>
+                                                <button class="btn btn-danger" type="submit" name="reject">Reject</button>
                                             </form>
                                         </td>
 <!--                                        <td>
@@ -149,6 +161,7 @@
                                             </form>
                                         </td>-->
                                 <%
+                                        even = !even;
                                     }
                                 %>
                             </tbody>
@@ -160,7 +173,7 @@
                 <!-- /.box-body -->
             </div>
         </div>
-        <div class="col-md-4" style="float:right">
+        <div class="col-xs-12 col-md-4 content pull-right">
             <div id="fg_box" class="box box-info box-solid" style="margin-bottom:0px">
                 <div class="box-header with-border">
                     <h3 class="box-title">Inventory Stock</h3>
@@ -198,6 +211,7 @@
                                         </tr>
                                 <%
                                     }
+
                                 %>
 
                             </tbody>

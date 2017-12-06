@@ -43,6 +43,8 @@ $(document).ready(function () {
             $("#photo_box").removeClass("box-info").addClass("box-success");
         }
     });
+    
+    $('#removeMedicine').hide();
 });
 
 function take_snapshot() {
@@ -509,10 +511,17 @@ function Add_Medicine(){
     `<td>
         <input name="remarks" placeholder="Remarks" class="form-control" type="text">
     </td>`
+    
+    $('#removeMedicine').show();
+
 }
 
 function Remove_Medicine(){
-    console.log("Removing Medicine");
     var table = document.getElementById("issueMedicine");
     table.deleteRow(-1);
+    
+    var numRows = table.getElementsByTagName("tr").length;
+    if(numRows === 2){
+        $('#removeMedicine').hide();
+    }
 }

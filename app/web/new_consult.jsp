@@ -4,6 +4,8 @@
     Author     : tcw
 --%>
 
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
 <%@page import="model.Order"%>
 <%@page import="model.Drug"%>
 <%@page import="java.util.ArrayList"%>
@@ -605,6 +607,7 @@
 
                                         if(viewPastConsultRecord){
                                             ArrayList<Order> orderList = inventoryDAO.getOrdersByVisitID(visitRecord.getId());
+                                            
                                             for(Order order:orderList){
                                                 String selectTag = "<input name='medicine' class='form-control medicine' id='medicines' value='" + order.getMedicine() + "' disabled";
                                                 String quantityInputTag = "<input name='quantity' placeholder='Quantity' class='form-control quantity' type='number' value='" + order.getQuantity() + "' disabled";
@@ -638,6 +641,13 @@
 
                                             ArrayList<Drug> drugList = inventoryDAO.getInventory();
                                             ArrayList<String> drugNames = new ArrayList<String>();
+                                            
+                                            Collections.sort(drugList, new Comparator<Drug>() {
+                                                @Override
+                                                public int compare(Drug drug1,Drug drug2) {
+                                                    return drug1.getMedicine_name().compareTo(drug2.getMedicine_name());
+                                                }
+                                            });
 
                                             for(Drug drug:drugList){
                                                 drugNames.add(drug.getMedicine_name() + " (" + drug.getQuantity() + ")");
@@ -675,7 +685,7 @@
                                     </span>
 
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Remove_Medicine()">Remove Medicine</button>
+                                        <button type="button" class="btn btn-info btn-flat" id="removeMedicine" onClick="Remove_Medicine()">Remove Medicine</button>
                                     </span>
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn btn-info btn-flat">Place Order</button>

@@ -49,19 +49,27 @@ public class OrderServlet extends HttpServlet {
         String[] quantities = request.getParameterValues("quantity");
         String[] notes = request.getParameterValues("notes");
         String[] remarks = request.getParameterValues("remarks");
-        int patientID = Integer.parseInt(request.getParameter("patientID").substring(3));
         
         int visitId = -1;
         String errorMsg = "";
+        
+        for(String quantity : quantities){
+            if(quantity.trim().equals("")){
+                System.out.println("Doctor Input Blank Quantity");
+                errorMsg = "Invalid Quantity";
+            }
+        }
+        
         if (visitID != null) {
             try {
                 visitId = Integer.parseInt(visitID);
             } catch (Exception e) {
-                errorMsg = "Failed to get visitID"; //shouldnt happen
+                System.out.println("Failed To Get VisitID");
+                errorMsg = "Failed To Get VisitID";
             }
         }
         
-        int orderID = orderDAO.getOrderID();
+        int orderID = orderDAO.getNextOrderID();
         orderDAO.placeOrder(visitId);
         for(int i=0; i<medicines.length; i++){
             Order order = new Order(0,"Dr Pris", 100, medicines[i], Integer.parseInt(quantities[i]), notes[i], remarks[i]);
