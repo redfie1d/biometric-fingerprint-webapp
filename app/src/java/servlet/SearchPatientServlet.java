@@ -54,8 +54,6 @@ public class SearchPatientServlet extends HttpServlet {
 
         }
 
-        System.out.println(pVillage);
-        System.out.println(pNo);
         if (pNo == -1) {
             session.setAttribute("searchError", "Patient not found!");
             response.sendRedirect("existing_patient.jsp");
@@ -63,7 +61,6 @@ public class SearchPatientServlet extends HttpServlet {
         }
 
         Patient p = PatientDAO.getPatientByPatientID(pVillage, pNo);
-        System.out.println(p);
 
         if (p == null) {
             session.setAttribute("searchError", "Patient not found!");

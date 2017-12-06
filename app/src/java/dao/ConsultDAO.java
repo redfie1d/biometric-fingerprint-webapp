@@ -24,11 +24,11 @@ public class ConsultDAO {
     ResultSet rs;
     PreparedStatement stmt;
     
-    public boolean insertData(int visitId, String doctor, String notes, String diagnosis, String problems, String urine_test, String hemocue_count, String blood_glucose, String referrals){
+    public boolean insertData(int visitId, String doctor, String notes, String diagnosis, String problems, String urine_test, String hemocue_count, String blood_glucose, String referrals, boolean chronic_referral){
         try {
             conn = ConnectionManager.getConnection();
             stmt = conn.prepareStatement("INSERT INTO consults(visit_id, date, doctor, notes, diagnosis, problems, urine_test, "
-                    + "hemocue_count, blood_glucose, referrals) values(?,?,?,?,?,?,?,?,?,?)");
+                    + "hemocue_count, blood_glucose, referrals, chronic_referral) values(?,?,?,?,?,?,?,?,?,?,?)");
             
             Date d = new Date();            
             
@@ -42,6 +42,7 @@ public class ConsultDAO {
             stmt.setString(8, hemocue_count);
             stmt.setString(9, blood_glucose);
             stmt.setString(10, referrals);
+            stmt.setBoolean(11, chronic_referral);
             stmt.executeUpdate();
             
             return true;
@@ -105,8 +106,9 @@ public class ConsultDAO {
                 String hemocue_count = rs.getString("hemocue_count");
                 String blood_glucose = rs.getString("blood_glucose");
                 String referrals = rs.getString("referrals");
+                boolean chronic_referral = rs.getBoolean("chronic_referral");
                 
-                return new Consult(consultId, visitId, doctor, notes, diagnosis, problems, urine_test, hemocue_count, blood_glucose, referrals);
+                return new Consult(consultId, visitId, doctor, notes, diagnosis, problems, urine_test, hemocue_count, blood_glucose, referrals, chronic_referral);
             }
 
         } catch (SQLException e) {

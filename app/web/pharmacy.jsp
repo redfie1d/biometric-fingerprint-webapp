@@ -195,13 +195,6 @@
                                 <%
                                     InventoryDAO inventoryDAO = new InventoryDAO();
                                     ArrayList<Drug> drugList = inventoryDAO.getInventory();
-                                    
-                                    Collections.sort(drugList, new Comparator<Drug>() {
-                                        @Override
-                                        public int compare(Drug drug1,Drug drug2) {
-                                            return drug1.getMedicine_name().compareTo(drug2.getMedicine_name());
-                                        }
-                                    });
                                      
                                     for(Drug drug:drugList){
                                 %>

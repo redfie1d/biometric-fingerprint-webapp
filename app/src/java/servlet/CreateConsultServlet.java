@@ -6,6 +6,7 @@
 package servlet;
 
 import dao.ConsultDAO;
+import dao.OrderDAO;
 import dao.PatientDAO;
 import dao.VisitDAO;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Consult;
+import model.Order;
 import model.Visit;
 
 /**
@@ -36,10 +38,11 @@ public class CreateConsultServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-            /* TODO output your page here. You may use following sample code. */
+            OrderDAO orderDAO = new OrderDAO();
+        
             String visitID = request.getParameter("visitId");
             String doctor = request.getParameter("doctor");
-            String notes = request.getParameter("notes");
+            String consultDetails = request.getParameter("consultDetails");
             String diagnosis = request.getParameter("diagnosis");
             String [] problems = request.getParameterValues("problems");
             
@@ -47,11 +50,24 @@ public class CreateConsultServlet extends HttpServlet {
             String hemocue = request.getParameter("hemocue");
             String blood = request.getParameter("blood");
             String referrals = request.getParameter("referrals");
+            String chronicReferral = request.getParameter("chronicReferral");
             
             String finalStringProblems = "";
             
+            String[] medicines = request.getParameterValues("medicine");
+            String[] quantities = request.getParameterValues("quantity");
+            String[] notes = request.getParameterValues("notes");
+            String[] remarks = request.getParameterValues("remarks");
+            
             int visitId = 0;
             String errorMsg = "";
+            
+//            for(String quantity : quantities){
+//                if(quantity.trim().equals("")){
+//                    System.out.println("Doctor Input Blank Quantity");
+//                    errorMsg = "Invalid Quantity";
+//                }
+//            }
             
             if (visitID != null) {
                 try {
@@ -69,22 +85,55 @@ public class CreateConsultServlet extends HttpServlet {
                            finalStringProblems += ",";
                         }
                     }
+                
                 }
                 
-                Consult consult = new Consult(visitId, doctor, notes, diagnosis, finalStringProblems, urine, hemocue, blood, referrals);
-                VisitDAO visitDAO = new VisitDAO();
-                Visit visit = visitDAO.getVisitByVisitID(visitId);
-                System.out.println("Printing Visit");
-                System.out.println(visit);
-                visit.setConsult(consult);
                 ConsultDAO consultDAO = new ConsultDAO();
-                boolean successful = consultDAO.insertData(visitId, doctor, notes, diagnosis, finalStringProblems, urine, hemocue, blood, referrals);
-                if(successful){
-                    request.getSession().setAttribute("visitRecord", visit);
-                    request.getSession().setAttribute("patientRecord", PatientDAO.getPatientByPatientID(visit.getPatientId()));
-                    request.getSession().setAttribute("successmsg", "A new consult record is created");
-                    response.sendRedirect("new_consult.jsp");
-                }
+                Consult consult = consultDAO.getConsultByVisitID(visitId);
+                
+                boolean successful = false;
+                
+                if(consult == null){
+                    System.out.println("No Consult Record Found For Visit. Creating Consult Record...");
+                    boolean cRef = false;
+                    
+                    if(chronicReferral != null){
+                        cRef = true;
+                    }
+                    
+                    consult = new Consult(visitId, doctor, consultDetails, diagnosis, finalStringProblems, urine, hemocue, blood, referrals, cRef);
+                    
+                    VisitDAO visitDAO = new VisitDAO();
+                    Visit visit = visitDAO.getVisitByVisitID(visitId);
+                    visit.setConsult(consult);
+                    
+                    System.out.println("Placing Order For Medicines");
+                    int orderID = orderDAO.getNextOrderID();
+                    orderDAO.placeOrder(visitId);
+                    for(int i=0; i<medicines.length; i++){
+                        Order order = new Order(0,"Dr Pris", 100, medicines[i], Integer.parseInt(quantities[i]), notes[i], remarks[i]);
+                        orderDAO.addOrders(orderID, order);
+                    }
+                    System.out.println("Successfully Ordered Medicines");
+                    
+                    successful = consultDAO.insertData(visitId, doctor, consultDetails, diagnosis, finalStringProblems, urine, hemocue, blood, referrals, cRef);
+                    
+                    if(successful){
+                        System.out.println("New Consult Record Added");
+                        request.getSession().setAttribute("visitRecord", visit);
+                        request.getSession().setAttribute("patientRecord", PatientDAO.getPatientByPatientID(visit.getPatientId()));
+                        request.getSession().setAttribute("successmsg", "A new consult record is created");
+                    }
+                    
+                } else {
+                    System.out.println("Consult Record Already Exists");
+                    request.getSession().setAttribute("visitError", "Consult record already exists");
+                }  
+                
+                response.sendRedirect("new_consult.jsp");
+                
+                
+                
             }
         
     }
@@ -129,4 +178,3 @@ public class CreateConsultServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-

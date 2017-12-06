@@ -126,7 +126,6 @@ public class OrderDAO {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                System.out.println("Returning rs.next");
                 return rs.getInt("AUTO_INCREMENT");
             }
         } catch (SQLException e) {

@@ -92,10 +92,9 @@
         <br/>
 
         <%
+            ConsultDAO consultDAO = new ConsultDAO();
+            
             String displayState = "block";
-            if (doctorName == null || doctorName.length() <= 0) {
-                displayState = "none";
-            }
 
             Object visitObject = session.getAttribute("visitRecord");
             Object patientObject = session.getAttribute("patientRecord");
@@ -113,11 +112,13 @@
             Triage triageObject = visitRecord == null ? null : visitRecord.getTriage();
 
             String patientDetailsDisplayState = visitRecord != null && patientRecord != null ? "block" : "none";
-            String consultActionPage = "CreateConsultServlet";
 
             Visit[] pastVisits = null;
 
+            String consultDisplayState = "none";
             if (visitRecord != null) {
+                consultDisplayState = consultDAO.getConsultByVisitID(visitRecord.getId()) == null || viewPastConsultRecord ? "block" : "none";
+                
                 //visitRecord = VisitDAO.getPatientLatestVisit(visitRecord.getPatientId());
                 triageObject = visitRecord.getTriage();
                 pastVisits = VisitDAO.getVisitByPatientID(visitRecord.getPatientId());
@@ -267,10 +268,10 @@
                                         </div>
 
                                         <div class="row" style="padding:15px;">
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <b>HIV Positive:</b>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <%
                                                     if (triageObject.getHivPositive() == 1) {
                                                 %>
@@ -284,29 +285,12 @@
                                                 %>
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <b>PTB Positive:</b>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <%
                                                     if (triageObject.getPtbPositive() == 1) {
-                                                %>
-                                                Yes
-                                                <%
-                                                } else {
-                                                %>
-                                                No
-                                                <%
-                                                    }
-                                                %>
-                                            </div>
-
-                                            <div class="col-md-2">
-                                                <b>Hepatitis C Positive:</b>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <%
-                                                    if (triageObject.getHepCPositive() == 1) {
                                                 %>
                                                 Yes
                                                 <%
@@ -360,7 +344,7 @@
                                 Date d = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(v.getDate());
                                 String date = new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(d);
                                 int visitID = v.getId();
-                                ConsultDAO consultDAO = new ConsultDAO();
+                                
                                 Consult consult = consultDAO.getConsultByVisitID(visitID);
                                 if (consult != null) {
                                     String doctor = consult.getDoctor();
@@ -387,6 +371,7 @@
                                     }
                                 }
                             }
+
                         %>
                             </tbody>
                         </table>  
@@ -397,7 +382,7 @@
 
             <div class="col-md-8">
 
-                <div id="patientRecordsBox" class="box box-info box-solid" style="display:<%=visitRecord != null ? "block" : "none"%>">
+                <div id="patientRecordsBox" class="box box-info box-solid" style="display:<%=consultDisplayState%>">
                     <div class="box-header with-border">
                         <h3 class="box-title">Doctor's Consultation</h3>
 
@@ -411,7 +396,7 @@
                     
                     <div class="box-body">
 
-                        <form action="<%=consultActionPage%>" method="POST" class="row">
+                        <form action="CreateConsultServlet" method="POST" class="row">
 
                             <input type="hidden" name="visitId" value="<%=visitRecord != null ? visitRecord.getId() : ""%>">
                             <input type="hidden" name="doctor" value="<%=doctorName != null && doctorName.length() > 0 ? doctorName : ""%>">
@@ -422,12 +407,12 @@
                                     <%
                                         if (viewPastConsultRecord && visitRecord != null && visitRecord.getConsult() != null) {
                                     %>
-                                    <textarea class="form-control" name="notes" rows="3" style="height:200px" disabled><%=visitRecord.getConsult().getNotes()%></textarea>
+                                    <textarea class="form-control" name="consultDetails" rows="3" style="height:200px" disabled><%=visitRecord.getConsult().getNotes()%></textarea>
 
                                     <%
                                     } else {
                                     %>
-                                    <textarea class="form-control" name="notes" rows="3" placeholder="Enter here..." style="height:200px"></textarea>
+                                    <textarea class="form-control" name="consultDetails" rows="3" placeholder="Enter here..." style="height:200px"></textarea>
 
                                     <%
                                         }
@@ -526,6 +511,7 @@
                                             }
                                         %>      
                                     </div>
+                                    
                                 </div>
                             </div>
 
@@ -563,14 +549,142 @@
                                     %>
                                 </div>
                             </div>
-
+                            <%
+                                String chronicReferral = "";
+                                String disable = "";
+                                
+                                if(visitRecord != null && visitRecord.getConsult()!=null && visitRecord.getConsult().isChronic_referral()){
+                                    chronicReferral = "checked";
+                                }
+                                
+                                if(viewPastConsultRecord){
+                                    disable = "disabled";
+                                }
+                            %>
                             <div class="col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <%
+                                            out.println("<input type='checkbox' name='chronicReferral' class='problemsCB' value='true' " + chronicReferral + " " + disable + ">");
+                                        %>
+                                        Chronic Referral
+                                    </label>
+                                </div>
+                                <hr>
+                                
+                                <div class="box box-info box-solid" style="display:<%=visitRecord != null ? "block" : "none"%>">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Issue Medicine</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <!-- /.box-tools -->
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table class="table" id="issueMedicine">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Medicine</th>
+                                                    <th>Quantity</th>
+                                                    <th>Regimen</th>
+                                                    <th>Remarks</th>
+                                                </tr>
+
+                                                <%
+                                                    InventoryDAO inventoryDAO = new InventoryDAO();
+
+                                                    if(viewPastConsultRecord){
+                                                        ArrayList<Order> orderList = inventoryDAO.getOrdersByVisitID(visitRecord.getId());
+
+                                                        for(Order order:orderList){
+                                                            String selectTag = "<input name='medicine' class='form-control medicine' id='medicines' value='" + order.getMedicine() + "' disabled";
+                                                            String quantityInputTag = "<input name='quantity' placeholder='Quantity' class='form-control quantity' type='number' value='" + order.getQuantity() + "' disabled";
+                                                            String notesInputTag = "<input name='notes' placeholder='Regimen' class='form-control notes' type='text' value='" + order.getNotes() + "' disabled";
+                                                            String remarksInputTag = "<input name='remarks' placeholder='Remarks' class='form-control remarks' type='text' value='" + order.getRemarks() + "' disabled";
+
+                                                            out.println("<tr><td>");
+                                                %>
+                                                            <%=selectTag%>
+                                                            </td>
+                                                            <td>
+                                                                <%=quantityInputTag%>
+                                                            </td>
+                                                            <td>
+                                                                <%=notesInputTag%>
+                                                            </td>
+                                                            <td>
+                                                                <%=remarksInputTag%>
+                                                            </td>
+                                                            </tr>
+                                                <%            
+                                                        }
+                                                    } else if (visitRecord != null){
+                                                        String selectTag = "<select name='medicine' class='form-control medicine' id='medicines'>";
+                                                        String quantityInputTag = "<input name='quantity' placeholder='Quantity' class='form-control quantity' type='number'>";
+                                                        String notesInputTag = "<input name='notes' placeholder='Regimen' class='form-control notes' type='text'>";
+                                                        String remarksInputTag = "<input name='remarks' placeholder='Remarks' class='form-control remarks' type='text'>";
+
+                                                        out.println("<tr><td>");
+                                                        out.println(selectTag);
+
+                                                        ArrayList<Drug> drugList = inventoryDAO.getInventory();
+                                                        ArrayList<String> drugNames = new ArrayList<String>();
+
+                                                        for(Drug drug:drugList){
+                                                            drugNames.add(drug.getMedicine_name() + " (" + drug.getQuantity() + ")");
+
+                                                %>
+                                                            <option value="<%=drug.getMedicine_name()%>" type="text"><%=drug.getMedicine_name()+ " (" + drug.getQuantity()+")"%></option>
+                                                <%
+                                                        }
+                                                %>
+                                                        </select>
+                                                        </td>
+                                                        <td>
+                                                            <%=quantityInputTag%>
+                                                        </td>
+                                                        <td>
+                                                            <%=notesInputTag%>
+                                                        </td>
+                                                        <td>
+                                                            <%=remarksInputTag%>
+                                                            <input type="hidden" name="visitId" value=<%=visitRecord.getId()%>>
+                                                        </td>
+                                                        </tr>
+                                                <%
+                                                    }
+                                                %>
+                                            </tbody>
+
+                                        </table>
+                                            <%
+                                                if(!viewPastConsultRecord){
+                                            %>   
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Add_Medicine()">Add Medicine</button>
+                                                    </span>
+
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-info btn-flat" id="removeMedicine" onClick="Remove_Medicine()">Remove Medicine</button>
+                                                    </span>
+                                            <%
+                                                }
+                                            %>
+                                        
+                                    </div>
+                                    
+                                </div>
                                 <%                                    
                                     if (!viewPastConsultRecord && visitRecord != null) {
                                 %>
                                         <button class="btn btn-primary btn-lg" id="btn-create-record" type="submit">Create Consult Record</button>
                                 <%
                                     } 
+
+                                    viewPastConsultRecord = false;
                                 %>
 
                             </div> 
@@ -580,125 +694,7 @@
 
                 </div>
                             
-                <div class="box box-info box-solid" style="display:<%=visitRecord != null ? "block" : "none"%>">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Issue Medicine</h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <!-- /.box-tools -->
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <form action="OrderServlet" method="POST">
-                            <table class="table" id="issueMedicine">
-                                <tbody>
-                                    <tr>
-                                        <th>Medicine</th>
-                                        <th>Quantity</th>
-                                        <th>Notes</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                    
-                                    <%
-                                        InventoryDAO inventoryDAO = new InventoryDAO();
-
-                                        if(viewPastConsultRecord){
-                                            ArrayList<Order> orderList = inventoryDAO.getOrdersByVisitID(visitRecord.getId());
-                                            
-                                            for(Order order:orderList){
-                                                String selectTag = "<input name='medicine' class='form-control medicine' id='medicines' value='" + order.getMedicine() + "' disabled";
-                                                String quantityInputTag = "<input name='quantity' placeholder='Quantity' class='form-control quantity' type='number' value='" + order.getQuantity() + "' disabled";
-                                                String notesInputTag = "<input name='notes' placeholder='Notes' class='form-control notes' type='text' value='" + order.getNotes() + "' disabled";
-                                                String remarksInputTag = "<input name='remarks' placeholder='Remarks' class='form-control remarks' type='text' value='" + order.getRemarks() + "' disabled";
-
-                                                out.println("<tr><td>");
-                                    %>
-                                                <%=selectTag%>
-                                                </td>
-                                                <td>
-                                                    <%=quantityInputTag%>
-                                                </td>
-                                                <td>
-                                                    <%=notesInputTag%>
-                                                </td>
-                                                <td>
-                                                    <%=remarksInputTag%>
-                                                </td>
-                                                </tr>
-                                    <%            
-                                            }
-                                        } else {
-                                            String selectTag = "<select name='medicine' class='form-control medicine' id='medicines'>";
-                                            String quantityInputTag = "<input name='quantity' placeholder='Quantity' class='form-control quantity' type='number'>";
-                                            String notesInputTag = "<input name='notes' placeholder='Notes' class='form-control notes' type='text'>";
-                                            String remarksInputTag = "<input name='remarks' placeholder='Remarks' class='form-control remarks' type='text'>";
-
-                                            out.println("<tr><td>");
-                                            out.println(selectTag);
-
-                                            ArrayList<Drug> drugList = inventoryDAO.getInventory();
-                                            ArrayList<String> drugNames = new ArrayList<String>();
-                                            
-                                            Collections.sort(drugList, new Comparator<Drug>() {
-                                                @Override
-                                                public int compare(Drug drug1,Drug drug2) {
-                                                    return drug1.getMedicine_name().compareTo(drug2.getMedicine_name());
-                                                }
-                                            });
-
-                                            for(Drug drug:drugList){
-                                                drugNames.add(drug.getMedicine_name() + " (" + drug.getQuantity() + ")");
-
-                                    %>
-                                                <option value="<%=drug.getMedicine_name()%>" type="text"><%=drug.getMedicine_name()+ " (" + drug.getQuantity()+")"%></option>
-                                    <%
-                                            }
-                                    %>
-                                            </select>
-                                            </td>
-                                            <td>
-                                                <%=quantityInputTag%>
-                                            </td>
-                                            <td>
-                                                <%=notesInputTag%>
-                                            </td>
-                                            <td>
-                                                <%=remarksInputTag%>
-                                                <input type="hidden" name="patientID" value=<%=patientRecord.getVillage()%><%=patientRecord.getPatientId()%>>
-                                                <input type="hidden" name="visitId" value=<%=visitRecord.getId()%>>
-                                            </td>
-                                            </tr>
-                                    <%
-                                        }
-                                    %>
-                                </tbody>
-                                
-                            </table>
-                            <%
-                                if(!viewPastConsultRecord){
-                            %>   
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Add_Medicine()">Add Medicine</button>
-                                    </span>
-
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-info btn-flat" id="removeMedicine" onClick="Remove_Medicine()">Remove Medicine</button>
-                                    </span>
-                                    <span class="input-group-btn">
-                                        <button type="submit" class="btn btn-info btn-flat">Place Order</button>
-                                    </span>
-                            <%
-                                }
-                            %>
-                        </form>
-                    </div>
-                    <%
-                        viewPastConsultRecord = false;
-                    %>
-                </div>
+                
                 <!-- /.box-body -->
             </div>
                                          

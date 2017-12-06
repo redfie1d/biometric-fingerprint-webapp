@@ -12,6 +12,7 @@ public class Consult {
     private String hemocue_count;
     private String blood_glucose;
     private String referrals;
+    private boolean chronic_referral;
 
     public Consult(int consult_id, int visitId, String doctor, String notes, String diagnosis, String problems) {
         this(visitId, doctor);
@@ -21,7 +22,7 @@ public class Consult {
         this.consult_id = consult_id;
     }
 
-    public Consult(int consult_id, int visitId, String doctor, String notes, String diagnosis, String problems, String urine_test, String hemocue_count, String blood_glucose, String referrals) {
+    public Consult(int consult_id, int visitId, String doctor, String notes, String diagnosis, String problems, String urine_test, String hemocue_count, String blood_glucose, String referrals, boolean chronic_referral) {
         this(visitId, doctor);
         this.consult_id = consult_id;
         this.notes = notes;
@@ -31,9 +32,10 @@ public class Consult {
         this.hemocue_count = hemocue_count;
         this.blood_glucose = blood_glucose;
         this.referrals = referrals;
+        this.chronic_referral = chronic_referral;
     }
 
-    public Consult(int visitId, String doctor, String notes, String diagnosis, String problems, String urine_test, String hemocue_count, String blood_glucose, String referrals) {
+    public Consult(int visitId, String doctor, String notes, String diagnosis, String problems, String urine_test, String hemocue_count, String blood_glucose, String referrals, boolean chronic_referral) {
         this(visitId, doctor);
 
         this.notes = notes;
@@ -43,6 +45,7 @@ public class Consult {
         this.hemocue_count = hemocue_count;
         this.blood_glucose = blood_glucose;
         this.referrals = referrals;
+        this.chronic_referral = chronic_referral;
     }
 
     public Consult(int visitId, String doctor) {
@@ -128,5 +131,13 @@ public class Consult {
 
     public void setReferrals(String referrals) {
         this.referrals = referrals;
+    }
+
+    public boolean isChronic_referral() {
+        return chronic_referral;
+    }
+
+    public void setChronic_referral(boolean chronic_referral) {
+        this.chronic_referral = chronic_referral;
     }
 }

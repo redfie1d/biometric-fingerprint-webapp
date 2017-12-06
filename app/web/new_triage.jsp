@@ -282,13 +282,6 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="hepCPositive" <%=visitRecord != null && visitRecord.getTriage() != null && visitRecord.getTriage().getHepCPositive()!= 0 ? "checked" : ""%>/>Hep C 
-                                        </label>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="col-md-12">

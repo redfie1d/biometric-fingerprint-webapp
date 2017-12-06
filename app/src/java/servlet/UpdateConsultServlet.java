@@ -36,55 +36,55 @@ public class UpdateConsultServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             /* TODO output your page here. You may use following sample code. */
-            String visitID = request.getParameter("visitId");
-            String doctor = request.getParameter("doctor");
-            String notes = request.getParameter("notes");
-            String diagnosis = request.getParameter("diagnosis");
-            String [] problems = request.getParameterValues("problems");
-            
-            String urine = request.getParameter("urine");
-            String hemocue = request.getParameter("hemocue");
-            String blood = request.getParameter("blood");
-            String referrals = request.getParameter("referrals");
-            
-            String finalStringProblems = "";
-            
-            int visitId = 0;
-            String errorMsg = "";
-            
-            if (visitID != null) {
-                try {
-                    visitId = Integer.parseInt(visitID);
-                } catch (Exception e) {
-                    errorMsg = "Please enter valid visitId";
-                }
-            }
-            
-            if(errorMsg.isEmpty()){
-                if (problems != null && problems.length > 0){
-                    for (int i=0; i<problems.length;i++){
-                        finalStringProblems += problems[i];
-                        if (i < problems.length -1 ){
-                           finalStringProblems += ",";
-                        }
-                    }
-                }
-                int currentConsultID = ConsultDAO.getConsultByVisitID(visitId).getConsult_id();
-                Consult consult = new Consult(visitId, doctor, notes, diagnosis, finalStringProblems, urine, hemocue, blood, referrals);
-                Visit visit = VisitDAO.getVisitByVisitID(visitId);
-                visit.setConsult(consult);
-                ConsultDAO consultDAO = new ConsultDAO();
-                boolean successful = consultDAO.updateData(currentConsultID, visitId, doctor, notes, diagnosis, finalStringProblems, urine, hemocue, blood, referrals);
-                if(successful){
-                    request.getSession().setAttribute("visitRecord", visit);
-                    request.getSession().setAttribute("patientRecord", PatientDAO.getPatientByPatientID(visit.getPatientId()));
-                    request.getSession().setAttribute("successmsg", "Consult record has been updated");
-//                    RequestDispatcher dispatcher = request.getRequestDispatcher("createTriage.jsp");
-//                    dispatcher.forward(request, response);
-                    
-                    response.sendRedirect("new_consult.jsp");
-                }
-            }
+//            String visitID = request.getParameter("visitId");
+//            String doctor = request.getParameter("doctor");
+//            String notes = request.getParameter("notes");
+//            String diagnosis = request.getParameter("diagnosis");
+//            String [] problems = request.getParameterValues("problems");
+//            
+//            String urine = request.getParameter("urine");
+//            String hemocue = request.getParameter("hemocue");
+//            String blood = request.getParameter("blood");
+//            String referrals = request.getParameter("referrals");
+//            
+//            String finalStringProblems = "";
+//            
+//            int visitId = 0;
+//            String errorMsg = "";
+//            
+//            if (visitID != null) {
+//                try {
+//                    visitId = Integer.parseInt(visitID);
+//                } catch (Exception e) {
+//                    errorMsg = "Please enter valid visitId";
+//                }
+//            }
+//            
+//            if(errorMsg.isEmpty()){
+//                if (problems != null && problems.length > 0){
+//                    for (int i=0; i<problems.length;i++){
+//                        finalStringProblems += problems[i];
+//                        if (i < problems.length -1 ){
+//                           finalStringProblems += ",";
+//                        }
+//                    }
+//                }
+//                int currentConsultID = ConsultDAO.getConsultByVisitID(visitId).getConsult_id();
+//                Consult consult = new Consult(visitId, doctor, notes, diagnosis, finalStringProblems, urine, hemocue, blood, referrals);
+//                Visit visit = VisitDAO.getVisitByVisitID(visitId);
+//                visit.setConsult(consult);
+//                ConsultDAO consultDAO = new ConsultDAO();
+//                boolean successful = consultDAO.updateData(currentConsultID, visitId, doctor, notes, diagnosis, finalStringProblems, urine, hemocue, blood, referrals);
+//                if(successful){
+//                    request.getSession().setAttribute("visitRecord", visit);
+//                    request.getSession().setAttribute("patientRecord", PatientDAO.getPatientByPatientID(visit.getPatientId()));
+//                    request.getSession().setAttribute("successmsg", "Consult record has been updated");
+////                    RequestDispatcher dispatcher = request.getRequestDispatcher("createTriage.jsp");
+////                    dispatcher.forward(request, response);
+//                    
+//                    response.sendRedirect("new_consult.jsp");
+//                }
+//            }
         
     }
 

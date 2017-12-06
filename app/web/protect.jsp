@@ -10,7 +10,7 @@
     // authenticate user
     /*if (session.getAttribute("user") == null){
         response.sendRedirect("LoginUI.jsp");
-    } */
+    }*/
     
     UserDAO userDao = new UserDAO();
     User user = (User) session.getAttribute("user");
