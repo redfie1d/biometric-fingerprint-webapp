@@ -6,8 +6,8 @@
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.User"%>
-<%@ include file="protect.jsp" %>
 <%@include file="header.jsp" %>
+<%@include file="protect.jsp" %>
 
 <style>
     .homepage-button{
@@ -99,6 +99,24 @@
             </a>
 
             <%
+                // REGISTRATION ONLY
+                } else if (user.getAccountType().equals("registration")) {
+            %>
+
+            <a class="btn btn-app homepage-button bg-blue" href="existing_patient.jsp">
+                <i class="fa fa-user-plus fa-5x"></i> <h3>Registration</h3>
+            </a>
+
+            <%
+                // VITALS ONLY
+                } else if (user.getAccountType().equals("vitals")) {
+            %>
+
+            <a class="btn btn-app homepage-button bg-orange" href="new_vitals.jsp">
+                <i class="fa fa-user-plus fa-5x"></i> <h3>Vitals</h3>
+            </a>
+
+            <%
                 // PHARMACY ONLY
                 } else if (user.getAccountType().equals("pharmacy")) {
             %>
@@ -106,6 +124,13 @@
             <a class="btn btn-app homepage-button bg-yellow" href="pharmacy.jsp">
                 <i class="fa fa-user-plus fa-5x"></i> <h3>Pharmacy</h3>
             </a>
+            
+            <%
+                // VIEWER ONLY
+                } else if (user.getAccountType().equals("viewer")) {
+            %>
+
+            <!--Display what?-->
             
             <%
                 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 06, 2017 at 04:52 PM
+-- Generation Time: Dec 07, 2017 at 12:37 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -401,6 +401,7 @@ INSERT INTO `users` (`name`, `username`, `password`, `account_type`) VALUES
 ('M44', 'm44', 'm44', 'm4'),
 ('M45', 'm45', 'm45', 'm4'),
 ('Pharmacy', 'pharmacy', 'sabaipharm', 'pharmacy'),
+('Registration', 'registration', 'sabai2017', 'registration'),
 ('Dr Strange1', 'strange1', 'strange1', 'acts'),
 ('Dr Strange10', 'strange10', 'strange10', 'acts'),
 ('Dr Strange11', 'strange11', 'strange11', 'acts'),
@@ -418,7 +419,9 @@ INSERT INTO `users` (`name`, `username`, `password`, `account_type`) VALUES
 ('Dr Strange8', 'strange8', 'strange8', 'acts'),
 ('Dr Strange9', 'strange9', 'strange9', 'acts'),
 ('Student', 'student', 'sabai2017', 'student'),
-('Viewer', 'viewer', 'sabaipublic', 'viewer');
+('name', 'username', 'password', 'accountType'),
+('Viewer', 'viewer', 'sabaipublic', 'viewer'),
+('Vitals', 'vitals', 'sabai2017', 'vitals');
 
 -- --------------------------------------------------------
 
