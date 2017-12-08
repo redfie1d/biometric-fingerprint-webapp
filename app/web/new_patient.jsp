@@ -5,6 +5,7 @@
 --%>
 
 <%@include file="header.jsp" %>
+<%@include file="protect.jsp" %>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="margin-left: 0 !important;">
@@ -201,12 +202,12 @@
                                 <div class="form-group row">
                                     <div class="radio col-md-4" style="margin-top:5px">
                                         <label>
-                                            <input type="radio" name="gender" id="optionsRadios1" value="male" checked="">Male
+                                            <input type="radio" name="gender" id="optionsRadios1" value="Male" checked="">Male
                                         </label>
                                     </div>
                                     <div class="radio col-md-4" style="margin-top:5px">
                                         <label>
-                                            <input type="radio" name="gender" id="optionsRadios2" value="female">Female
+                                            <input type="radio" name="gender" id="optionsRadios2" value="Female">Female
                                         </label>
                                     </div>
                                 </div>

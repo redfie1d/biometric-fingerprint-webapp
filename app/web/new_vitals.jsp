@@ -9,7 +9,7 @@
 <%@page import="model.Visit"%>
 <%@page import="model.Patient"%>
 <%@include file="header.jsp" %>
-<%@ include file="protect.jsp" %>
+<%@include file="protect.jsp" %>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" style="margin-left: 0 !important;">

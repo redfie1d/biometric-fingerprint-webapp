@@ -30,18 +30,17 @@
     <section class="content">
         <!-- Your Page Content Here -->
 
-        <%
-            String alertBarDisplayState = "none";
+        <%            String alertBarDisplayState = "none";
             String alertBarStatus = "warning";
             String alertMsg = "";
-            
+
             if (session.getAttribute("searchError") != null) {
                 alertMsg = session.getAttribute("searchError").toString();
                 session.removeAttribute("searchError");
                 alertBarDisplayState = "block";
                 alertBarStatus = "warning";
             }
-            
+
             if (session.getAttribute("successMsg") != null) {
                 alertMsg = session.getAttribute("successMsg").toString();
                 session.removeAttribute("successMsg");
@@ -148,18 +147,18 @@
             </div>
 
             <%
-                
+
                 String patientDetailsDisplayState = "none";
-                
+
                 Object visitObject = session.getAttribute("visitRecord");
                 Object patientObject = session.getAttribute("patientRecord");
-                
+
                 Visit visitRecord = visitObject == null ? null : (Visit) visitObject;
                 Patient patientRecord = patientObject == null ? null : (Patient) patientObject;
-                
+
                 session.removeAttribute("visitRecord");
                 session.removeAttribute("patientRecord");
-                
+
                 if (patientRecord != null) {
                     patientDetailsDisplayState = "block";
                     patientRecord = PatientDAO.getPatientByPatientID(patientRecord.getVillage(), patientRecord.getPatientId());
@@ -177,7 +176,14 @@
                         <span class="widget-user-username col-md-4">Village: <%=patientRecord.getVillage()%></span>
                         <span class="widget-user-username col-md-4">Gender: <%=patientRecord.getGender()%></span>
                         <span class="widget-user-username col-md-4">0</span>
-                        <span class="widget-user-username col-md-4">Age: <%=patientRecord.getDateOfBirth()%></span>
+                        <span class="widget-user-username col-md-4">Date Of Birth: <%=patientRecord.getDateOfBirth()%></span>
+                        <span class="box-tools pull-right">
+                            <form action="update_patient.jsp" method="POST">
+                                <input type="hidden" name="village" value=<%=patientRecord.getVillage()%> />
+                                <input type="hidden" name="patientId" value=<%=patientRecord.getPatientId()%> />
+                                <button type="submit" class="btn btn-warning btn-lg" title="Update Patient's Details">Update Patient's Details</button>
+                            </form>
+                        </span>
                     </div>
 
                     <div class="widget-user-image">
@@ -213,33 +219,21 @@
 
                                     <%
                                         ArrayList<Visit> visitsAL = new ArrayList<>(Arrays.asList(visits));
-                                        
-                                        for(Visit visit:visitsAL){
-                                            String beforeDate = visit.getDate();
-                                            System.out.println(beforeDate);
-                                        }
-                                        
-                                        System.out.println("===============================");
-                                        
+
                                         Collections.sort(visitsAL, new Comparator<Visit>() {
                                             @Override
                                             public int compare(Visit o1, Visit o2) {
-                                                return o2.getId()-o1.getId();
+                                                return o2.getDate().compareTo(o1.getDate());
                                             }
                                         });
-                                        
-                                        for(Visit visit:visitsAL){
-                                            String afterDate = visit.getDate();
-                                            System.out.println(afterDate);
-                                        }
-                                        
-                                        for (int i=0; i<visitsAL.size();i++) {
+
+                                        for (int i = 0; i < visitsAL.size(); i++) {
                                             Visit visit = visitsAL.get(i);
                                             Vitals v = visit.getVitals();
                                     %>
 
 
-                                    <tr <%=i==0?"style='background:lightgreen'":""%>>
+                                    <tr <%=i == 0 ? "style='background:lightgreen'" : ""%>>
                                         <td><%=visit.getId()%></td>
                                         <td><%=visit.getDate()%></td>
                                         <td>
@@ -255,7 +249,7 @@
                                             <%=v == null ? "NA" : v.getTemperature()%>
                                         </td>
                                     </tr>
-                                    <%    
+                                    <%
                                         }
                                     %>
 

@@ -274,6 +274,8 @@ function createPatientRecord2() {
     }
 }
 
+
+
 function clearNewRegistrationForm() {
     location.reload();
 }
