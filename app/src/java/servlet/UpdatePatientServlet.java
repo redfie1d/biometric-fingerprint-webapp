@@ -5,19 +5,13 @@
  */
 package servlet;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import dao.FingerprintDAO;
 import dao.PatientDAO;
-import dao.VisitDAO;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Base64;
-import java.util.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Patient;
-import model.Visit;
-import util.FingerprintClass;
 
 /**
  *
@@ -85,6 +77,11 @@ public class UpdatePatientServlet extends HttpServlet {
                     stream.write(photoImageByte);
                     System.out.println("Write to patient-images successful");
                 }
+                
+//                try (OutputStream stream = new FileOutputStream(new File("C:\\Users\\Jun_M\\Pictures\\patient-images\\" + imageString), false)) {
+//                    stream.write(photoImageByte);
+//                    System.out.println("Write to patient-images successful");
+//                }
             }
             
             boolean updateSuccessful = PatientDAO.updatePatientDetails(patientId, village, name, imageString, contactNo, Integer.parseInt(travellingTimeToClinic), dateOfBirth);
