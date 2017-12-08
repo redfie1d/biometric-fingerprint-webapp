@@ -111,7 +111,7 @@ public class CreatePatientServlet extends HttpServlet {
                 try (OutputStream stream = new FileOutputStream(new File(servletContext.getRealPath("/") + "../../web/patient-images/" + p.getVillage() + p.getPatientId() + ".png"))) {
                     stream.write(photoImageByte);
                 }
-                
+
 //                try (OutputStream stream = new FileOutputStream(new File("C:\\Users\\Jun_M\\Pictures\\patient-images\\" + p.getVillage() + p.getPatientId() + ".png"))) {
 //                    stream.write(photoImageByte);
 //                }
@@ -141,14 +141,13 @@ public class CreatePatientServlet extends HttpServlet {
             boolean successful = visitDAO.insertData(visitId, p.getPatientId(), visitDate);
             if (successful) {
                 System.out.println("successful registered patient and created a new visit");
-
-                JsonObject jo = new JsonObject();
-                jo.addProperty("status", "success");
-                jo.addProperty("newID", p.getVillage() + p.getPatientId());
-                out.print(gs.toJson(jo));
-                out.close();
             }
 
+            JsonObject jo = new JsonObject();
+            jo.addProperty("status", "success");
+            jo.addProperty("newID", p.getVillage() + p.getPatientId());
+            out.print(gs.toJson(jo));
+            out.close();
         }
     }
 
