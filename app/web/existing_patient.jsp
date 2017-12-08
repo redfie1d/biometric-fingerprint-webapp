@@ -4,6 +4,12 @@
     Author     : tcw
 --%>
 
+<%@page import="java.io.IOException"%>
+<%@page import="javax.xml.bind.DatatypeConverter"%>
+<%@page import="java.io.ByteArrayOutputStream"%>
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="java.awt.image.BufferedImage"%>
+<%@page import="java.io.File"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.Arrays"%>
@@ -187,7 +193,28 @@
                     </div>
 
                     <div class="widget-user-image">
-                        <img class="img-circle" src="patient-images/<%=patientRecord.getPhotoImage()%>" alt="User Avatar">                 
+                        <%
+                            //write image
+                            String imgName = "";
+                            
+                            try {
+                                imgName = "C:\\Users\\Jun_M\\Pictures\\patient-images\\" + patientRecord.getPhotoImage();
+                                BufferedImage bImage = ImageIO.read(new File(imgName));//give the path of an image
+                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                ImageIO.write(bImage, "jpg", baos);
+                                baos.flush();
+                                byte[] imageInByteArray = baos.toByteArray();
+                                baos.close();
+                                String b64 = DatatypeConverter.printBase64Binary(imageInByteArray);
+                        %>
+                        <!--<img  class="img-circle" src="data:image/jpg;base64, <%=b64%>" alt="User Avatar" style="width:50%"/>-->             
+                        <%
+                            } catch (IOException e) {
+                                System.out.println("Error: " + e);
+                            }
+                        %>
+
+                        <img class="img-circle" src="patient-images/<%=patientRecord.getPhotoImage()%>" alt="User Avatar" style="width:100px; margin-right:10px;">         
                     </div>
 
                     <div class="box-footer">

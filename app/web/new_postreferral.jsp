@@ -4,6 +4,12 @@
     Author     : JunMing
 --%>
 
+<%@page import="java.io.IOException"%>
+<%@page import="javax.xml.bind.DatatypeConverter"%>
+<%@page import="java.io.ByteArrayOutputStream"%>
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="java.awt.image.BufferedImage"%>
+<%@page import="java.io.File"%>
 <%@page import="model.Order"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
@@ -168,6 +174,28 @@
                                 %>
                                 <div class="widget-user-header bg-aqua">
                                     <div class="widget-user-image">
+                                        
+                                        <%
+                                            //write image
+                                            String imgName = "";
+
+                                            try {
+                                                imgName = "C:\\Users\\Jun_M\\Pictures\\patient-images\\" + patientRecord.getPhotoImage();
+                                                BufferedImage bImage = ImageIO.read(new File(imgName));//give the path of an image
+                                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                                ImageIO.write(bImage, "jpg", baos);
+                                                baos.flush();
+                                                byte[] imageInByteArray = baos.toByteArray();
+                                                baos.close();
+                                                String b64 = DatatypeConverter.printBase64Binary(imageInByteArray);
+                                        %>
+                                        <!--<img class="img-responsive" src="data:image/png;base64, <%=b64%>" alt="User Avatar" style="width:100px"/>-->               
+                                        <%
+                                            } catch (IOException e) {
+                                                System.out.println("Error: " + e);
+                                            }
+                                        %>
+                                        
                                         <img class="img" src="patient-images/<%=patientRecord.getPhotoImage()%>" alt="User Avatar" style="width:100px; margin-right:10px;">
                                     </div>
                                     <!-- /.widget-user-image -->

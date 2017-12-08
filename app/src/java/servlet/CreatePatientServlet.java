@@ -16,17 +16,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jdk.nashorn.internal.runtime.Context;
 import model.Patient;
 import model.Visit;
 import util.FingerprintClass;
@@ -115,7 +111,10 @@ public class CreatePatientServlet extends HttpServlet {
                 try (OutputStream stream = new FileOutputStream(new File(servletContext.getRealPath("/") + "../../web/patient-images/" + p.getVillage() + p.getPatientId() + ".png"))) {
                     stream.write(photoImageByte);
                 }
-
+                
+//                try (OutputStream stream = new FileOutputStream(new File("C:\\Users\\Jun_M\\Pictures\\patient-images\\" + p.getVillage() + p.getPatientId() + ".png"))) {
+//                    stream.write(photoImageByte);
+//                }
             }
 
             p.setPhotoImage(p.getVillage() + p.getPatientId() + ".png");
@@ -142,13 +141,13 @@ public class CreatePatientServlet extends HttpServlet {
             boolean successful = visitDAO.insertData(visitId, p.getPatientId(), visitDate);
             if (successful) {
                 System.out.println("successful registered patient and created a new visit");
-            }
 
-            JsonObject jo = new JsonObject();
-            jo.addProperty("status", "success");
-            jo.addProperty("newID", p.getVillage() + p.getPatientId());
-            out.print(gs.toJson(jo));
-            out.close();
+                JsonObject jo = new JsonObject();
+                jo.addProperty("status", "success");
+                jo.addProperty("newID", p.getVillage() + p.getPatientId());
+                out.print(gs.toJson(jo));
+                out.close();
+            }
 
         }
     }
