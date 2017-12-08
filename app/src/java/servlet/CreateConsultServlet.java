@@ -107,14 +107,16 @@ public class CreateConsultServlet extends HttpServlet {
                     Visit visit = visitDAO.getVisitByVisitID(visitId);
                     visit.setConsult(consult);
                     
-                    System.out.println("Placing Order For Medicines");
-                    int orderID = orderDAO.getNextOrderID();
-                    orderDAO.placeOrder(visitId);
-                    for(int i=0; i<medicines.length; i++){
-                        Order order = new Order(0,"Dr Pris", 100, medicines[i], Integer.parseInt(quantities[i]), notes[i], remarks[i]);
-                        orderDAO.addOrders(orderID, order);
+                    if(medicines != null){
+                        System.out.println("Placing Order For Medicines");
+                        int orderID = orderDAO.getNextOrderID();
+                        orderDAO.placeOrder(visitId);
+                        for(int i=0; i<medicines.length; i++){
+                            Order order = new Order(0,"Dr Pris", 100, medicines[i], Integer.parseInt(quantities[i]), notes[i], remarks[i]);
+                            orderDAO.addOrders(orderID, order);
+                        }
+                        System.out.println("Successfully Ordered Medicines");
                     }
-                    System.out.println("Successfully Ordered Medicines");
                     
                     successful = consultDAO.insertData(visitId, doctor, consultDetails, diagnosis, finalStringProblems, urine, hemocue, blood, referrals, cRef);
                     

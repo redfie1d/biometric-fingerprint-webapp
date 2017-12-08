@@ -93,7 +93,7 @@ public class InventoryDAO {
         return false;
     }
     
-    public static boolean updateInventory(Order order){
+    public static void updateInventory(Order order){
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -105,7 +105,6 @@ public class InventoryDAO {
             stmt.setString(2, order.getMedicine());
             stmt.executeUpdate();
             
-            return true;
             //Returns the converted array to the caller of method
 
         } catch (SQLException e) {
@@ -113,7 +112,6 @@ public class InventoryDAO {
         } finally {
             ConnectionManager.close(conn, stmt, rs);
         }
-        return false;
     }
     
     public static ArrayList<Order> getOrdersByVisitID(int visit_id){

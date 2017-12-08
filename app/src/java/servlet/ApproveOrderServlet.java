@@ -47,12 +47,17 @@ public class ApproveOrderServlet extends HttpServlet {
             System.out.println("Pharmacy Approved OrderID: " + orderID);
             
             for(Order order:orderList){
-                if(!inventoryDAO.updateInventory(order)){
+                if(inventoryDAO.getDrugQuantity(order.getMedicine()) < order.getQuantity()){
                     status = false;
                 }
+                
             }
             
             if(status){
+                for(Order order:orderList){
+                    inventoryDAO.updateInventory(order);
+                }
+                
                 System.out.println("Sufficient Quantity For All Orders");
                 inventoryDAO.updateInventoryStatus(orderList.get(0).getOrderID());
                 request.getSession().setAttribute("successmsg", "Request Approved");

@@ -596,6 +596,7 @@
                                                 </tr>
 
                                                 <%
+                                                    String optionValues = "";
                                                     InventoryDAO inventoryDAO = new InventoryDAO();
 
                                                     if(viewPastConsultRecord){
@@ -629,11 +630,9 @@
                                                         String notesInputTag = "<input name='notes' placeholder='Regimen' class='form-control notes' type='text'>";
                                                         String remarksInputTag = "<input name='remarks' placeholder='Remarks' class='form-control remarks' type='text'>";
 
-                                                        out.println("<tr><td>");
-                                                        out.println(selectTag);
+                                                        out.println("<tr>");
 
                                                         ArrayList<Drug> drugList = inventoryDAO.getInventory();
-                                                        ArrayList<String> drugNames = new ArrayList<String>();
 
                                                         Collections.sort(drugList, new Comparator<Drug>() {
                                                             @Override
@@ -642,26 +641,14 @@
                                                             }
                                                         });
 
-                                                        for(Drug drug:drugList){
-                                                            drugNames.add(drug.getMedicine_name() + " (" + drug.getQuantity() + ")");
+                                                        optionValues = drugList.get(0).getMedicine_name() + "(" + drugList.get(0).getQuantity()+")";
 
-                                                %>
-                                                            <option value="<%=drug.getMedicine_name()%>" type="text"><%=drug.getMedicine_name()+ " (" + drug.getQuantity()+")"%></option>
-                                                <%
+                                                        for(int i=1; i<drugList.size(); i++){
+                                                            optionValues += "_" + drugList.get(i).getMedicine_name() + " (" + drugList.get(i).getQuantity()+")";
                                                         }
+System.out.println(optionValues);
                                                 %>
-                                                        </select>
-                                                        </td>
-                                                        <td>
-                                                            <%=quantityInputTag%>
-                                                        </td>
-                                                        <td>
-                                                            <%=notesInputTag%>
-                                                        </td>
-                                                        <td>
-                                                            <%=remarksInputTag%>
                                                             <input type="hidden" name="visitId" value=<%=visitRecord.getId()%>>
-                                                        </td>
                                                         </tr>
                                                 <%
                                                     }
@@ -673,7 +660,7 @@
                                                 if(!viewPastConsultRecord){
                                             %>   
                                                     <span class="input-group-btn">
-                                                        <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Add_Medicine()">Add Medicine</button>
+                                                        <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Add_Medicine('<%=optionValues%>')">Add Medicine</button>
                                                     </span>
 
                                                     <span class="input-group-btn">

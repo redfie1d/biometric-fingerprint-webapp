@@ -486,7 +486,7 @@ function Enroll() {
 }
 
 
-function Add_Medicine(){
+function Add_Medicine(options){
     var table = document.getElementById("issueMedicine");
     var numRows = table.getElementsByTagName("tr").length;
     var row = table.insertRow(-1);
@@ -495,13 +495,17 @@ function Add_Medicine(){
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
     
+    var medicine = options.split("_");
+    var optionValues = "";
+    for(var i in medicine){
+        optionValues += "<option value='" + medicine[i].split("(")[0].trim() + "' type=text>" + medicine[i] + "</option>";
+    }
     
-    var options = document.getElementById("medicines").innerHTML;
  
-    cell1.innerHTML = `<select name="medicine" class="form-control">` + options + `</select>`
+    cell1.innerHTML = `<select name="medicine" class="form-control">` + optionValues + `</select>`
     cell2.innerHTML = 
     `<td>
-        <input name="quantity" placeholder="Quantity" class="form-control" type="number">
+        <input name="quantity" placeholder="Quantity" class="form-control" type="number" required/>
     </td>`
     cell3.innerHTML = 
     `<td>
