@@ -75,6 +75,10 @@
         <servlet-name>CreatePostReferralServlet</servlet-name>
         <servlet-class>servlet.CreatePostReferralServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditOrderServlet</servlet-name>
+        <servlet-class>servlet.EditOrderServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InitializeBioMiniServlet</servlet-name>
         <url-pattern>/InitializeBioMiniServlet</url-pattern>
@@ -146,6 +150,10 @@
     <servlet-mapping>
         <servlet-name>CreatePostReferralServlet</servlet-name>
         <url-pattern>/CreatePostReferralServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditOrderServlet</servlet-name>
+        <url-pattern>/EditOrderServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

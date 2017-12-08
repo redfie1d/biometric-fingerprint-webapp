@@ -117,6 +117,8 @@
 
             String consultDisplayState = "none";
             if (visitRecord != null) {
+                System.out.println(visitRecord.getId());
+                
                 consultDisplayState = consultDAO.getConsultByVisitID(visitRecord.getId()) == null || viewPastConsultRecord ? "block" : "none";
                 
                 //visitRecord = VisitDAO.getPatientLatestVisit(visitRecord.getPatientId());
@@ -598,7 +600,7 @@
 
                                                     if(viewPastConsultRecord){
                                                         ArrayList<Order> orderList = inventoryDAO.getOrdersByVisitID(visitRecord.getId());
-
+                                                        
                                                         for(Order order:orderList){
                                                             String selectTag = "<input name='medicine' class='form-control medicine' id='medicines' value='" + order.getMedicine() + "' disabled";
                                                             String quantityInputTag = "<input name='quantity' placeholder='Quantity' class='form-control quantity' type='number' value='" + order.getQuantity() + "' disabled";
@@ -632,6 +634,13 @@
 
                                                         ArrayList<Drug> drugList = inventoryDAO.getInventory();
                                                         ArrayList<String> drugNames = new ArrayList<String>();
+
+                                                        Collections.sort(drugList, new Comparator<Drug>() {
+                                                            @Override
+                                                            public int compare(Drug drug1,Drug drug2) {
+                                                                return Integer.parseInt(drug1.getMedicine_name().split("\\.")[0]) - Integer.parseInt(drug2.getMedicine_name().split("\\.")[0]);
+                                                            }
+                                                        });
 
                                                         for(Drug drug:drugList){
                                                             drugNames.add(drug.getMedicine_name() + " (" + drug.getQuantity() + ")");

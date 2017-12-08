@@ -29,7 +29,7 @@ public class VisitDAO {
         try {
             conn = ConnectionManager.getConnection();
 
-            stmt = conn.prepareStatement("SELECT * FROM visits WHERE patient_id = ? and date = (select max(date) from visits where patient_id = ?)");
+            stmt = conn.prepareStatement("SELECT * FROM visits WHERE patient_id = ? and id = (select max(id) from visits where patient_id = ?)");
             
 //            stmt = conn.prepareStatement("Select * from visits where patient_id = ? and status = 'started'");
             stmt.setInt(1, patientID);

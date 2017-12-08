@@ -115,6 +115,22 @@ public class OrderDAO {
         }
     }
     
+    public static void updateOrder(int orderID, int newQuantity, String medicine){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("update orderlist set quantity = ? where order_id = ? and medicine_name = ?");
+            stmt.setInt(1, newQuantity);
+            stmt.setInt(2, orderID);
+            stmt.setString(3, medicine);
+            stmt.executeUpdate();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     public static int getNextOrderID(){
         Connection conn = null;
         PreparedStatement stmt = null;

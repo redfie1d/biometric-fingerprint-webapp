@@ -214,12 +214,24 @@
                                     <%
                                         ArrayList<Visit> visitsAL = new ArrayList<>(Arrays.asList(visits));
                                         
+                                        for(Visit visit:visitsAL){
+                                            String beforeDate = visit.getDate();
+                                            System.out.println(beforeDate);
+                                        }
+                                        
+                                        System.out.println("===============================");
+                                        
                                         Collections.sort(visitsAL, new Comparator<Visit>() {
                                             @Override
                                             public int compare(Visit o1, Visit o2) {
-                                                return o2.getDate().compareTo(o1.getDate());
+                                                return o2.getId()-o1.getId();
                                             }
                                         });
+                                        
+                                        for(Visit visit:visitsAL){
+                                            String afterDate = visit.getDate();
+                                            System.out.println(afterDate);
+                                        }
                                         
                                         for (int i=0; i<visitsAL.size();i++) {
                                             Visit visit = visitsAL.get(i);

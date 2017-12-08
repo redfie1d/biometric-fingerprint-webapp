@@ -83,7 +83,9 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
+                    <form action="ApproveOrderServlet" method="POST">
                         <table class="table">
+                            
                             <tbody>
                                 <tr>
                                     <th>Order ID</th>
@@ -94,6 +96,7 @@
                                     <th>Notes</th>
                                     <th>Remarks</th>
                                 </tr>
+                                
                                 <%
                                     OrderDAO orderDAO = new OrderDAO();
                                     ArrayList<Order> orderList = orderDAO.getOrders();
@@ -111,62 +114,64 @@
                                         }
                                     }
                                     
+                                    int counter = 1;
                                     boolean even = true;
                                     for (Integer key:map.keySet())
                                     {
                                         ArrayList<Order> orderIDList = map.get(key);
                                         Order firstOrder = orderIDList.get(0);
                                 %>
-                                        <tr>
-                                            <td><%=firstOrder.getOrderID()%></td>
-                                            <td><%=firstOrder.getDoctor()%></td>
-                                            <td><%=firstOrder.getPatientID()%></td>
-                                            <td><%=firstOrder.getMedicine()%></td>
-                                            <td><%=firstOrder.getQuantity()%></td>
-                                            <td><%=firstOrder.getNotes()%></td>
-                                            <td><%=firstOrder.getRemarks()%></td>
-                                        </tr>
-                                <%
-                                        for(int i=1; i<orderIDList.size(); i++){
-                                            Order currentOrder = orderIDList.get(i);
-                                %>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><%=currentOrder.getMedicine()%></td>
-                                                <td><%=currentOrder.getQuantity()%></td>
-                                                <td><%=currentOrder.getNotes()%></td>
-                                                <td><%=currentOrder.getRemarks()%></td>
+                                        
+                                            <tr class="issued<%=counter%>">
+                                                <td><%=firstOrder.getOrderID()%></td>
+                                                <td><%=firstOrder.getDoctor()%></td>
+                                                <td><%=firstOrder.getPatientID()%></td>
+                                                <td><%=firstOrder.getMedicine()%></td>
+                                                <td><%=firstOrder.getQuantity()%></td>
+                                                <td><%=firstOrder.getNotes()%></td>
+                                                <td><%=firstOrder.getRemarks()%></td>
                                             </tr>
+                                    <%
+                                            for(int i=1; i<orderIDList.size(); i++){
+                                                Order currentOrder = orderIDList.get(i);
+                                    %>
+                                                <tr class="issued<%=counter%>">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><%=currentOrder.getMedicine()%></td>
+                                                    <td><%=currentOrder.getQuantity()%></td>
+                                                    <td><%=currentOrder.getNotes()%></td>
+                                                    <td><%=currentOrder.getRemarks()%></td>
+                                                </tr>
+                                    <%
+                                            }
+                                    %>
+                                    
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                
+                                                <td>
+ 
+                                                    <button class="btn btn-info approve" type="button" name="approve" onClick="onApprove(<%=firstOrder.getOrderID()%>)">Approve</button>
+                                                    <button class="btn btn-warning edit" type="button" name="edit" onClick="onEdit(<%=counter%>, <%=firstOrder.getOrderID()%>)">Edit</button>
+                                                    <button class="btn btn-warning confirm" type="button" name="orderID">Confirm</button>
+                                                    <button class="btn btn-warning cancel" type="button" name="cancel">Cancel</button>
+                                                    <button class="btn btn-danger reject" type="button" name="reject" onClick="onReject(<%=firstOrder.getOrderID()%>)">Reject</button>
+                                                    
+                                                </td>
                                 <%
-                                        }
-                                %>
-
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <form action="ApproveOrderServlet" method="POST">
-                                                <input type="hidden" name="orderID" value=<%=firstOrder.getOrderID()%>>
-                                                <button class="btn btn-info" type="submit" name="approve">Approve</button>
-                                                <button class="btn btn-danger" type="submit" name="reject">Reject</button>
-                                            </form>
-                                        </td>
-<!--                                        <td>
-                                            <form action="ApproveOrderServlet" method="POST">
-                                                <button class="btn btn-info" type="button" onClick="">Edit Quantity</button>
-                                            </form>
-                                        </td>-->
-                                <%
+                                        counter++;
                                         even = !even;
                                     }
                                 %>
                             </tbody>
+                            
                         </table>
-                
+                </form>
 
                     <br>
                 </div>
@@ -195,6 +200,13 @@
                                 <%
                                     InventoryDAO inventoryDAO = new InventoryDAO();
                                     ArrayList<Drug> drugList = inventoryDAO.getInventory();
+                                    
+                                    Collections.sort(drugList, new Comparator<Drug>() {
+                                        @Override
+                                        public int compare(Drug drug1,Drug drug2) {
+                                            return Integer.parseInt(drug1.getMedicine_name().split("\\.")[0]) - Integer.parseInt(drug2.getMedicine_name().split("\\.")[0]);
+                                        }
+                                    });
                                      
                                     for(Drug drug:drugList){
                                 %>
@@ -218,3 +230,8 @@
         </div>
         <div style="clear:both"></div>
 </div>
+                                
+<script src='js/jquery.min.js'></script>
+<script src='js/pharmacy.js'></script>
+                                
+<%@include file="footer.jsp" %>

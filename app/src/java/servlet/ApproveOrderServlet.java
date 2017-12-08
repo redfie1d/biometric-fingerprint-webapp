@@ -69,7 +69,7 @@ public class ApproveOrderServlet extends HttpServlet {
             request.getSession().setAttribute("successmsg", "Request Rejected");
         }
         
-        response.sendRedirect("pharmacy.jsp");
+//        response.sendRedirect("pharmacy.jsp");
         
     }
 
