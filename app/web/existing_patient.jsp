@@ -223,7 +223,7 @@
                                         Collections.sort(visitsAL, new Comparator<Visit>() {
                                             @Override
                                             public int compare(Visit o1, Visit o2) {
-                                                return o2.getDate().compareTo(o1.getDate());
+                                                return o2.getId()-o1.getId();
                                             }
                                         });
 
