@@ -131,7 +131,7 @@
 
                         <div class="row text-center">
                             <div class="col-sm-12">
-                                <img id="fg1Image" class="img-responsive" src="dist/img/fingerprint.png" alt="Photo">
+                                <!--<img id="fg1Image" class="img-responsive" src="dist/img/fingerprint.png" alt="Photo">-->
                             </div>
                         </div>
 

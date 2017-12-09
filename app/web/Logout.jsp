@@ -14,9 +14,7 @@
     <body>
         <%
             session.removeAttribute("user");
-
             session.invalidate();
-
         %> 
 
         <div class="container">

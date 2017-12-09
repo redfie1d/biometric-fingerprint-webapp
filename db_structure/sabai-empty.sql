@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 07, 2017 at 12:37 PM
+-- Generation Time: Dec 09, 2017 at 05:16 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -385,42 +385,41 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`name`, `username`, `password`, `account_type`) VALUES
-('Admin', 'admin', 'sabaisuper', 'admin'),
-('Dr Alumni1', 'alumni1', 'alumni1', 'alumni'),
-('Dr Alumni2', 'alumni2', 'alumni2', 'alumni'),
-('Dr Alumni3', 'alumni3', 'alumni3', 'alumni'),
-('Dr Alumni4', 'alumni4', 'alumni4', 'alumni'),
-('Dr Alumni5', 'alumni5', 'alumni5', 'alumni'),
-('Dr Alumni6', 'alumni6', 'alumni6', 'alumni'),
-('Dr Alumni7', 'alumni7', 'alumni7', 'alumni'),
-('Dr Alumni8', 'alumni8', 'alumni8', 'alumni'),
-('Dr Alumni9', 'alumni9', 'alumni9', 'alumni'),
-('M41', 'm41', 'm41', 'm4'),
-('M42', 'm42', 'm42', 'm4'),
-('M43', 'm43', 'm43', 'm4'),
-('M44', 'm44', 'm44', 'm4'),
-('M45', 'm45', 'm45', 'm4'),
+('Admin', 'admin', 'sabaisuper2017', 'admin'),
+('Dr Allyson Tan', 'allyson_tan', 'alum9', 'alumni'),
+('Dr Angeline Lim', 'angeline_lim', 'acts4', 'acts'),
+('Dr Anu Pandey', 'anu_pandey', 'acts9', 'acts'),
+('Arturo Neo', 'arturo_neo', 'afterglow2', 'm4'),
+('Dr Benjamin Tang', 'benjamin_tang', 'acts15', 'acts'),
+('Cassandra Ang', 'cassandra_ang', 'afterglow1', 'm4'),
+('Dr Charles Chuah', 'charles_chuah', 'acts6', 'acts'),
+('Dr Christian Heng', 'christian_heng', 'alum5', 'alumni'),
+('Dr Christopher Gn', 'christopher_gn', 'alum8', 'alumni'),
+('Dr Christopher Wee', 'christopher_wee', 'acts3', 'acts'),
+('Colin Quek', 'colin_quek', 'afterglow5', 'm4'),
+('Dawne Lim', 'dawne_lim', 'afterglow3', 'm4'),
+('Dr Deborah Lee', 'deborah_lee', 'acts12', 'acts'),
+('Dr Gerard Low', 'gerard_low', 'acts2', 'acts'),
+('Dr Hemashree Rajesh', 'hemashree_rajesh', 'acts11', 'acts'),
+('Dr Joan Chin', 'joan_chin', 'acts5', 'acts'),
+('Dr Joel Lee', 'joel_lee', 'alum4', 'alumni'),
+('Dr John Hui', 'john_hui', 'acts7', 'acts'),
+('Dr Kwong Seh Meng', 'kwong_sehmeng', 'alum7', 'alumni'),
+('Dr Lawrence Ng', 'lawrence_ng', 'acts16', 'acts'),
+('Maehanyi Frances', 'maehanyi_frances', 'afterglow4', 'm4'),
+('Dr Ng Ee Yang', 'ng_eeyang', 'alum3', 'alumni'),
+('Dr Penny Lo', 'penny_lo', 'acts8', 'acts'),
 ('Pharmacy', 'pharmacy', 'sabaipharm', 'pharmacy'),
+('Dr Priscilla Lim', 'priscilla_lim', 'acts1', 'acts'),
+('Dr Regina Tan', 'regina_tan', 'acts14', 'acts'),
 ('Registration', 'registration', 'sabai2017', 'registration'),
-('Dr Strange1', 'strange1', 'strange1', 'acts'),
-('Dr Strange10', 'strange10', 'strange10', 'acts'),
-('Dr Strange11', 'strange11', 'strange11', 'acts'),
-('Dr Strange12', 'strange12', 'strange12', 'acts'),
-('Dr Strange13', 'strange13', 'strange13', 'acts'),
-('Dr Strange14', 'strange14', 'strange14', 'acts'),
-('Dr Strange15', 'strange15', 'strange15', 'acts'),
-('Dr Strange16', 'strange16', 'strange16', 'acts'),
-('Dr Strange2', 'strange2', 'strange2', 'acts'),
-('Dr Strange3', 'strange3', 'strange3', 'acts'),
-('Dr Strange4', 'strange4', 'strange4', 'acts'),
-('Dr Strange5', 'strange5', 'strange5', 'acts'),
-('Dr Strange6', 'strange6', 'strange6', 'acts'),
-('Dr Strange7', 'strange7', 'strange7', 'acts'),
-('Dr Strange8', 'strange8', 'strange8', 'acts'),
-('Dr Strange9', 'strange9', 'strange9', 'acts'),
+('Dr Rohan Puthran', 'rohan_puthran', 'alum2', 'alumni'),
 ('Student', 'student', 'sabai2017', 'student'),
-('name', 'username', 'password', 'accountType'),
+('Dr Tan Juanmin', 'tan_juanmin', 'alum1', 'alumni'),
+('Dr Teo Jia Hui', 'teo_jiahui', 'alum6', 'alumni'),
+('Dr Vanessa Tan', 'vanessa_tan', 'acts10', 'acts'),
 ('Viewer', 'viewer', 'sabaipublic', 'viewer'),
+('Dr Vinith Menezes', 'vinith_menezes', 'acts13', 'acts'),
 ('Vitals', 'vitals', 'sabai2017', 'vitals');
 
 -- --------------------------------------------------------
