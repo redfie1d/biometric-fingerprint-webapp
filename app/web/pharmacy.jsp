@@ -152,17 +152,14 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>
-                                                
-                                                <td>
- 
+                                                <td colspan="3" style="text-align:right">
                                                     <button class="btn btn-info approve" type="button" name="approve" onClick="onApprove(<%=firstOrder.getOrderID()%>)">Approve</button>
                                                     <button class="btn btn-warning edit" type="button" name="edit" onClick="onEdit(<%=counter%>, <%=firstOrder.getOrderID()%>)">Edit</button>
-                                                    <button class="btn btn-warning confirm" type="button" name="orderID">Confirm</button>
-                                                    <button class="btn btn-warning cancel" type="button" name="cancel">Cancel</button>
+                                                    <button class="btn btn-success confirm" type="button" name="orderID">Confirm</button>
+                                                    <button class="btn btn-danger cancel" type="button" name="cancel">Cancel</button>
                                                     <button class="btn btn-danger reject" type="button" name="reject" onClick="onReject(<%=firstOrder.getOrderID()%>)">Reject</button>
-                                                    
                                                 </td>
+                                                
                                 <%
                                         counter++;
                                         even = !even;

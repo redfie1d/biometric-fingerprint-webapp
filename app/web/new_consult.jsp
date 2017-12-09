@@ -673,7 +673,6 @@
                                                         for(int i=1; i<drugList.size(); i++){
                                                             optionValues += "_" + drugList.get(i).getMedicine_name() + " (" + drugList.get(i).getQuantity()+")";
                                                         }
-System.out.println(optionValues);
                                                 %>
                                                             <input type="hidden" name="visitId" value=<%=visitRecord.getId()%>>
                                                         </tr>
@@ -681,21 +680,25 @@ System.out.println(optionValues);
                                                     }
                                                 %>
                                             </tbody>
-
+                                            
                                         </table>
                                             <%
                                                 if(!viewPastConsultRecord){
-                                            %>   
-                                                    <span class="input-group-btn">
+                                            %>      
+                                            <hr>
+                                            <div style="float:left">
+                                                    <span class="input-group-btn" style="width:0;padding-right:10px">
                                                         <button type="button" class="btn btn-info btn-flat" id="addMedicine" onClick="Add_Medicine('<%=optionValues%>')">Add Medicine</button>
                                                     </span>
 
-                                                    <span class="input-group-btn">
+                                                    <span class="input-group-btn" style="width:0; padding-right:10px">
                                                         <button type="button" class="btn btn-info btn-flat" id="removeMedicine" onClick="Remove_Medicine()">Remove Medicine</button>
                                                     </span>
+                                            </div>
                                             <%
                                                 }
                                             %>
+                                            
                                         
                                     </div>
                                     

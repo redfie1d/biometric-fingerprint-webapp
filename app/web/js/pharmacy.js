@@ -30,6 +30,7 @@ function onEdit(orderIndex, orderID) {
 
     var list = [];
     var $input = $("<td><input class='form-control' name='abc'/></td>");
+    $input.css("width", "100px")
 
     var selection= $('.issued' + orderIndex + ' td:nth-child(5)');
 

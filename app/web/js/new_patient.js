@@ -503,6 +503,8 @@ function Add_Medicine(options){
     
  
     cell1.innerHTML = `<select name="medicine" class="form-control">` + optionValues + `</select>`
+    cell1.style.width ="25%";
+    
     cell2.innerHTML = 
     `<td>
         <input name="quantity" placeholder="Quantity" class="form-control" type="number" required/>
