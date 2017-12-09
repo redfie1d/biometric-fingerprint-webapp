@@ -86,8 +86,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
                         </ul>
                         
-                        <ul class="nav navbar-nav navbar-right">
-                            <a href="Logout.jsp"><button class="btn btn-danger navbar-btn">Logout</button></a>
+                        <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
+                            <a href="LogoutServlet"><button class="btn btn-danger navbar-btn">Logout</button></a>
                         </ul>
                     </div>
                 </nav>

@@ -130,7 +130,9 @@
                 } else if (user.getAccountType().equals("viewer")) {
             %>
 
-            <!--Display what?-->
+            <a class="btn btn-app homepage-button bg-green" href="new_consult.jsp">
+                <i class="fa fa-user fa-5x"></i> <h3>Consultation</h3>
+            </a>
             
             <%
                 }
