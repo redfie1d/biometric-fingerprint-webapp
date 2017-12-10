@@ -184,13 +184,14 @@ public class FingerprintClass {
     }
 
     public static Patient identify(int fingerprintNumber) {
+        
 
         long[] hScanner = new long[1];
 
         hScanner = GetCurrentScannerHandle();
 
         if (hScanner == null) {
-            System.out.println("getCurrentScannerHandle fail!! ");
+            System.out.println("Unable to get current scanner handle");
             return null;
         }
 
@@ -201,7 +202,7 @@ public class FingerprintClass {
         int nRes = p.UFS_CaptureSingleImage(hScanner[0]);
 
         if (nRes != 0) {
-            System.out.println("caputure single image fail!! " + nRes);
+            System.out.println("Unable to capture fingerprint image. Error status: " + nRes);
             return null;
         }
 
@@ -249,7 +250,7 @@ public class FingerprintClass {
 
         ArrayList<Patient> patientList = FingerprintDAO.getFingerprints();
 
-        System.out.println("fg count: " + patientList.size());
+//        System.out.println("fg count: " + patientList.size());
 
         if (fingerprintNumber == 1 && fingerprintTwo != null) {
 
@@ -281,7 +282,7 @@ public class FingerprintClass {
             if (nRes == 0) {
                 if (refIdentifyRes[0] == 1) {
 //                        System.out.println("Identfy success!!  match index number:" + (i + 1));
-                    System.out.println("Identfy success!!  match index number:" + patientList.get(i).getPatientId());
+                    System.out.println("Identify success!!  match index number:" + patientList.get(i).getPatientId());
                     nMatchResult = 1;
                     patient = patientList.get(i);
                     break;
@@ -292,7 +293,7 @@ public class FingerprintClass {
         }
 
         if (nMatchResult != 1) {
-            System.out.println("Identfy fail!!");
+            System.out.println("Identify fail!!");
         }
 
         return patient;
@@ -311,7 +312,7 @@ public class FingerprintClass {
 
         int nRes = 0;
 
-        p = new BioMiniSDK();
+//        p = new BioMiniSDK();
 
         nRes = p.UFS_Init();
 
@@ -404,13 +405,17 @@ public class FingerprintClass {
         long[] hScanner = new long[1];
         int nRes = 0;
         int[] nNumber = new int[1];
+        
+        for(long i:hScanner){
+            System.out.println("long i= " + i);
+        }
 
         nRes = p.UFS_GetScannerNumber(nNumber);
 
         if (nRes == 0) {
-
+            System.out.println("Succeeded in getting number of scanners");
             if (nNumber[0] <= 0) {
-
+                System.out.println("nNumber[0]="+nNumber[0]);
                 return null;
             }
 
@@ -420,7 +425,8 @@ public class FingerprintClass {
         }
 
         nRes = p.UFS_GetScannerHandle(0, hScanner);
-
+        
+        System.out.println("hScanner is now: " + hScanner);
         if (nRes == 0 && hScanner != null) {
             return hScanner;
         }
