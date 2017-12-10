@@ -183,7 +183,7 @@ public class FingerprintClass {
         return null;
     }
 
-    public static Patient identify(int fingerprintNumber) {
+    public static Object identify(int fingerprintNumber) {
         
 
         long[] hScanner = new long[1];
@@ -226,6 +226,9 @@ public class FingerprintClass {
             }
 
             Patient patient = checkFingerprintIfExist(nRes, bTemplate, refTemplateSize, fingerprintNumber);
+            if(patient == null){
+                return new Object();
+            }
             return patient;
 
         } else {
