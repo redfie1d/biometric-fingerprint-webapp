@@ -39,11 +39,23 @@ public class IdentifyFingerprintServlet extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
 
         FingerprintClass.initalize();
-        Patient patient = FingerprintClass.identify(Integer.parseInt(request.getParameter("fingerprintNumber")));
+        
+        Object object = FingerprintClass.identify(Integer.parseInt(request.getParameter("fingerprintNumber")));
+        
+        Patient patient = null;
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        if (patient != null) {
+        
+        if (object == null){
+            JsonObject errObject = new JsonObject();
+            errObject.addProperty("status", "error");
+            errObject.addProperty("msg", "Fingerprint recording failed");
+            
+            try(PrintWriter out = response.getWriter()){
+                out.print(new Gson().toJson(errObject));
+            }
+        } else if(object instanceof Patient){
+            patient = (Patient)object;
             patient = PatientDAO.getPatientByPatientID(patient.getPatientId());
 //            patient.setFgImage(null);
 //            patient.setFingerprint(new byte[0]);
@@ -56,43 +68,18 @@ public class IdentifyFingerprintServlet extends HttpServlet {
             sucObject.addProperty("status", "success");
             sucObject.addProperty("msg", jsonString);
             
-
-
-//            ByteArrayOutputStream os = new ByteArrayOutputStream();
-//            OutputStream b64 = new BASE64EncoderStream(os);
-//            ImageIO.write(FingerprintClass.currentNewFingerImage, "bmp", b64);
-//            String result = os.toString("UTF-8");
-//            System.out.println(result);
-
-//            String fgImageStr = Base64.getEncoder().encodeToString(FingerprintClass.fuck);
-//            sucObject.addProperty("img", fgImageStr);
-            
-//            System.out.println(fgImageStr);
-            
-            try (PrintWriter out = response.getWriter()) {
+            try(PrintWriter out = response.getWriter()){
                 out.print(new Gson().toJson(sucObject));
             }
-
         } else {
             JsonObject errObject = new JsonObject();
+//           
             errObject.addProperty("status", "error");
             errObject.addProperty("msg", "no patient identified");
             
-//            ByteArrayOutputStream os = new ByteArrayOutputStream();
-//            OutputStream b64 = new BASE64EncoderStream(os);
-//            ImageIO.write(FingerprintClass.currentNewFingerImage, "bmp", b64);
-//            String result = os.toString("UTF-8");
-//            System.out.println(result);
-            
-            
-//            String fgImageStr = Base64.getEncoder().encodeToString(FingerprintClass.fuck);
-//            errObject.addProperty("img", fgImageStr);
-//            System.out.println(fgImageStr);
-
-            try (PrintWriter out = response.getWriter()) {
-                out.print(gson.toJson(errObject));
+            try(PrintWriter out = response.getWriter()){
+                out.print(new Gson().toJson(errObject));
             }
-
         }
     }
 
