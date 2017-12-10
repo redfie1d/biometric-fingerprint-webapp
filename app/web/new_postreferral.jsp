@@ -189,14 +189,14 @@
                                                 baos.close();
                                                 String b64 = DatatypeConverter.printBase64Binary(imageInByteArray);
                                         %>
-                                        <!--<img class="img-responsive" src="data:image/png;base64, <%=b64%>" alt="User Avatar" style="width:100px"/>-->               
+                                        <img class="img-responsive" src="data:image/png;base64, <%=b64%>" alt="User Avatar" style="width:100px"/>           
                                         <%
                                             } catch (IOException e) {
                                                 System.out.println("Error: " + e);
                                             }
                                         %>
                                         
-                                        <img class="img" src="patient-images/<%=patientRecord.getPhotoImage()%>" alt="User Avatar" style="width:100px; margin-right:10px;">
+                                        <!--<img class="img" src="patient-images/<%=patientRecord.getPhotoImage()%>" alt="User Avatar" style="width:100px; margin-right:10px;">-->
                                     </div>
                                     <!-- /.widget-user-image -->
                                     <h3 class="widget-user-username">Name: <%=patientRecord.getName()%></h3>

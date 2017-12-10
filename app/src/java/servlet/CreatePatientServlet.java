@@ -108,13 +108,13 @@ public class CreatePatientServlet extends HttpServlet {
                 System.out.println("RealPath = " + servletContext.getRealPath("/"));
                 System.out.println("user.dir = " + System.getProperty("user.dir"));
 
-                try (OutputStream stream = new FileOutputStream(new File(servletContext.getRealPath("/") + "../../web/patient-images/" + p.getVillage() + p.getPatientId() + ".png"))) {
-                    stream.write(photoImageByte);
-                }
-
-//                try (OutputStream stream = new FileOutputStream(new File("C:\\Users\\Jun_M\\Pictures\\patient-images\\" + p.getVillage() + p.getPatientId() + ".png"))) {
+//                try (OutputStream stream = new FileOutputStream(new File(servletContext.getRealPath("/") + "../../web/patient-images/" + p.getVillage() + p.getPatientId() + ".png"))) {
 //                    stream.write(photoImageByte);
 //                }
+
+                try (OutputStream stream = new FileOutputStream(new File("C:\\Users\\Jun_M\\Pictures\\patient-images\\" + p.getVillage() + p.getPatientId() + ".png"))) {
+                    stream.write(photoImageByte);
+                }
             }
 
             p.setPhotoImage(p.getVillage() + p.getPatientId() + ".png");

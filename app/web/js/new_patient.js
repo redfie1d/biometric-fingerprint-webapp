@@ -498,7 +498,12 @@ function Add_Medicine(options){
     var medicine = options.split("_");
     var optionValues = "";
     for(var i in medicine){
-        optionValues += "<option value='" + medicine[i].split("(")[0].trim() + "' type=text>" + medicine[i] + "</option>";
+        if(medicine[i].split("(").length>2){
+            optionValues += "<option value='" + medicine[i].split("(")[0].trim() + "(" + medicine[i].split("(")[1].trim() + ")" + "' type=text>" + medicine[i] + "</option>";
+        } 
+        else {
+            optionValues += "<option value='" + medicine[i].split("(")[0].trim() + "' type=text>" + medicine[i] + "</option>";
+        }
     }
     
  

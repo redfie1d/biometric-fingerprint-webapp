@@ -73,15 +73,15 @@ public class UpdatePatientServlet extends HttpServlet {
                 System.out.println("RealPath = " + servletContext.getRealPath("/"));
                 System.out.println("user.dir = " + System.getProperty("user.dir"));
 
-                try (OutputStream stream = new FileOutputStream(new File(servletContext.getRealPath("/") + "../../web/patient-images/" + imageString), false)) {
-                    stream.write(photoImageByte);
-                    System.out.println("Write to patient-images successful");
-                }
-                
-//                try (OutputStream stream = new FileOutputStream(new File("C:\\Users\\Jun_M\\Pictures\\patient-images\\" + imageString), false)) {
+//                try (OutputStream stream = new FileOutputStream(new File(servletContext.getRealPath("/") + "../../web/patient-images/" + imageString), false)) {
 //                    stream.write(photoImageByte);
 //                    System.out.println("Write to patient-images successful");
 //                }
+                
+                try (OutputStream stream = new FileOutputStream(new File("C:\\Users\\Jun_M\\Pictures\\patient-images\\" + imageString), false)) {
+                    stream.write(photoImageByte);
+                    System.out.println("Write to patient-images successful");
+                }
             }
             
             boolean updateSuccessful = PatientDAO.updatePatientDetails(patientId, village, name, imageString, contactNo, Integer.parseInt(travellingTimeToClinic), dateOfBirth);
