@@ -498,7 +498,7 @@ function Add_Medicine(options){
     var medicine = options.split("_");
     var optionValues = "";
     for(var i in medicine){
-        optionValues += "<option value='" + medicine[i].substring(0,lastIndexOf("(")).trim() + "' type=text>" + medicine[i] + "</option>";
+        optionValues += "<option value='" + medicine[i].substring(0,medicine[i].lastIndexOf("(")).trim() + "' type=text>" + medicine[i] + "</option>";
         
     }
     
