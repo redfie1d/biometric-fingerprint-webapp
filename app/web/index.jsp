@@ -120,10 +120,15 @@
                 // PHARMACY ONLY
                 } else if (user.getAccountType().equals("pharmacy")) {
             %>
-
+            
+            <a class="btn btn-app homepage-button bg-green" href="new_consult.jsp">
+                <i class="fa fa-user fa-5x"></i> <h3>Consultation</h3>
+            </a>
+            
             <a class="btn btn-app homepage-button bg-yellow" href="pharmacy.jsp">
                 <i class="fa fa-user-plus fa-5x"></i> <h3>Pharmacy</h3>
             </a>
+            
             
             <%
                 // VIEWER ONLY
