@@ -3,11 +3,12 @@
     Created on : 22 Nov, 2017, 3:21:52 PM
     Author     : Kwtam
 --%>
+<%@page import="java.util.TreeMap"%>
+<%@page import="dao.PatientDAO"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="model.Drug"%>
 <%@page import="dao.InventoryDAO"%>
-<%@page import="java.util.HashMap"%>
 <%@page import="model.Order"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.OrderDAO"%>
@@ -99,8 +100,9 @@
                                 
                                 <%
                                     OrderDAO orderDAO = new OrderDAO();
+                                    PatientDAO patientDAO = new PatientDAO();
                                     ArrayList<Order> orderList = orderDAO.getOrders();
-                                    HashMap<Integer, ArrayList<Order>> map = new HashMap<>();
+                                    TreeMap<Integer, ArrayList<Order>> map = new TreeMap<>();
                                     for(Order order:orderList){
                                         int orderID = order.getOrderID();
                                         ArrayList<Order> currentOrderList = map.get(orderID);
@@ -125,7 +127,7 @@
                                             <tr class="issued<%=counter%>">
                                                 <td><%=firstOrder.getOrderID()%></td>
                                                 <td><%=firstOrder.getDoctor()%></td>
-                                                <td><%=firstOrder.getPatientID()%></td>
+                                                <td><%=firstOrder.getPatientID()%> - <%=patientDAO.getPatientByPatientID(firstOrder.getPatientID()).getName()%></td>
                                                 <td><%=firstOrder.getMedicine()%></td>
                                                 <td><%=firstOrder.getQuantity()%></td>
                                                 <td><%=firstOrder.getNotes()%></td>
