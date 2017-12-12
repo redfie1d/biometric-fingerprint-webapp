@@ -129,6 +129,7 @@
                 <i class="fa fa-user-plus fa-5x"></i> <h3>Pharmacy</h3>
             </a>
             
+            
             <%
                 // VIEWER ONLY
                 } else if (user.getAccountType().equals("viewer")) {
