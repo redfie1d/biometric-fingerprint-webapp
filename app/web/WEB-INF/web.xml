@@ -79,6 +79,10 @@
         <servlet-name>EditOrderServlet</servlet-name>
         <servlet-class>servlet.EditOrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SaveConsultServlet</servlet-name>
+        <servlet-class>servlet.SaveConsultServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InitializeBioMiniServlet</servlet-name>
         <url-pattern>/InitializeBioMiniServlet</url-pattern>
@@ -154,6 +158,10 @@
     <servlet-mapping>
         <servlet-name>EditOrderServlet</servlet-name>
         <url-pattern>/EditOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveConsultServlet</servlet-name>
+        <url-pattern>/SaveConsultServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -78,7 +78,7 @@ public class UpdatePatientServlet extends HttpServlet {
 //                    System.out.println("Write to patient-images successful");
 //                }
                 
-                try (OutputStream stream = new FileOutputStream(new File("C:\\Users\\Jun_M\\Pictures\\patient-images\\" + imageString), false)) {
+                try (OutputStream stream = new FileOutputStream(new File("\\\\JM-ASUS-LAPTOP\\patient-images\\" + imageString), false)) {
                     stream.write(photoImageByte);
                     System.out.println("Write to patient-images successful");
                 }

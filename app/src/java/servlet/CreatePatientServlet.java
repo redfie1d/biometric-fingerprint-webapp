@@ -112,7 +112,7 @@ public class CreatePatientServlet extends HttpServlet {
 //                    stream.write(photoImageByte);
 //                }
 
-                try (OutputStream stream = new FileOutputStream(new File("C:\\Users\\Jun_M\\Pictures\\patient-images\\" + p.getVillage() + p.getPatientId() + ".png"))) {
+                try (OutputStream stream = new FileOutputStream(new File("\\\\JM-ASUS-LAPTOP\\patient-images\\" + p.getVillage() + p.getPatientId() + ".png"))) {
                     stream.write(photoImageByte);
                 }
             }

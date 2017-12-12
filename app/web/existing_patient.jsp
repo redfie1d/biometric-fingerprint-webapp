@@ -179,10 +179,10 @@
                     <div class="widget-user-header bg-aqua text-center">
                         <span class="widget-user-username col-md-4">ID: <%=patientRecord.getVillage()%><%=patientRecord.getPatientId()%></span>
                         <span class="widget-user-username col-md-4">Name: <%=patientRecord.getName()%></span>
-                        <span class="widget-user-username col-md-4">Village: <%=patientRecord.getVillage()%></span>
+                        <span class="widget-user-username col-md-4">Date Of Birth: <%=patientRecord.getDateOfBirth()%></span>
                         <span class="widget-user-username col-md-4">Gender: <%=patientRecord.getGender()%></span>
                         <span class="widget-user-username col-md-4">0</span>
-                        <span class="widget-user-username col-md-4">Date Of Birth: <%=patientRecord.getDateOfBirth()%></span>
+                        <span class="widget-user-username col-md-4">Contact No: <%=patientRecord.getContactNo()%></span>
                         <span class="box-tools pull-right">
                             <form action="update_patient.jsp" method="POST">
                                 <input type="hidden" name="village" value=<%=patientRecord.getVillage()%> />
@@ -198,7 +198,7 @@
                             String imgName = "";
                             
                             try {
-                                imgName = "C:\\Users\\Jun_M\\Pictures\\patient-images\\" + patientRecord.getPhotoImage();
+                                imgName = "\\\\JM-ASUS-LAPTOP\\patient-images\\" + patientRecord.getPhotoImage();
                                 BufferedImage bImage = ImageIO.read(new File(imgName));//give the path of an image
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                                 ImageIO.write(bImage, "jpg", baos);
