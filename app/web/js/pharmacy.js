@@ -12,6 +12,7 @@ $(document).ready(function () {
        $('button.approve').hide();
        $('button.reject').hide();
        $('button.edit').hide();
+       $('button.mask').hide();
        $(this).siblings('.cancel').show();
        $(this).siblings('.confirm').show();
     });
@@ -20,6 +21,7 @@ $(document).ready(function () {
        $('button.approve').show();
        $('button.reject').show();
        $('button.edit').show();
+       $('button.mask').show();
        $(this).siblings('.confirm').hide();
        $(this).hide();
     });
@@ -104,6 +106,24 @@ function onReject(orderID) {
         data: {
             orderID: orderID,
             reject: "reject",
+        },
+        success: function (msg) {
+            location.reload();
+
+        },
+        error: function (request, status, error) {
+
+        }
+    });
+};
+
+function onHide(orderID) {
+    jQuery.ajax({
+        type: "POST",
+        url: "ApproveOrderServlet",
+        data: {
+            orderID: orderID,
+            hide: "hide",
         },
         success: function (msg) {
             location.reload();

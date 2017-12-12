@@ -150,15 +150,37 @@ public class InventoryDAO {
         return orderList;
     }
     
-    public static boolean rejectOrders(int visit_id){
+    public static boolean rejectOrders(int orderID){
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
         try {
             conn = ConnectionManager.getConnection();
-            stmt = conn.prepareStatement("delete from orderlist where order_id = ?");
-            stmt.setInt(1, visit_id);
+            stmt = conn.prepareStatement("update orders set status='REJECTED' where order_id = ?");
+            stmt.setInt(1, orderID);
+            stmt.executeUpdate();
+
+            return true;
+            //Returns the converted array to the caller of method
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return false;
+    }
+    
+    public static boolean hideOrders(int orderID){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("update orders set status='HIDDEN' where order_id = ?");
+            stmt.setInt(1, orderID);
             stmt.executeUpdate();
 
             return true;

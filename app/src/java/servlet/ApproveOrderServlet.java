@@ -74,6 +74,13 @@ public class ApproveOrderServlet extends HttpServlet {
             request.getSession().setAttribute("successmsg", "Request Rejected");
         }
         
+        if(request.getParameter("hide") != null){
+            System.out.println("Pharmacy Hides OrderID: " + orderID);
+            inventoryDAO.hideOrders(orderID);
+            System.out.println("Pharmacy Successfully Hidden OrderID: " + orderID);
+            request.getSession().setAttribute("successmsg", "Order Hidden");
+        }
+        
 //        response.sendRedirect("pharmacy.jsp");
         
     }
