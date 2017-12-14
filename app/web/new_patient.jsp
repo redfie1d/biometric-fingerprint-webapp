@@ -173,8 +173,9 @@
                             <label for="village">Village</label>
                             <!--<input type="text" class="form-control" id="village" name="village" placeholder="Enter village">-->
                             <select name="village" id="village" class="form-control">
+                                <option value="PCV" selected>PCV</option>
                                 <option value="KSV">KSV</option>
-                                <option value="PCV">PCV</option>
+                                
                             </select>
                         </div>
 

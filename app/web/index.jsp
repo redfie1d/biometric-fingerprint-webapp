@@ -63,6 +63,10 @@
             <a class="btn btn-app homepage-button bg-purple" href="new_postreferral.jsp">
                 <i class="fa fa-user-plus fa-5x"></i> <h3>Post-Referral</h3>
             </a>
+            
+            <a class="btn btn-app homepage-button bg-purple" href="new_order.jsp">
+                <i class="fa fa-user-plus fa-5x"></i> <h3>Add Medicine Order</h3>
+            </a>
 
             <%
                 }
