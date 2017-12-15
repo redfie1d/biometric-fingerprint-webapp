@@ -127,7 +127,8 @@
 
             if (visitRecord != null) {
                 vitalsObject = visitRecord.getVitals();
-                pastVisits = (Visit[]) session.getAttribute("pastVisits");
+                pastVisits = VisitDAO.getVisitByPatientID(visitRecord.getPatientId());
+                //pastVisits = (Visit[]) session.getAttribute("pastVisits");
             }
 
             session.removeAttribute("viewPastPostReferral");
@@ -376,11 +377,19 @@
                                 <%
                                     int count = 1;
                                     for (Visit v : pastVisits) {
-                                        String date = null;
-
-                                        // Do for each visit
-                                        Date visitDate = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(v.getDate());
-                                        date = new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(visitDate);
+                                        String consultDate = "";
+                                        String date = "";
+                                        try {
+                                            Consult pastConsult = ConsultDAO.getConsultByVisitID(v.getId());
+                                            consultDate = pastConsult.getConsultDate();
+                                            
+                                            Date d = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(consultDate);
+                                            date = new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(d);
+                                        } catch (Exception e) {
+                                            Date d = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(v.getDate());
+                                            date = new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(d);
+                                        }
+                                        
                                         int visitID = v.getId();
                                         ConsultDAO consultDAO = new ConsultDAO();
                                         Consult consult = consultDAO.getConsultByVisitID(visitID);

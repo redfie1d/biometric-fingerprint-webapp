@@ -249,7 +249,7 @@
                                         <div class="col-md-9">
                                             <%
                                                 String dateOfBirth = patientRecord.getDateOfBirth();
-                                                int yearOfBirth = Integer.parseInt(dateOfBirth.substring(0,4));
+                                                int yearOfBirth = Integer.parseInt(dateOfBirth.substring(0, 4));
                                                 int age = 2017 - yearOfBirth;
                                                 out.println(age);
                                             %>
@@ -393,8 +393,19 @@
                                 <%
                                     int count = 1;
                                     for (Visit v : pastVisits) {
-                                        Date d = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(v.getDate());
-                                        String date = new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(d);
+                                        String consultDate = "";
+                                        String date = "";
+                                        try {
+                                            Consult pastConsult = ConsultDAO.getConsultByVisitID(v.getId());
+                                            consultDate = pastConsult.getConsultDate();
+                                            
+                                            Date d = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(consultDate);
+                                            date = new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(d);
+                                        } catch (Exception e) {
+                                            Date d = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(v.getDate());
+                                            date = new SimpleDateFormat("dd/MM/yyyy  HH:mm").format(d);
+                                        }
+                                        
                                         int visitID = v.getId();
 
                                         Consult consult = consultDAO.getConsultByVisitID(visitID);
@@ -776,13 +787,13 @@
 
 <script>
 //            .summaryProblemGroup
-                                                            $(document).ready(function () {
-                                                                var problems = ["Cardiovascular", "Dental", "Dermatology", "Endocrine", "ENT", "Eye",
-                                                                    "Gastrointestinal", "Gynaecology", "Hematology", "Infectious Diseases", "Musculo-skeletal", "Neurology",
-                                                                    "Oncology", "Psychology", "Renal", "Respiratory", "Urology", "Surgery"];
+                                                    $(document).ready(function () {
+                                                        var problems = ["Cardiovascular", "Dental", "Dermatology", "Endocrine", "ENT", "Eye",
+                                                            "Gastrointestinal", "Gynaecology", "Hematology", "Infectious Diseases", "Musculo-skeletal", "Neurology",
+                                                            "Oncology", "Psychology", "Renal", "Respiratory", "Urology", "Surgery"];
 
 
-                                                            });
+                                                    });
 </script>
 
 <%@include file="footer.jsp" %>
