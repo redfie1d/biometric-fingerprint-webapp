@@ -209,7 +209,12 @@
                                             <b>Age:</b>
                                         </div>
                                         <div class="col-md-9">
-                                            <%=patientRecord.getDateOfBirth()%>
+                                            <%
+                                                String dateOfBirth = patientRecord.getDateOfBirth();
+                                                int yearOfBirth = Integer.parseInt(dateOfBirth.substring(0,4));
+                                                int age = 2017 - yearOfBirth;
+                                                out.println(age);
+                                            %>
                                         </div>
                                     </div>
 

@@ -11,6 +11,7 @@ import dao.PatientDAO;
 import dao.VisitDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -104,7 +105,7 @@ public class CreateConsultServlet extends HttpServlet {
                     cRef = true;
                 }
 
-                consult = new Consult(visitId, doctor, consultDetails, diagnosis, finalStringProblems, urine, hemocue, blood, referrals, cRef);
+                consult = new Consult(visitId, new Date().toString(), doctor, consultDetails, diagnosis, finalStringProblems, urine, hemocue, blood, referrals, cRef);
 
                 VisitDAO visitDAO = new VisitDAO();
                 Visit visit = visitDAO.getVisitByVisitID(visitId);

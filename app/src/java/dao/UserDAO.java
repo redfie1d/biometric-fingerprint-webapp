@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.User;
@@ -46,5 +47,32 @@ public class UserDAO {
             ConnectionManager.close(conn, stmt, rs);
         }
         return user;
+    }
+    
+    public static ArrayList<String> retrieveAllDoctors() {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<String> userList = new ArrayList<>();
+        String sql = "SELECT name FROM users where account_type = 'alumni' or account_type = 'acts' or account_type = 'm4'";
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement(sql);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                userList.add(name);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return userList;
     }
 }

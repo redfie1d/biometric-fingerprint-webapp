@@ -34,7 +34,7 @@ public class ConsultDAO {
             Date d = new Date();            
             
             stmt.setInt(1, visitId);
-            stmt.setString(2, new SimpleDateFormat("dd/MM/yyyy").format(d));
+            stmt.setString(2, d.toString());
             stmt.setString(3, doctor);
             stmt.setString(4, notes);
             stmt.setString(5, diagnosis);
@@ -64,7 +64,8 @@ public class ConsultDAO {
             Date d = new Date();            
             
             stmt.setInt(1, visitId);
-            stmt.setString(2, new SimpleDateFormat("dd/mm/yyyy").format(d));
+            //stmt.setString(2, new SimpleDateFormat("dd/mm/yyyy").format(d));
+            stmt.setString(2, d.toString());
             stmt.setString(3, doctor);
             stmt.setString(4, notes);
             stmt.setString(5, diagnosis);
@@ -109,7 +110,7 @@ public class ConsultDAO {
                 String referrals = rs.getString("referrals");
                 boolean chronic_referral = rs.getBoolean("chronic_referral");
                 
-                return new Consult(consultId, visitId, doctor, notes, diagnosis, problems, urine_test, hemocue_count, blood_glucose, referrals, chronic_referral);
+                return new Consult(consultId, visitId, date, doctor, notes, diagnosis, problems, urine_test, hemocue_count, blood_glucose, referrals, chronic_referral);
             }
 
         } catch (SQLException e) {

@@ -222,4 +222,26 @@ public class OrderDAO {
         }
         return orderList;
     }
+    
+    public static int getOrderIdByPatientId(int patientId){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("select order_id from orders where visit_id = (SELECT id FROM `visits` WHERE `patient_id` = ? order by id desc limit 1)");
+            stmt.setInt(1, patientId);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt("order_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return 0;
+    }
 }

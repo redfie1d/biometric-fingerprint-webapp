@@ -4,6 +4,7 @@ public class Consult {
 
     private int consult_id;
     private int visitId;
+    private String date;
     private String doctor;
     private String notes;
     private String diagnosis;
@@ -14,17 +15,19 @@ public class Consult {
     private String referrals;
     private boolean chronic_referral;
 
-    public Consult(int consult_id, int visitId, String doctor, String notes, String diagnosis, String problems) {
+    public Consult(int consult_id, int visitId, String date, String doctor, String notes, String diagnosis, String problems) {
         this(visitId, doctor);
+        this.date = date;
         this.notes = notes;
         this.diagnosis = diagnosis;
         this.problems = problems;
         this.consult_id = consult_id;
     }
 
-    public Consult(int consult_id, int visitId, String doctor, String notes, String diagnosis, String problems, String urine_test, String hemocue_count, String blood_glucose, String referrals, boolean chronic_referral) {
+    public Consult(int consult_id, int visitId, String date, String doctor, String notes, String diagnosis, String problems, String urine_test, String hemocue_count, String blood_glucose, String referrals, boolean chronic_referral) {
         this(visitId, doctor);
         this.consult_id = consult_id;
+        this.date = date;
         this.notes = notes;
         this.diagnosis = diagnosis;
         this.problems = problems;
@@ -35,9 +38,9 @@ public class Consult {
         this.chronic_referral = chronic_referral;
     }
 
-    public Consult(int visitId, String doctor, String notes, String diagnosis, String problems, String urine_test, String hemocue_count, String blood_glucose, String referrals, boolean chronic_referral) {
+    public Consult(int visitId, String date, String doctor, String notes, String diagnosis, String problems, String urine_test, String hemocue_count, String blood_glucose, String referrals, boolean chronic_referral) {
         this(visitId, doctor);
-
+        this.date = date;
         this.notes = notes;
         this.diagnosis = diagnosis;
         this.problems = problems;
@@ -55,6 +58,10 @@ public class Consult {
 
     public int getVisitId() {
         return visitId;
+    }
+    
+    public String getConsultDate() {
+        return date;
     }
 
     public String getDoctor() {
@@ -84,6 +91,11 @@ public class Consult {
     public void setVisitId(int visitId) {
         this.visitId = visitId;
     }
+    
+    public void setConsultDate(String date) {
+        this.date = date;
+    }
+
 
     public void setDoctor(String doctor) {
         this.doctor = doctor;
