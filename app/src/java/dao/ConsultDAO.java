@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import model.Consult;
 import model.Vitals;
@@ -117,5 +118,29 @@ public class ConsultDAO {
             ConnectionManager.close(conn, stmt, rs);
         }
         return null;
+    }
+    
+    public static ArrayList<String> getSummaryOfProblems() {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ArrayList<String> problems = new ArrayList<>();
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.prepareStatement("Select problems from consults");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String problemString = rs.getString("problems");
+                problems.add(problemString);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+        return problems;
     }
 }
