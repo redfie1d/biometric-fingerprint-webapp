@@ -1,0 +1,37 @@
+Name,username,password,accountType
+Dr Priscilla Lim,priscilla_lim,acts1,acts
+Dr Gerard Low,gerard_low,acts2,acts
+Dr Christopher Wee,christopher_wee,acts3,acts
+Dr Angeline Lim,angeline_lim,acts4,acts
+Dr Joan Chin,joan_chin,acts5,acts
+Dr Charles Chuah,charles_chuah,acts6,acts
+Dr John Hui,john_hui,acts7,acts
+Dr Penny Lo,penny_lo,acts8,acts
+Dr Anu Pandey,anu_pandey,acts9,acts
+Dr Vanessa Tan,vanessa_tan,acts10,acts
+Dr Hemashree Rajesh,hemashree_rajesh,acts11,acts
+Dr Deborah Lee,deborah_lee,acts12,acts
+Dr Vinith Menezes,vinith_menezes,acts13,acts
+Dr Regina Tan,regina_tan,acts14,acts
+Dr Benjamin Tang,benjamin_tang,acts15,acts
+Dr Lawrence Ng,lawrence_ng,acts16,acts
+Dr Tan Juanmin,tan_juanmin,alum1,alumni
+Dr Rohan Puthran,rohan_puthran,alum2,alumni
+Dr Ng Ee Yang,ng_eeyang,alum3,alumni
+Dr Joel Lee,joel_lee,alum4,alumni
+Dr Christian Heng,christian_heng,alum5,alumni
+Dr Teo Jia Hui,teo_jiahui,alum6,alumni
+Dr Kwong Seh Meng,kwong_sehmeng,alum7,alumni
+Dr Christopher Gn,christopher_gn,alum8,alumni
+Dr Allyson Tan,allyson_tan,alum9,alumni
+Cassandra Ang,cassandra_ang,afterglow1,m4
+Arturo Neo,arturo_neo,afterglow2,m4
+Dawne Lim,dawne_lim,afterglow3,m4
+Maehanyi Frances,maehanyi_frances,afterglow4,m4
+Colin Quek,colin_quek,afterglow5,m4
+Student,student,sabai2017,student
+Registration,registration,sabai2017,registration
+Vitals,vitals,sabai2017,vitals
+Pharmacy,pharmacy,sabaipharm,pharmacy
+Admin,admin,sabaisuper2017,admin
+Viewer,viewer,sabaipublic,viewer

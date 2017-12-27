@@ -1,0 +1,9 @@
+Operation Mode:					Universal Repeater
+Main Router/AP Wireless Network Name(SSID):	Sa'Bai
+Main Router/AP MAC Address(BSSID):		38-D5-47-0C-6D-60
+Range Extender Wireless Network Name:		Sa'Bai
+Wireless Security Mode:				Most Secure(WPA/WPA2-PSK)
+Local AP Wireless Password:				sabainussmu
+
+Default Access:						http://tplinkwifi.net
+LAN IP Address:					192.168.0.254

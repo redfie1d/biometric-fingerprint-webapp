@@ -1,4 +1,0 @@
-1. Queue management system
-2. Windows Location Service
-3. System bootstrapping for doctors name and location
-4. update triage instead of create triage if there's an existing record (fix Ghetto)
