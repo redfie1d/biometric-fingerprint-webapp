@@ -195,6 +195,7 @@ function Identify_1() {
     $("#fg1_msg").css("display", "none");
     
     $("#fg1_tab").removeClass("bg-green").removeClass("bg-red");
+    console.log("identify 1");
 
     jQuery.ajax({
         type: "POST",
@@ -250,6 +251,7 @@ function Identify_1() {
 //            }
         },
         error: function (request, status, error) {
+            console.log(error);
         }
     });
 }
