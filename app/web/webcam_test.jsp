@@ -1,5 +1,5 @@
 <%-- 
-    Document   : webcam
+    Document   : webcam_test
     Created on : 24 Nov, 2016, 8:27:47 PM
     Author     : tcw
 --%>

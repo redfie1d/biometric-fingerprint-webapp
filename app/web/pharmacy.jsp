@@ -12,8 +12,8 @@
 <%@page import="model.Order"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.OrderDAO"%>
-<%@include file="header.jsp" %>
-<%@ include file="protect.jsp" %>
+<%@include file="header.jsp"%>
+<%@include file="protect.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <% 
@@ -231,5 +231,3 @@
                                 
 <script src='js/jquery.min.js'></script>
 <script src='js/pharmacy.js'></script>
-                                
-<%@include file="footer.jsp" %>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 24, 2017 at 08:49 AM
+-- Generation Time: Jul 21, 2018 at 03:05 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -21,32 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `sabai`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `allergies`
---
-
-DROP TABLE IF EXISTS `allergies`;
-CREATE TABLE IF NOT EXISTS `allergies` (
-  `allergy_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `allergy_name` varchar(255) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`allergy_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `conditions`
---
-
-DROP TABLE IF EXISTS `conditions`;
-CREATE TABLE IF NOT EXISTS `conditions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `condition_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -786,26 +760,6 @@ INSERT INTO `consults` (`consult_id`, `visit_id`, `date`, `doctor`, `notes`, `di
 (1089, 798, 'Sun Dec 17 16:47:54 ICT 2017', 'Dr Tan Juanmin', '1. Cough \r\n- a/w runny nose, headache, generalised body aches\r\n- No neurological deficits\r\n- No BOV\r\n- Gait steady\r\n- Tension band like headache\r\n- Contact history +: son\r\n\r\n2. Longstanding epigastric pain\r\n- Worse with food\r\n- Intermittent\r\n- No radiation to back\r\n- No urinary or bowel symptoms\r\n- No nausea/vomiting\r\n- No PR bleeding/malena\r\n\r\nO/E\r\nAlert, conversant\r\nNon toxic\r\n\r\nThroat not injected\r\nNo enlarged or exudative tonsils\r\n\r\nL Clear\r\n\r\nCN grossly intact\r\nNo RAPD\r\nNo pronator drift\r\nPower in UL and LL full\r\nSensation intact\r\n\r\n\r\n', 'Viral URTI with prodromal symptoms\r\nDyspepsia', '', '', '', '', '', 0),
 (1090, 780, 'Sun Dec 17 16:51:58 ICT 2017', 'Maehanyi Frances', '55 F\r\n\r\nPMHx\r\n1. Hypertension x 5 years\r\n     - On traditional Chinese medication  from pharmacy - compliant to meds\r\n     - Not on follow up\r\n2. Total hysterectomy (transvaginal) 2\' prolapsed uterus in May 2017\r\n\r\nHOPC\r\n1. Poorly controlled HTN\r\n- Asymptomatic\r\n- Nil exertional chest pain, breathlessness\r\n- Nil headache, BOV \r\n\r\n2. Epigastric pain x 2-3 months\r\n- Burning pain radiating to LHC\r\n- Each episode lasts for 2-3 hours; episodes occur 2-3 times a day\r\n- Worse when passing motion (without straining)\r\n- Pain persists even after passing motion\r\n- No relation to food - sometimes happens before, sometimes after\r\n- Sometimes relieved by OTC medication\r\n- A/w sour taste in mouth; nil water brash, retrosternal burning pain\r\n- A/w fever x 1/7 every 4-5 days - resolves with OTC medication\r\n- Nil nausea/vomiting\r\n- Nil constipation/diarrhoea/melena/hematochezia/mucus\r\n- Nil dysuria/hematuria\r\n- Nil vaginal discharge/itch/bleeding\r\n- Nil CP/SOB/cough\r\n- Nil LOA; insignificant LOW 86 -> 81 kg over 5 months\r\n- Visited doctor 2 months ago, was told that she has \"inflammation of her intestines\"\r\n\r\n3. Vaginal discharge x 5 months\r\n- Ever since total hysterectomy performed in May 2017 (vaginal approach)\r\n- Malodorous discharge, white/yellow in colour\r\n- A/w pain at vagina (claims to be where surgical incision was made)\r\n- A/w vaginal itch\r\n- Nil spotting, suprapubic pain, fever\r\n- No longer on f/u with gynaecologist\r\n\r\n4. Rash x 1-2 years\r\n- On bilateral knees (extensor surface) + left lateral thorax up to armpit, left shoulder \r\n- A/w itch, painful, erythematous, scratch marks\r\n- Claims to have had blisters before which burst\r\n- Used to apply some cream, helped with the rash\r\n\r\n5. Likely Diabetes Mellitus\r\n- Incidental finding\r\n- CBG 3-hour post-meal 11.4mmol/L\r\n- Also complains of polyuria but no polydipsia and polyphagia\r\n\r\n6. Frequent bilateral red eyes\r\n- A/w eye dryness, itch, BOV\r\n- Vision baseline blurring\r\n\r\n7. Likely Cushingoid\r\n- Appears cushingoeid - central obesity with sparing of limbs\r\n- Red reflex not diminished on ophthalmoscope\r\n- Lower limb proximal myopathy\r\n\r\nO/E\r\nVitals\r\n1st BP 153/105mmHg (automated)\r\n2nd BP 144/68 mmHg (manual)\r\n3rd BP 130/60 mmHg (manual)\r\nHR 102bpm regular\r\n\r\nMorbidly obese; appears Cushingoid - consistent with chronic TCM use\r\nEsotropia - R abduction insufficiency - does not complain of diplopia\r\nTongue dry\r\nAbdomen tender over epigastric, LIF, RHC, right lumbar, RIF; otherwise soft no masses\r\nGeneralised rash over bilateral lower limbs, abdomen, left lateral chest, armpit, groin area\r\nErythematous post-blister scarring\r\n\r\nPV exam: \r\nwhitish mucous discharge in vaginal canal \r\nnil obvious lesions or bleeding seen  ', '1) Poorly controlled HTN\r\n2) GERD\r\n3) Vaginal candidiasis\r\n4) Generalised body rash - likely secondary to bacterial infection; groin rash - likely funagl\r\n5) Newly diagnosed DM\r\n6) Cushing\'s syndrome\r\n7) Dry eyes', '', '', '', '11.4 (3h poast-prandial)', '', 0),
 (1091, 799, 'Sun Dec 17 16:57:34 ICT 2017', 'Dr Teo Jia Hui', '1 year 10 months old child\r\ncame with mother\r\n\r\ncoughing x 10/7\r\nwith mucus \r\na/w runny nose \r\n\r\ndiarrhoea x  4-5 times \r\nx2/7 -yellowish stools \r\nusual constipation with blood - hard pellet stools with huge calibre stools on occasion\r\ncries when BO \r\n\r\nnutrition: takes porridge and water \r\nselective with vegetables and fruits \r\nminimal fibre in diet\r\n\r\nPlan:\r\nadvised on increasing fibre in diet for recurrent constipations\r\nURTI meds\r\n\r\n\r\nO/E:\r\nalert \r\neating a biscuit \r\nlungs clear no creps\r\n\r\nanal chronic tears seen', '1. chronic constipation complicated by PR bleed and anal fissures \r\n2. failure to thrive \r\n3. upper respiratory tract infection', 'Respiratory', '', '', '', '', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `drugs`
---
-
-DROP TABLE IF EXISTS `drugs`;
-CREATE TABLE IF NOT EXISTS `drugs` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `drug` varchar(255) NOT NULL DEFAULT '',
-  `dosage` varchar(255) NOT NULL DEFAULT '',
-  `batch` int(11) NOT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `per_consumption` text,
-  `frequency` text,
-  `default_qty_for_prescription` int(11) DEFAULT NULL,
-  `dateOfModification` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -5712,57 +5666,6 @@ INSERT INTO `postreferrals` (`postreferral_id`, `visit_id`, `date`, `recorder`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prescriptions`
---
-
-DROP TABLE IF EXISTS `prescriptions`;
-CREATE TABLE IF NOT EXISTS `prescriptions` (
-  `prescript_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `consult_id` int(11) UNSIGNED NOT NULL,
-  `drug` varchar(255) NOT NULL DEFAULT '',
-  `frequency` varchar(255) NOT NULL DEFAULT '',
-  `dosage` varchar(255) NOT NULL DEFAULT '',
-  `quantity` int(11) NOT NULL DEFAULT '0',
-  `date` datetime DEFAULT NULL,
-  `drug_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`prescript_id`),
-  KEY `consult_med` (`consult_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `problems`
---
-
-DROP TABLE IF EXISTS `problems`;
-CREATE TABLE IF NOT EXISTS `problems` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `referrals`
---
-
-DROP TABLE IF EXISTS `referrals`;
-CREATE TABLE IF NOT EXISTS `referrals` (
-  `referral_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `consult_id` int(11) UNSIGNED NOT NULL,
-  `condition` varchar(255) DEFAULT NULL,
-  `test` varchar(255) DEFAULT NULL,
-  `parameters` varchar(255) DEFAULT NULL,
-  `remarks` longtext,
-  PRIMARY KEY (`referral_id`),
-  KEY `consult_referral` (`consult_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -7531,18 +7434,6 @@ ALTER TABLE `patients`
 --
 ALTER TABLE `postreferrals`
   ADD CONSTRAINT `visit_postreferral_fk` FOREIGN KEY (`visit_id`) REFERENCES `visits` (`id`);
-
---
--- Constraints for table `prescriptions`
---
-ALTER TABLE `prescriptions`
-  ADD CONSTRAINT `consult_med` FOREIGN KEY (`consult_id`) REFERENCES `consults` (`consult_id`);
-
---
--- Constraints for table `referrals`
---
-ALTER TABLE `referrals`
-  ADD CONSTRAINT `consult_referral` FOREIGN KEY (`consult_id`) REFERENCES `consults` (`consult_id`);
 
 --
 -- Constraints for table `visits`

@@ -1,3 +1,0 @@
-Import via cmd:
-D:\wamp64\bin\mysql\mysql5.7.19\bin
-mysql -u root -p sabai < "C:\Users\Jun_M\Desktop\Project Sa Bai\Project-Sa-Bai-2017\db_structure\sabai.sql"

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : test
+    Document   : biomini-test
     Created on : 24 Nov, 2016, 9:22:51 AM
     Author     : tcw
 --%>
