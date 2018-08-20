@@ -34,14 +34,6 @@
             </div>
         </div>
 
-        <!--        <div class="row">
-                    <div class="col-md-12">
-                        <button class="btn btn-primary" id="Bt_Init" style="width:120px;height:30px;" onclick="Init()">Init</button>
-                        <button class="btn btn-info" id="Bt_Enroll" onclick="Enroll()" style="width:150px;height:30px;">Enroll</button>
-                        <button class="btn btn-primary" id="Bt_UnInit" style="width:120px;height:30px;" onclick="UnInit()">UnInit</button>
-                    </div>
-                </div>-->
-
         <br/>
 
         <div class="row">
@@ -69,23 +61,6 @@
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_1">
 
-                                    <!--                                    <div class="row text-center">
-                                                                            <div class="btn-group">
-                                                                                <button type="button" class="btn btn-info">Left</button>
-                                                                                <button type="button" class="btn">Right</button>
-                                                                            </div>
-                                    
-                                                                            <div class="btn-group">
-                                                                                <button type="button" class="btn btn-info">1</button>
-                                                                                <button type="button" class="btn">2</button>
-                                                                                <button type="button" class="btn">3</button>
-                                                                                <button type="button" class="btn">4</button>
-                                                                                <button type="button" class="btn">5</button>
-                                                                            </div>
-                                                                        </div>
-                                    
-                                                                        <br/>-->
-
                                     <div class="row text-center">
                                         <div class="col-sm-12">
                                             <img id="fg1Image" class="img-responsive" src="dist/img/fingerprint.png" alt="Photo">
@@ -105,23 +80,6 @@
                                 </div>
 
                                 <div class="tab-pane" id="tab_2">
-
-                                    <!--                                    <div class="row text-center">
-                                                                            <div class="btn-group">
-                                                                                <button type="button" class="btn btn-info">Left</button>
-                                                                                <button type="button" class="btn">Right</button>
-                                                                            </div>
-                                    
-                                                                            <div class="btn-group">
-                                                                                <button type="button" class="btn btn-info">1</button>
-                                                                                <button type="button" class="btn">2</button>
-                                                                                <button type="button" class="btn">3</button>
-                                                                                <button type="button" class="btn">4</button>
-                                                                                <button type="button" class="btn">5</button>
-                                                                            </div>
-                                                                        </div>
-                                    
-                                                                        <br/>-->
 
                                     <div class="row text-center">
                                         <div class="col-sm-12">
@@ -164,10 +122,6 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <!--                        <div class="form-group">
-                                                    <label for="patientID">Patient ID</label>
-                                                    <input type="text" class="form-control" id="patientID" name="patientID" placeholder="Enter patient id">
-                                                </div>-->
 
                         <div class="form-group">
                             <label for="village">Village</label>
@@ -175,7 +129,7 @@
                             <select name="village" id="village" class="form-control">
                                 <option value="PCV" selected>PCV</option>
                                 <option value="KSV">KSV</option>
-                                
+
                             </select>
                         </div>
 
@@ -192,14 +146,11 @@
                         <div class="form-group">
                             <label for="dateOfBirth">Date of Birth</label>
                             <input class="form-control" type="date" name="dateOfBirth" id="dateOfBirth">
-                            <!--<label for="yearOfBirth">Year of Birth</label>-->
-                            <!--<input type="number" class="form-control" id="yearOfBirth" name="yearOfBirth" placeholder="Enter year of birth">-->
                         </div>
 
                         <div class = "row">
                             <div class="form-group col-md-6">
                                 <label for="gender">Gender</label>
-                                <!--<input type="text" class="form-control" id="gender" name="gender" placeholder="Enter gender">-->
                                 <div class="form-group row">
                                     <div class="radio col-md-4" style="margin-top:5px">
                                         <label>
@@ -218,60 +169,6 @@
                                 <input type="number" class="form-control" id="travellingTimeToClinic" name="travellingTimeToClinic" placeholder="Minutes">
                             </div>
                         </div>
-
-                        <!--                        <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <h5><b>Hospital/Clinic usually visited:</b></h5>
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="checkbox" style="margin-top:0;">
-                                                                    <label>
-                                                                        <input type="checkbox"/>Kampong Speu Referral Hospital (RH)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    </label>
-                        
-                                                                    <label>
-                                                                        <input type="checkbox"/>Kong Pisey RH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    </label>
-                        
-                                                                    <label>
-                                                                        <input type="checkbox"/>Udong RH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    </label>
-                                                                    
-                                                                    <br/>
-                                                                    
-                                                                    <label for="inputEmail3" class="control-label" style="font-size:14px;display: inline;font-weight:400; margin-bottom:10px;">
-                                                                        <input type="checkbox" style="position:initial">
-                                                                        <div style="align-self: center; display: inline;">
-                                                                            Health Center (Specify):&nbsp;
-                                                                        </div>
-                                                                        <div style="display: inline;">
-                                                                            <input type="email" class="form-control" id="inputEmail3" placeholder="" style="display:inline; width: 25%">
-                                                                        </div>
-                                                                    </label>
-                                                                    
-                                                                    <label for="inputEmail3" class="control-label" style="font-size:14px;display: flex;font-weight:400;">
-                                                                        <div style="align-self: center; display: flex;">
-                                                                            <input type="checkbox"> Phnom Penh (Specify):&nbsp;
-                                                                        </div>
-                                                                        <div>
-                                                                            <input type="email" class="form-control" id="inputEmail3" placeholder="">
-                                                                        </div>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
-
-                        <!--                        <div class="form-group">
-                                                    <label for="exampleInputEmail1">Drug Allergy</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1" name="" placeholder="Enter drug allergy">
-                                                </div>
-                        
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Parent</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1" name="" placeholder="Enter parent">
-                                                </div>-->
                     </div>
                     <!-- /.box-body -->
                 </div>
