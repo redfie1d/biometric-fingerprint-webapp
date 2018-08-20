@@ -3,7 +3,7 @@
 Software required to be installed:
 1. Netbeans IDE - Java EE (https://netbeans.org/downloads/)
 2. WAMP Server - Windows (http://www.wampserver.com/en/)
-3. BioMiniSDK (Check the driver and microsoft visual c++ redistributable when prompted)
+3. BioMiniSDK (Check the driver and microsoft visual c++ redistributable options when prompted)
 
 Starting the application
 - app is a netbeans project. Open with netbeans.
