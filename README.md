@@ -11,6 +11,7 @@ Starting the application
 - Ensure WAMP Server is online(green) (if you cannot login/cannot connect to database)
 
 Typical network infrastructure setup
+
 Host A:
 - Main computer/server hosting the application locally via the LAN
 - Can do registration with 1 biometric scanner connected
