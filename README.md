@@ -32,5 +32,7 @@ Starting the application
 - Ensure WAMP Server is online(green) (if you cannot login/cannot connect to database)
 
 Host A URL: http://localhost:8084/SabaiBiometrics/
+
 Host A IP Address (Example): 192.168.0.22
+
 Host B URL: http://192.168.0.22:8084/SabaiBiometrics/
