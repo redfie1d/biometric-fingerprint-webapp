@@ -5,11 +5,6 @@ Software required to be installed:
 2. WAMP Server - Windows (http://www.wampserver.com/en/)
 3. BioMiniSDK (Check BioMini SDK; check the driver and vc 2008 redistributable options when prompted)
 
-Starting the application
-- app is a netbeans project. Open with netbeans.
-- To run the web application, clean build and run.
-- Ensure WAMP Server is online(green) (if you cannot login/cannot connect to database)
-
 Typical network infrastructure setup
 
 Host A:
@@ -25,7 +20,17 @@ Host C:
 Host A requirements:
 - Need to allow db access to Host B's address by creating new user with Host B's address in phpmyadmin
 - Need to set up a shared folder containing patient images for Host Bs to read/write patient image when creating/updating patient.
+- Edit imgName in existing_patient.jsp & new_consult.jsp to shared folder path
 
 Host B requirements:
 - Need to edit the connection.properties file and set db.host to Host A's address
 - Edit imgName in existing_patient.jsp & new_consult.jsp to folder path shared by Host A
+
+Starting the application
+- app is a netbeans project. Open with netbeans.
+- To run the web application, clean build and run.
+- Ensure WAMP Server is online(green) (if you cannot login/cannot connect to database)
+
+Host A URL: http://localhost:8084/SabaiBiometrics/
+Host A IP Address (Example): 192.168.0.22
+Host B URL: http://192.168.0.22:8084/SabaiBiometrics/
