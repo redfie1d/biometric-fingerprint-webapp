@@ -1,4 +1,4 @@
-# Project Sa'Bai 2017 Biometric Web Application
+# Project Sa'Bai 2017 Biometric Fingerprint Web Application
 Project Sa’Bai is an overseas community involvement project (OCIP) based in Phnom Penh, Cambodia and led by students from the National University of Singapore (NUS) Yong Loo Lin School of Medicine, that has been serving the underprivileged community in Cambodia since 2006. Besides holding free medical screenings and consultations at four schools and two villages, they also run various specialist clinics such as Vision, Dental, ENT and Women’s as well as teaching villagers skills and habits for use in their daily lives. In addition, they organise direct initiatives that target community-specific needs through their Water Filtration project, and their Referral system, which aims to reconnect the locals back into the Cambodian healthcare system and meet their healthcare needs.
 
 With the help of students from the Singapore Management University (SMU), they have also developed a fully functioning Biometrics system that captures data from a patient’s previous visits and keeps track of the population’s health over the years.
